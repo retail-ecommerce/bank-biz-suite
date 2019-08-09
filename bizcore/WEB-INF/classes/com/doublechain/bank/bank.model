@@ -1,0 +1,62 @@
+<root org="doublechain"
+    chinese_name="银行模拟平台"
+    english_name="银行模拟平台"
+>
+
+
+    <platform
+        name="银行模拟平台|银行模拟平台"
+       
+        founded="now()"
+        
+    />
+	<change_request
+		name="存款|转账|取款"
+		create_time="createTime()"
+		platform="$(platform)"
+	/>
+	
+	<transaction
+		name="存款交易|存款交易|取款交易"
+		from_account="$(account)"
+		to_account="$(account)"
+		amount="$123.00"
+		type="存款|存款|取款"
+		change_request="$(change_request)"
+		
+	/>
+	
+	
+	<account
+		name="张三账户|李四账户|银行账户"
+		balance="$123.00"
+		create_time="createTime()"
+		update_time="updateTime()"
+		platform="$(platform)"
+		 _identified_by="name"
+	
+	/>
+	
+	<account_change
+		name="存款交易|存款交易|取款交易"
+		account="$(account)"
+		
+		previous_balance="$1312.00"
+		type="存款|存款|取款"
+		amount="$123.00"
+		current_balance="$1312.00"
+		
+		
+		change_request="$(change_request)"
+		
+	/>
+	
+	
+    
+</root>
+
+
+
+
+
+
