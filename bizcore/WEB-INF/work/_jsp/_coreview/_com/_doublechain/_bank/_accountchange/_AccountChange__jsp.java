@@ -99,9 +99,11 @@ public class _AccountChange__jsp extends com.caucho.jsp.JavaPage
       out.write(_jsp_string13, 0, _jsp_string13.length);
       pageContext.requestSetOrRemove("changeRequest", _caucho_expr_9.evalObject(_jsp_env));
       out.write('\n');
+      pageContext.requestSetOrRemove("referName", "");
+      out.write('\n');
       _jsp__include__tag_1 = new _jsp._tags._include__tag();
       _jsp__include__tag_1.setJspContext(pageContext);
-      _jsp__include__tag_1.setPage("com/doublechain/bank/changerequest/ChangeRequest$Action.jsp");
+      _jsp__include__tag_1.setPage("com/doublechain/bank/changerequest/ChangeRequest$Info.jsp");
       _jsp__include__tag_1.doTag();
       out.write(_jsp_string14, 0, _jsp_string14.length);
       _caucho_expr_10.print(out, _jsp_env, false);
@@ -210,7 +212,7 @@ public class _AccountChange__jsp extends com.caucho.jsp.JavaPage
     String resourcePath = loader.getResourcePathSpecificFirst();
     mergePath.addClassPath(resourcePath);
     com.caucho.vfs.Depend depend;
-    depend = new com.caucho.vfs.Depend(appDir.lookup("coreview/com/doublechain/bank/accountchange/AccountChange.jsp"), 169532829516388923L, false);
+    depend = new com.caucho.vfs.Depend(appDir.lookup("coreview/com/doublechain/bank/accountchange/AccountChange.jsp"), 8598187913331550989L, false);
     com.caucho.jsp.JavaPage.addDepend(_caucho_depends, depend);
     depend = new com.caucho.vfs.Depend(mergePath.lookup("jar:file:/opt/resin-3.1.12/lib/resin.jar!/com/caucho/jstl/fmt.tld"), 8594578285720415164L, false);
     com.caucho.jsp.JavaPage.addDepend(_caucho_depends, depend);
@@ -254,6 +256,7 @@ public class _AccountChange__jsp extends com.caucho.jsp.JavaPage
   private final static char []_jsp_string0;
   private final static char []_jsp_string7;
   private final static char []_jsp_string10;
+  private final static char []_jsp_string13;
   private final static char []_jsp_string6;
   private final static char []_jsp_string5;
   private final static char []_jsp_string16;
@@ -263,7 +266,6 @@ public class _AccountChange__jsp extends com.caucho.jsp.JavaPage
   private final static char []_jsp_string3;
   private final static char []_jsp_string18;
   private final static char []_jsp_string11;
-  private final static char []_jsp_string13;
   private final static char []_jsp_string9;
   static {
     _jsp_string2 = "/\" />    \n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->\n    <meta name=\"description\" content=\"\">\n    <meta name=\"author\" content=\"\">\n   \n    <title>  ".toCharArray();
@@ -275,16 +277,16 @@ public class _AccountChange__jsp extends com.caucho.jsp.JavaPage
     _jsp_string0 = "\n\n\n\n\n\n\n\n".toCharArray();
     _jsp_string7 = "\n</div>\n    	".toCharArray();
     _jsp_string10 = "</a></li>\n	 \n	".toCharArray();
+    _jsp_string13 = "\n\n".toCharArray();
     _jsp_string6 = "\n    		\n    		<div class=\"alert alert-success\">\n   ".toCharArray();
     _jsp_string5 = "\n    <ul>\n    	".toCharArray();
     _jsp_string16 = "</a>\n    </div>\n    <div class=\"col-xs-3 text-center\">\n    	<a href=\"./secUserManager/showlogin/\">\n    	<i class=\"glyphicon glyphicon-user\"></i><br>".toCharArray();
-    _jsp_string14 = "\n\n</div>\n\n\n\n\n\n\n	</div><!-- end of <div id=\"summary\" class=\"tab-pane fade in active\">-->\n\n	\n\n	\n	\n\n</div><!--<div class=\"tab-content\" style=\"padding-top: 10px\">-->\n\n\n\n\n <!-- /real content -->\n          \n          \n          </div>\n        </div><!--  <div class=\"col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main\"> -->\n        </div><!-- <div class=\"row\"> -->\n        </div>\n        \n  \n<div id=\"footer\">\n  <div class=\"col-xs-12 navbar-inverse navbar-fixed-bottom\">\n  <div class=\"row\" id=\"bottomNav\">\n    <div class=\"col-xs-3 text-center\">\n    	<a href=\"./secUserManager/home/\"><i class=\"glyphicon glyphicon-home\"></i><br/>".toCharArray();
+    _jsp_string14 = "\n\n</div>\n\n\n\n\n\n\n\n\n	\n\n\n\n\n\n	</div><!-- end of <div id=\"summary\" class=\"tab-pane fade in active\">-->\n\n	\n\n	\n	\n\n</div><!--<div class=\"tab-content\" style=\"padding-top: 10px\">-->\n\n\n\n\n <!-- /real content -->\n          \n          \n          </div>\n        </div><!--  <div class=\"col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main\"> -->\n        </div><!-- <div class=\"row\"> -->\n        </div>\n        \n  \n<div id=\"footer\">\n  <div class=\"col-xs-12 navbar-inverse navbar-fixed-bottom\">\n  <div class=\"row\" id=\"bottomNav\">\n    <div class=\"col-xs-3 text-center\">\n    	<a href=\"./secUserManager/home/\"><i class=\"glyphicon glyphicon-home\"></i><br/>".toCharArray();
     _jsp_string4 = "\n\n\n\n\n<div id=\"msg\"></div>\n\n<div class=\"row\">\n\n	<div class=\"col-xs-12 col-md-12\">\n			    ".toCharArray();
     _jsp_string15 = "</a>\n    </div>\n    <div class=\"col-xs-3 text-center\">\n    	<a href=\"./secUserManager/home/\"><i class=\"glyphicon glyphicon-envelope\"></i><br>".toCharArray();
     _jsp_string3 = " </title>\n\n    <!-- Bootstrap core CSS -->\n    <link href=\"./bootstrap/bootstrap.min.css\" rel=\"stylesheet\">\n\n    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->\n    <link href=\"./bootstrap/ie10-viewport-bug-workaround.css\" rel=\"stylesheet\">\n 	<link href=\"./bootstrap/jquery-ui.css\" rel=\"stylesheet\">\n    <!-- Custom styles for this template -->\n    <link href=\"./bootstrap/dashboard.css\" rel=\"stylesheet\">\n    <link href=\"./bootstrap/font-awesome.min.css\" rel=\"stylesheet\">\n   \n   \n\n    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->\n    <!--[if lt IE 9]><script src=\"../../assets/js/ie8-responsive-file-warning.js\"></script><![endif]-->\n    <script src=\"./bootstrap/ie-emulation-modes-warning.js\"></script>\n\n    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->\n    <!--[if lt IE 9]>\n      <script src=\"https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js\"></script>\n      <script src=\"https://oss.maxcdn.com/respond/1.4.2/respond.min.js\"></script>\n    <![endif]-->\n <style type=\"text/css\">* {\n text-shadow: transparent 0px 0px 0px, rgba(0,0,0,0.68) 0px 0px 0px !important; \n}\n\n</style>\n\n\n</head>\n\n  <body >\n\n\n    <div class=\"container-fluid\">\n      <div class=\"row\">\n      \n        <div class=\"col-xs-12 col-sm-12  col-md-12  main\">\n          \n          <div class=\"table-responsive\" id=\"content\">\n          <!-- real content -->\n\n".toCharArray();
     _jsp_string18 = "\";\n 	var scanQRTips = \"".toCharArray();
     _jsp_string11 = "\n \n	</ul>\n	</div>\n</div>\n<div class=\"tab-content\"  id='tab-content'>\n<div id=\"summary\" class=\"tab-pane fade in active\">\n<div class=\"row\">\n	\n	<div class=\"col-xs-12 col-md-12\">\n	\n	</div>\n</div>\n\n<div class=\"row\" desc=\"show parent objects\">\n	\n	   \n	".toCharArray();
-    _jsp_string13 = "\n\n</div>\n\n\n\n\n\n\n\n\n	<div class=\"row\">\n".toCharArray();
     _jsp_string9 = "\n</div>\n\n\n\n</div> <!--<div class=\"row\">-->\n\n<div class=\"row\">\n	\n</div>\n\n<div class=\"row\">\n	\n	<div class=\"col-xs-12 col-md-12\">\n\n	<ul class=\"nav nav-tabs\" id=\"navi-tabs\">\n	  <li class=\"active\"><a data-toggle=\"tab\" href=\"#summary\" class=\"disabled\"><i class=\"fa  fa-home\"></i> ".toCharArray();
   }
 }
