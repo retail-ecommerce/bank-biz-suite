@@ -467,9 +467,21 @@ public class BaseChecker {
 			return;
 		}
 		
+		
+		if(userContext==null) {
+			
+			Class [] classes = {List.class};
+			throw  exceptionClazz.getDeclaredConstructor(classes).newInstance(messageList);
+
+		}
+		
+		
 		for(Message message: messageList){
 			String subject = message.getSubject();
 			String template = userContext.getLocaleKey(subject);
+			
+			
+			
 			if(template==null){
 				//not found, it is fine to use hard coded value
 				userContext.log("Check Result "+message.getBody());

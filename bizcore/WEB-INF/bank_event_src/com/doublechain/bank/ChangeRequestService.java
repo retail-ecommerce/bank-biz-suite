@@ -6,8 +6,11 @@ import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 import com.doublechain.bank.account.Account;
+import com.doublechain.bank.account.AccountManagerException;
 import com.doublechain.bank.accountchange.AccountChange;
 import com.doublechain.bank.changerequest.ChangeRequest;
+import com.doublechain.bank.changerequest.ChangeRequestManager;
+import com.doublechain.bank.changerequest.ChangeRequestManagerException;
 import com.doublechain.bank.changerequest.ChangeRequestTokens;
 import com.doublechain.bank.platform.Platform;
 import com.doublechain.bank.transaction.Transaction;
@@ -44,6 +47,9 @@ public class ChangeRequestService extends BaseManagerImpl{
 		return super.checkAccess(baseUserContext, methodName, parameters);
 	}
 	public ChangeRequest process(BankUserContext userContext, ChangeRequest request) throws Exception {
+		
+		
+		userContext.getChecker().checkChangeRequestAsObject(request);
 		
 		
 		ChangeRequest newReq = userContext.getManagerGroup()
@@ -168,9 +174,17 @@ public class ChangeRequestService extends BaseManagerImpl{
 		
 		req.addTransaction(tx);
 		
+		BankObjectChecker checker=new BankObjectChecker();
+		
+		
+		checker.checkChangeRequestAsObject(req);
+		
+		
+		
 		try {
-			emitRequest(req);
-		} catch (IOException e) {
+			checker.throwExceptionIfHasErrors(ChangeRequestManagerException.class);
+			//emitRequest(req);
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
