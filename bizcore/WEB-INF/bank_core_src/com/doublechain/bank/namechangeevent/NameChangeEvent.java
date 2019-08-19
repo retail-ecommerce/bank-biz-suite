@@ -23,7 +23,6 @@ public class NameChangeEvent extends BaseEntity implements  java.io.Serializable
 	public static final String NAME_PROPERTY                  = "name"              ;
 	public static final String ACCOUNT_PROPERTY               = "account"           ;
 	public static final String CHANGE_REQUEST_PROPERTY        = "changeRequest"     ;
-	public static final String CURRENT_STATUS_PROPERTY        = "currentStatus"     ;
 	public static final String VERSION_PROPERTY               = "version"           ;
 
 
@@ -50,7 +49,6 @@ public class NameChangeEvent extends BaseEntity implements  java.io.Serializable
 	protected		String              	mName               ;
 	protected		Account             	mAccount            ;
 	protected		ChangeRequest       	mChangeRequest      ;
-	protected		String              	mCurrentStatus      ;
 	protected		int                 	mVersion            ;
 	
 	
@@ -67,11 +65,11 @@ public class NameChangeEvent extends BaseEntity implements  java.io.Serializable
 		this.changed = true;
 	}
 	
-	public 	NameChangeEvent(String name, Account account, String currentStatus)
+	public 	NameChangeEvent(String name, Account account, ChangeRequest changeRequest)
 	{
 		setName(name);
 		setAccount(account);
-		setCurrentStatus(currentStatus);
+		setChangeRequest(changeRequest);
 	
 	}
 	
@@ -115,9 +113,6 @@ public class NameChangeEvent extends BaseEntity implements  java.io.Serializable
 		}
 		if(CHANGE_REQUEST_PROPERTY.equals(property)){
 			return getChangeRequest();
-		}
-		if(CURRENT_STATUS_PROPERTY.equals(property)){
-			return getCurrentStatus();
 		}
 
     		//other property not include here
@@ -204,22 +199,6 @@ public class NameChangeEvent extends BaseEntity implements  java.io.Serializable
 		this.changed = true;
 	}
 	
-	public void setCurrentStatus(String currentStatus){
-		this.mCurrentStatus = trimString(currentStatus);;
-	}
-	public String getCurrentStatus(){
-		return this.mCurrentStatus;
-	}
-	public NameChangeEvent updateCurrentStatus(String currentStatus){
-		this.mCurrentStatus = trimString(currentStatus);;
-		this.changed = true;
-		return this;
-	}
-	public void mergeCurrentStatus(String currentStatus){
-		if(currentStatus != null) { setCurrentStatus(currentStatus);}
-	}
-	
-	
 	public void setVersion(int version){
 		this.mVersion = version;;
 	}
@@ -268,7 +247,6 @@ public class NameChangeEvent extends BaseEntity implements  java.io.Serializable
 		appendKeyValuePair(result, NAME_PROPERTY, getName());
 		appendKeyValuePair(result, ACCOUNT_PROPERTY, getAccount());
 		appendKeyValuePair(result, CHANGE_REQUEST_PROPERTY, getChangeRequest());
-		appendKeyValuePair(result, CURRENT_STATUS_PROPERTY, getCurrentStatus());
 		appendKeyValuePair(result, VERSION_PROPERTY, getVersion());
 
 		
@@ -288,7 +266,6 @@ public class NameChangeEvent extends BaseEntity implements  java.io.Serializable
 			dest.setName(getName());
 			dest.setAccount(getAccount());
 			dest.setChangeRequest(getChangeRequest());
-			dest.setCurrentStatus(getCurrentStatus());
 			dest.setVersion(getVersion());
 
 		}
@@ -307,7 +284,6 @@ public class NameChangeEvent extends BaseEntity implements  java.io.Serializable
 			dest.mergeName(getName());
 			dest.mergeAccount(getAccount());
 			dest.mergeChangeRequest(getChangeRequest());
-			dest.mergeCurrentStatus(getCurrentStatus());
 			dest.mergeVersion(getVersion());
 
 		}
@@ -325,7 +301,6 @@ public class NameChangeEvent extends BaseEntity implements  java.io.Serializable
 		
 			dest.mergeId(getId());
 			dest.mergeName(getName());
-			dest.mergeCurrentStatus(getCurrentStatus());
 			dest.mergeVersion(getVersion());
 
 		}
@@ -344,7 +319,6 @@ public class NameChangeEvent extends BaseEntity implements  java.io.Serializable
 		if(getChangeRequest() != null ){
  			stringBuilder.append("\tchangeRequest='ChangeRequest("+getChangeRequest().getId()+")';");
  		}
-		stringBuilder.append("\tcurrentStatus='"+getCurrentStatus()+"';");
 		stringBuilder.append("\tversion='"+getVersion()+"';");
 		stringBuilder.append("}");
 

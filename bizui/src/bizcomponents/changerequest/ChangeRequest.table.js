@@ -58,7 +58,16 @@ class ChangeRequestTable extends PureComponent {
     const field = searchParameters[`${listName}.orderBy.0`] || "id"
     const order = searchParameters[`${listName}.descOrAsc.0`] || "desc"
     const sorter = { field , order}
-    const convertSorter=(targetSorter)=>{
+    const convertSorter=(item,targetSorter)=>{
+
+      console.log("item", item)
+      if(item.sortOrder==="descend"){
+        return "ascend"
+      }
+      if(item.sortOrder==="ascend"){
+        return "descend"
+      }
+
       if(targetSorter.order==="desc"){
         return "descend"
       }
@@ -67,10 +76,13 @@ class ChangeRequestTable extends PureComponent {
     }
     const enhancedColumns = remainColumns.map(item=>{
       if(sorter.field===item.dataIndex){
-        return {...item, sortOrder: convertSorter(sorter)}
+        return {...item, sortOrder: convertSorter(item,sorter)}
       }
       return item
     })
+
+    console.log("enhancedColumns",enhancedColumns)
+
     return enhancedColumns
 
   }

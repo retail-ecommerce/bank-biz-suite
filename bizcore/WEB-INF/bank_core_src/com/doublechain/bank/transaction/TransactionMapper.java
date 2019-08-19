@@ -20,7 +20,6 @@ public class TransactionMapper extends BaseRowMapper<Transaction>{
  		setAmount(transaction, rs, rowNumber); 		
  		setType(transaction, rs, rowNumber); 		
  		setChangeRequest(transaction, rs, rowNumber); 		
- 		setCurrentStatus(transaction, rs, rowNumber); 		
  		setVersion(transaction, rs, rowNumber);
 
 		return transaction;
@@ -132,18 +131,6 @@ public class TransactionMapper extends BaseRowMapper<Transaction>{
  		transaction.setChangeRequest(createEmptyChangeRequest(changeRequestId));
  	}
  	
-	protected void setCurrentStatus(Transaction transaction, ResultSet rs, int rowNumber) throws SQLException{
-	
-		//there will be issue when the type is double/int/long
-		String currentStatus = rs.getString(TransactionTable.COLUMN_CURRENT_STATUS);
-		if(currentStatus == null){
-			//do nothing when nothing found in database
-			return;
-		}
-		
-		transaction.setCurrentStatus(currentStatus);
-	}
-		
 	protected void setVersion(Transaction transaction, ResultSet rs, int rowNumber) throws SQLException{
 	
 		//there will be issue when the type is double/int/long

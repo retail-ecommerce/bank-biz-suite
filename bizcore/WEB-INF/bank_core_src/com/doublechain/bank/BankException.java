@@ -14,13 +14,7 @@ public class BankException extends Exception implements MessageContainer {
     	if(this.getErrorMessageList().size()<=0) {
     		return pMessage;
     	}
-    	if(this.getErrorMessageList().size()==1) {
-    		if (pMessage == null) {
-    			return getErrorMessageList().get(0).getBody();
-    		}else {
-    			return pMessage+"\n"+getErrorMessageList().get(0).getBody();
-    		}
-    	}
+    	
     	
 		StringBuilder stringBuilder=new StringBuilder();
 		if (pMessage != null) {
@@ -28,7 +22,10 @@ public class BankException extends Exception implements MessageContainer {
 		}
 		
 		for(Message message: getErrorMessageList()) {
+			stringBuilder.append(message.getSourcePosition());
+			stringBuilder.append("\t");
 			stringBuilder.append(message.getBody());
+			stringBuilder.append("\n");
 		}
 		
 		

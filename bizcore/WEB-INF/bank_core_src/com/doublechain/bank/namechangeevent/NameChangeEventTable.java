@@ -21,14 +21,13 @@ public class NameChangeEventTable{
 	static final String COLUMN_NAME = "name";
 	static final String COLUMN_ACCOUNT = "account";
 	static final String COLUMN_CHANGE_REQUEST = "change_request";
-	static final String COLUMN_CURRENT_STATUS = "current_status";
 	static final String COLUMN_VERSION = "version";
  
 	public static final String []ALL_CLOUMNS = {COLUMN_ID, 
-		COLUMN_NAME, COLUMN_ACCOUNT, COLUMN_CHANGE_REQUEST, COLUMN_CURRENT_STATUS, 
+		COLUMN_NAME, COLUMN_ACCOUNT, COLUMN_CHANGE_REQUEST, 
 		COLUMN_VERSION};
 	public static final String []NORMAL_CLOUMNS = {
-		COLUMN_NAME, COLUMN_ACCOUNT, COLUMN_CHANGE_REQUEST, COLUMN_CURRENT_STATUS
+		COLUMN_NAME, COLUMN_ACCOUNT, COLUMN_CHANGE_REQUEST
 		};
 	
 	

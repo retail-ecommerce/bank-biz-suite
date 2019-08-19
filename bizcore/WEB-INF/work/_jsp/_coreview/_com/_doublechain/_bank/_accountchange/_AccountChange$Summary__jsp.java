@@ -98,6 +98,10 @@ public class _AccountChange$Summary__jsp extends com.caucho.jsp.JavaPage
         out.write(_jsp_string12, 0, _jsp_string12.length);
         _caucho_expr_16.print(out, _jsp_env, false);
         out.write(_jsp_string11, 0, _jsp_string11.length);
+        _caucho_expr_17.print(out, _jsp_env, false);
+        out.write(_jsp_string12, 0, _jsp_string12.length);
+        _caucho_expr_18.print(out, _jsp_env, false);
+        out.write(_jsp_string11, 0, _jsp_string11.length);
         if (_jsp_FormatNumberTag_1 == null) {
           _jsp_FormatNumberTag_1 = new com.caucho.jstl.rt.FormatNumberTag();
           _jsp_FormatNumberTag_1.setPageContext(pageContext);
@@ -105,16 +109,20 @@ public class _AccountChange$Summary__jsp extends com.caucho.jsp.JavaPage
           _jsp_FormatNumberTag_1.setType("currency");
         }
 
-        _jsp_FormatNumberTag_1.setValue(_caucho_expr_17.evalObject(_jsp_env));
+        _jsp_FormatNumberTag_1.setValue(_caucho_expr_19.evalObject(_jsp_env));
         _jsp_FormatNumberTag_1.doEndTag();
-        out.write(_jsp_string12, 0, _jsp_string12.length);
-        _caucho_expr_18.print(out, _jsp_env, false);
-        out.write(_jsp_string11, 0, _jsp_string11.length);
-        _caucho_expr_19.print(out, _jsp_env, false);
         out.write(_jsp_string12, 0, _jsp_string12.length);
         _caucho_expr_20.print(out, _jsp_env, false);
         out.write(_jsp_string11, 0, _jsp_string11.length);
-        _caucho_expr_21.print(out, _jsp_env, false);
+        if (_jsp_FormatNumberTag_1 == null) {
+          _jsp_FormatNumberTag_1 = new com.caucho.jstl.rt.FormatNumberTag();
+          _jsp_FormatNumberTag_1.setPageContext(pageContext);
+          _jsp_FormatNumberTag_1.setParent((javax.servlet.jsp.tagext.Tag) null);
+          _jsp_FormatNumberTag_1.setType("currency");
+        }
+
+        _jsp_FormatNumberTag_1.setValue(_caucho_expr_21.evalObject(_jsp_env));
+        _jsp_FormatNumberTag_1.doEndTag();
         out.write(_jsp_string13, 0, _jsp_string13.length);
       }
       out.write(_jsp_string14, 0, _jsp_string14.length);
@@ -190,14 +198,14 @@ public class _AccountChange$Summary__jsp extends com.caucho.jsp.JavaPage
     _caucho_expr_11 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${result.id}");
     _caucho_expr_12 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['account_change.name']}");
     _caucho_expr_13 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${result.name}");
-    _caucho_expr_14 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['account_change.amount']}");
-    _caucho_expr_15 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${result.amount}");
-    _caucho_expr_16 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['account_change.current_balance']}");
-    _caucho_expr_17 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${result.currentBalance}");
-    _caucho_expr_18 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['account_change.type']}");
-    _caucho_expr_19 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${result.type}");
-    _caucho_expr_20 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['account_change.current_status']}");
-    _caucho_expr_21 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${result.currentStatus}");
+    _caucho_expr_14 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['account_change.previous_balance']}");
+    _caucho_expr_15 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${result.previousBalance}");
+    _caucho_expr_16 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['account_change.type']}");
+    _caucho_expr_17 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${result.type}");
+    _caucho_expr_18 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['account_change.amount']}");
+    _caucho_expr_19 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${result.amount}");
+    _caucho_expr_20 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['account_change.current_balance']}");
+    _caucho_expr_21 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${result.currentBalance}");
   }
 
   public void destroy()
@@ -218,7 +226,7 @@ public class _AccountChange$Summary__jsp extends com.caucho.jsp.JavaPage
     String resourcePath = loader.getResourcePathSpecificFirst();
     mergePath.addClassPath(resourcePath);
     com.caucho.vfs.Depend depend;
-    depend = new com.caucho.vfs.Depend(appDir.lookup("coreview/com/doublechain/bank/accountchange/AccountChange$Summary.jsp"), 27313818742888443L, false);
+    depend = new com.caucho.vfs.Depend(appDir.lookup("coreview/com/doublechain/bank/accountchange/AccountChange$Summary.jsp"), -3483299421274258160L, false);
     com.caucho.jsp.JavaPage.addDepend(_caucho_depends, depend);
     depend = new com.caucho.vfs.Depend(mergePath.lookup("jar:file:/opt/resin-3.1.12/lib/resin.jar!/com/caucho/jstl/fmt.tld"), 8594578285720415164L, false);
     com.caucho.jsp.JavaPage.addDepend(_caucho_depends, depend);

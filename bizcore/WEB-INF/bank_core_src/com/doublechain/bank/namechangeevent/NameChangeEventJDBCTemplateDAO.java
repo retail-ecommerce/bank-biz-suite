@@ -529,7 +529,7 @@ public class NameChangeEventJDBCTemplateDAO extends BankBaseDAOImpl implements N
  		return prepareNameChangeEventCreateParameters(nameChangeEvent);
  	}
  	protected Object[] prepareNameChangeEventUpdateParameters(NameChangeEvent nameChangeEvent){
- 		Object[] parameters = new Object[7];
+ 		Object[] parameters = new Object[6];
  
  		parameters[0] = nameChangeEvent.getName(); 	
  		if(nameChangeEvent.getAccount() != null){
@@ -539,16 +539,15 @@ public class NameChangeEventJDBCTemplateDAO extends BankBaseDAOImpl implements N
  		if(nameChangeEvent.getChangeRequest() != null){
  			parameters[2] = nameChangeEvent.getChangeRequest().getId();
  		}
- 
- 		parameters[3] = nameChangeEvent.getCurrentStatus();		
- 		parameters[4] = nameChangeEvent.nextVersion();
- 		parameters[5] = nameChangeEvent.getId();
- 		parameters[6] = nameChangeEvent.getVersion();
+ 		
+ 		parameters[3] = nameChangeEvent.nextVersion();
+ 		parameters[4] = nameChangeEvent.getId();
+ 		parameters[5] = nameChangeEvent.getVersion();
  				
  		return parameters;
  	}
  	protected Object[] prepareNameChangeEventCreateParameters(NameChangeEvent nameChangeEvent){
-		Object[] parameters = new Object[5];
+		Object[] parameters = new Object[4];
 		String newNameChangeEventId=getNextId();
 		nameChangeEvent.setId(newNameChangeEventId);
 		parameters[0] =  nameChangeEvent.getId();
@@ -563,8 +562,7 @@ public class NameChangeEventJDBCTemplateDAO extends BankBaseDAOImpl implements N
  			parameters[3] = nameChangeEvent.getChangeRequest().getId();
  		
  		}
- 		
- 		parameters[4] = nameChangeEvent.getCurrentStatus();		
+ 				
  				
  		return parameters;
  	}

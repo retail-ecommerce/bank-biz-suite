@@ -101,14 +101,8 @@
 <c:if test="${param.referName ne 'name'}">
 	<th>${userContext.localeMap['platform.name']}</th>
 </c:if>
-<c:if test="${param.referName ne 'founder'}">
-	<th>${userContext.localeMap['platform.founder']}</th>
-</c:if>
 <c:if test="${param.referName ne 'founded'}">
 	<th>${userContext.localeMap['platform.founded']}</th>
-</c:if>
-<c:if test="${param.referName ne 'description'}">
-	<th>${userContext.localeMap['platform.description']}</th>
 </c:if>
 <th>${userContext.localeMap['@action']}</th>
 		</tr></thead>
@@ -117,9 +111,7 @@
 			<c:forEach var="item" items="${platformList}">
 				<tr currentVersion='${item.version}' id="platform-${item.id}" ><td><a class="link-action-removed" href="./platformManager/view/${item.id}/"> ${item.id}</a></td>
 <c:if test="${param.referName ne 'name'}">	<td contenteditable='true' class='edit-value'  propertyToChange='name' storedCellValue='${item.name}' prefix='${ownerBeanName}Manager/updatePlatform/${result.id}/${item.id}/'>${item.name}</td>
-</c:if><c:if test="${param.referName ne 'founder'}">	<td contenteditable='true' class='edit-value'  propertyToChange='founder' storedCellValue='${item.founder}' prefix='${ownerBeanName}Manager/updatePlatform/${result.id}/${item.id}/'>${item.founder}</td>
 </c:if><c:if test="${param.referName ne 'founded'}">	<td contenteditable='true' class='edit-value'  propertyToChange='founded' storedCellValue='${item.founded}' prefix='${ownerBeanName}Manager/updatePlatform/${result.id}/${item.id}/'><fmt:formatDate pattern="yyyy-MM-dd'T'HH:mm:ss" value="${item.founded}" /></td>
-</c:if><c:if test="${param.referName ne 'description'}">	<td contenteditable='true' class='edit-value'  propertyToChange='description' storedCellValue='${item.description}' prefix='${ownerBeanName}Manager/updatePlatform/${result.id}/${item.id}/'>${item.description}</td>
 </c:if>
 				<td>
 

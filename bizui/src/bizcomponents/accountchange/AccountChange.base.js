@@ -69,14 +69,14 @@ const renderItemOfList=(accountChange,targetComponent)=>{
       <DescriptionList  key={accountChange.id} size="small" col="4">
         <Description term="ID">{accountChange.id}</Description> 
         <Description term="名称">{accountChange.name}</Description> 
-        <Description term="账户">{accountChange.account==null?appLocaleName(userContext,"NotAssigned"):`${accountChange.account.displayName}(${accountChange.account.id})`}
-        </Description>
-        <Description term="初期余额">{accountChange.previousBalance}</Description> 
+        <Description term="账户"><div>{accountChange.account==null?appLocaleName(userContext,"NotAssigned"):`${accountChange.account.displayName}(${accountChange.account.id})`}
+        </div></Description>
+        <Description term="初期余额"><div style={{"color":"red"}}>{accountChange.previousBalance}</div></Description> 
         <Description term="类型">{accountChange.type}</Description> 
-        <Description term="金额">{accountChange.amount}</Description> 
-        <Description term="当前余额">{accountChange.currentBalance}</Description> 
-        <Description term="变更请求">{accountChange.changeRequest==null?appLocaleName(userContext,"NotAssigned"):`${accountChange.changeRequest.displayName}(${accountChange.changeRequest.id})`}
-        </Description>
+        <Description term="金额"><div style={{"color":"red"}}>{accountChange.amount}</div></Description> 
+        <Description term="当前余额"><div style={{"color":"red"}}>{accountChange.currentBalance}</div></Description> 
+        <Description term="变更请求"><div>{accountChange.changeRequest==null?appLocaleName(userContext,"NotAssigned"):`${accountChange.changeRequest.displayName}(${accountChange.changeRequest.id})`}
+        </div></Description>
 	
         
       </DescriptionList>

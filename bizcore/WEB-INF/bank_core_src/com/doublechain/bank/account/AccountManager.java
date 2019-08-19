@@ -33,51 +33,43 @@ public interface AccountManager{
 	/*======================================================DATA MAINTENANCE===========================================================*/
 	
 
-	//public  TransactionManager getTransactionManager(BankUserContext userContext, String accountId, String name, BigDecimal amount, String type ,String [] tokensExpr)  throws Exception;
+	//public  TransactionManager getTransactionManager(BankUserContext userContext, String accountId, String name, BigDecimal amount, String type, String changeRequestId ,String [] tokensExpr)  throws Exception;
 	
-	public  Account addTransactionAsFromAccount(BankUserContext userContext, String accountId, String name, BigDecimal amount, String type , String [] tokensExpr)  throws Exception;
+	public  Account addTransactionAsFromAccount(BankUserContext userContext, String accountId, String name, BigDecimal amount, String type, String changeRequestId , String [] tokensExpr)  throws Exception;
 	public  Account removeTransactionAsFromAccount(BankUserContext userContext, String accountId, String transactionId, int transactionVersion,String [] tokensExpr)  throws Exception;
 	public  Account updateTransactionAsFromAccount(BankUserContext userContext, String accountId, String transactionId, int transactionVersion, String property, String newValueExpr,String [] tokensExpr)  throws Exception;
 
 	/*
-	public  Account associateTransactionListAsFromAccountToNewChangeRequest(BankUserContext userContext, String accountId, String  transactionIds[], String name, String platformId, String [] tokensExpr) throws Exception ;
-	public  Account associateTransactionListAsFromAccountToChangeRequest(BankUserContext userContext, String accountId, String  transactionIds[],String changeRequestId, String [] tokensExpr) throws Exception ;
 
 	*/
 
-	//public  TransactionManager getTransactionManager(BankUserContext userContext, String accountId, String name, BigDecimal amount, String type ,String [] tokensExpr)  throws Exception;
+	//public  TransactionManager getTransactionManager(BankUserContext userContext, String accountId, String name, BigDecimal amount, String type, String changeRequestId ,String [] tokensExpr)  throws Exception;
 	
-	public  Account addTransactionAsToAccount(BankUserContext userContext, String accountId, String name, BigDecimal amount, String type , String [] tokensExpr)  throws Exception;
+	public  Account addTransactionAsToAccount(BankUserContext userContext, String accountId, String name, BigDecimal amount, String type, String changeRequestId , String [] tokensExpr)  throws Exception;
 	public  Account removeTransactionAsToAccount(BankUserContext userContext, String accountId, String transactionId, int transactionVersion,String [] tokensExpr)  throws Exception;
 	public  Account updateTransactionAsToAccount(BankUserContext userContext, String accountId, String transactionId, int transactionVersion, String property, String newValueExpr,String [] tokensExpr)  throws Exception;
 
 	/*
-	public  Account associateTransactionListAsToAccountToNewChangeRequest(BankUserContext userContext, String accountId, String  transactionIds[], String name, String platformId, String [] tokensExpr) throws Exception ;
-	public  Account associateTransactionListAsToAccountToChangeRequest(BankUserContext userContext, String accountId, String  transactionIds[],String changeRequestId, String [] tokensExpr) throws Exception ;
 
 	*/
 
-	//public  NameChangeEventManager getNameChangeEventManager(BankUserContext userContext, String accountId, String name ,String [] tokensExpr)  throws Exception;
+	//public  NameChangeEventManager getNameChangeEventManager(BankUserContext userContext, String accountId, String name, String changeRequestId ,String [] tokensExpr)  throws Exception;
 	
-	public  Account addNameChangeEvent(BankUserContext userContext, String accountId, String name , String [] tokensExpr)  throws Exception;
+	public  Account addNameChangeEvent(BankUserContext userContext, String accountId, String name, String changeRequestId , String [] tokensExpr)  throws Exception;
 	public  Account removeNameChangeEvent(BankUserContext userContext, String accountId, String nameChangeEventId, int nameChangeEventVersion,String [] tokensExpr)  throws Exception;
 	public  Account updateNameChangeEvent(BankUserContext userContext, String accountId, String nameChangeEventId, int nameChangeEventVersion, String property, String newValueExpr,String [] tokensExpr)  throws Exception;
 
 	/*
-	public  Account associateNameChangeEventListToNewChangeRequest(BankUserContext userContext, String accountId, String  nameChangeEventIds[], String name, String platformId, String [] tokensExpr) throws Exception ;
-	public  Account associateNameChangeEventListToChangeRequest(BankUserContext userContext, String accountId, String  nameChangeEventIds[],String changeRequestId, String [] tokensExpr) throws Exception ;
 
 	*/
 
-	//public  AccountChangeManager getAccountChangeManager(BankUserContext userContext, String accountId, String name, BigDecimal previousBalance, String type, BigDecimal amount, BigDecimal currentBalance ,String [] tokensExpr)  throws Exception;
+	//public  AccountChangeManager getAccountChangeManager(BankUserContext userContext, String accountId, String name, BigDecimal previousBalance, String type, BigDecimal amount, BigDecimal currentBalance, String changeRequestId ,String [] tokensExpr)  throws Exception;
 	
-	public  Account addAccountChange(BankUserContext userContext, String accountId, String name, BigDecimal previousBalance, String type, BigDecimal amount, BigDecimal currentBalance , String [] tokensExpr)  throws Exception;
+	public  Account addAccountChange(BankUserContext userContext, String accountId, String name, BigDecimal previousBalance, String type, BigDecimal amount, BigDecimal currentBalance, String changeRequestId , String [] tokensExpr)  throws Exception;
 	public  Account removeAccountChange(BankUserContext userContext, String accountId, String accountChangeId, int accountChangeVersion,String [] tokensExpr)  throws Exception;
 	public  Account updateAccountChange(BankUserContext userContext, String accountId, String accountChangeId, int accountChangeVersion, String property, String newValueExpr,String [] tokensExpr)  throws Exception;
 
 	/*
-	public  Account associateAccountChangeListToNewChangeRequest(BankUserContext userContext, String accountId, String  accountChangeIds[], String name, String platformId, String [] tokensExpr) throws Exception ;
-	public  Account associateAccountChangeListToChangeRequest(BankUserContext userContext, String accountId, String  accountChangeIds[],String changeRequestId, String [] tokensExpr) throws Exception ;
 
 	*/
 

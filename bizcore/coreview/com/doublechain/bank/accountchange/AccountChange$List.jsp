@@ -101,6 +101,9 @@
 <c:if test="${param.referName ne 'name'}">
 	<th>${userContext.localeMap['account_change.name']}</th>
 </c:if>
+<c:if test="${param.referName ne 'account'}">
+	<th>${userContext.localeMap['account_change.account']}</th>
+</c:if>
 <c:if test="${param.referName ne 'previousBalance'}">
 	<th>${userContext.localeMap['account_change.previous_balance']}</th>
 </c:if>
@@ -113,14 +116,8 @@
 <c:if test="${param.referName ne 'currentBalance'}">
 	<th>${userContext.localeMap['account_change.current_balance']}</th>
 </c:if>
-<c:if test="${param.referName ne 'account'}">
-	<th>${userContext.localeMap['account_change.account']}</th>
-</c:if>
 <c:if test="${param.referName ne 'changeRequest'}">
 	<th>${userContext.localeMap['account_change.change_request']}</th>
-</c:if>
-<c:if test="${param.referName ne 'currentStatus'}">
-	<th>${userContext.localeMap['account_change.current_status']}</th>
 </c:if>
 <th>${userContext.localeMap['@action']}</th>
 		</tr></thead>
@@ -129,10 +126,6 @@
 			<c:forEach var="item" items="${accountChangeList}">
 				<tr currentVersion='${item.version}' id="accountChange-${item.id}" ><td><a class="link-action-removed" href="./accountChangeManager/view/${item.id}/"> ${item.id}</a></td>
 <c:if test="${param.referName ne 'name'}">	<td contenteditable='true' class='edit-value'  propertyToChange='name' storedCellValue='${item.name}' prefix='${ownerBeanName}Manager/updateAccountChange/${result.id}/${item.id}/'>${item.name}</td>
-</c:if><c:if test="${param.referName ne 'previousBalance'}">	<td contenteditable='true' class='edit-value money'  propertyToChange='previousBalance' storedCellValue='${item.previousBalance}' prefix='${ownerBeanName}Manager/updateAccountChange/${result.id}/${item.id}/'><fmt:formatNumber type="currency"  value="${item.previousBalance}" /></td>
-</c:if><c:if test="${param.referName ne 'type'}">	<td contenteditable='true' class='edit-value'  propertyToChange='type' storedCellValue='${item.type}' prefix='${ownerBeanName}Manager/updateAccountChange/${result.id}/${item.id}/'>${item.type}</td>
-</c:if><c:if test="${param.referName ne 'amount'}">	<td contenteditable='true' class='edit-value money'  propertyToChange='amount' storedCellValue='${item.amount}' prefix='${ownerBeanName}Manager/updateAccountChange/${result.id}/${item.id}/'><fmt:formatNumber type="currency"  value="${item.amount}" /></td>
-</c:if><c:if test="${param.referName ne 'currentBalance'}">	<td contenteditable='true' class='edit-value money'  propertyToChange='currentBalance' storedCellValue='${item.currentBalance}' prefix='${ownerBeanName}Manager/updateAccountChange/${result.id}/${item.id}/'><fmt:formatNumber type="currency"  value="${item.currentBalance}" /></td>
 </c:if><c:if test="${param.referName ne 'account'}">
 	<td class="select_candidate_td"
 			data-candidate-method="./accountChangeManager/requestCandidateAccount/${ownerBeanName}/${item.id}/"
@@ -152,7 +145,11 @@
 		</div>
 	</td>
 </c:if>
-<c:if test="${param.referName ne 'changeRequest'}">
+<c:if test="${param.referName ne 'previousBalance'}">	<td contenteditable='true' class='edit-value money'  propertyToChange='previousBalance' storedCellValue='${item.previousBalance}' prefix='${ownerBeanName}Manager/updateAccountChange/${result.id}/${item.id}/'><fmt:formatNumber type="currency"  value="${item.previousBalance}" /></td>
+</c:if><c:if test="${param.referName ne 'type'}">	<td contenteditable='true' class='edit-value'  propertyToChange='type' storedCellValue='${item.type}' prefix='${ownerBeanName}Manager/updateAccountChange/${result.id}/${item.id}/'>${item.type}</td>
+</c:if><c:if test="${param.referName ne 'amount'}">	<td contenteditable='true' class='edit-value money'  propertyToChange='amount' storedCellValue='${item.amount}' prefix='${ownerBeanName}Manager/updateAccountChange/${result.id}/${item.id}/'><fmt:formatNumber type="currency"  value="${item.amount}" /></td>
+</c:if><c:if test="${param.referName ne 'currentBalance'}">	<td contenteditable='true' class='edit-value money'  propertyToChange='currentBalance' storedCellValue='${item.currentBalance}' prefix='${ownerBeanName}Manager/updateAccountChange/${result.id}/${item.id}/'><fmt:formatNumber type="currency"  value="${item.currentBalance}" /></td>
+</c:if><c:if test="${param.referName ne 'changeRequest'}">
 	<td class="select_candidate_td"
 			data-candidate-method="./accountChangeManager/requestCandidateChangeRequest/${ownerBeanName}/${item.id}/"
 			data-switch-method="./accountChangeManager/transferToAnotherChangeRequest/${item.id}/"
@@ -171,8 +168,7 @@
 		</div>
 	</td>
 </c:if>
-<c:if test="${param.referName ne 'currentStatus'}">	<td contenteditable='true' class='edit-value'  propertyToChange='currentStatus' storedCellValue='${item.currentStatus}' prefix='${ownerBeanName}Manager/updateAccountChange/${result.id}/${item.id}/'>${item.currentStatus}</td>
-</c:if>
+
 				<td>
 
 				<a href='#${ownerBeanName}Manager/removeAccountChange/${result.id}/${item.id}/' class='delete-action btn btn-danger btn-xs'><i class="fa fa-trash-o fa-lg"></i> ${userContext.localeMap['@delete']}</a>

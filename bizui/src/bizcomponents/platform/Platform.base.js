@@ -61,7 +61,7 @@ const renderItemOfList=(platform,targetComponent)=>{
       <DescriptionList  key={platform.id} size="small" col="4">
         <Description term="ID">{platform.id}</Description> 
         <Description term="名称">{platform.name}</Description> 
-        <Description term="成立">{ moment(platform.founded).format('YYYY-MM-DD')}</Description> 
+        <Description term="成立"><div>{ moment(platform.founded).format('YYYY-MM-DD')}</div></Description> 
 	
         
       </DescriptionList>

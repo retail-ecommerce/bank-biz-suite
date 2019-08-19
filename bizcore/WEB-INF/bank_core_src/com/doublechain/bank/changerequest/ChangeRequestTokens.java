@@ -150,7 +150,7 @@ public class ChangeRequestTokens extends CommonTokens{
 	}
 	
 	public ChangeRequestTokens searchAllTextOfTransactionList(String verb, String value){	
-		String field = "id|name|type|currentStatus";
+		String field = "id|name|type";
 		addSearchMoreOptions(TRANSACTION_LIST,transactionListSearchCounter++, field, verb, value);
 		return this;
 	}
@@ -216,7 +216,7 @@ public class ChangeRequestTokens extends CommonTokens{
 	}
 	
 	public ChangeRequestTokens searchAllTextOfNameChangeEventList(String verb, String value){	
-		String field = "id|name|currentStatus";
+		String field = "id|name";
 		addSearchMoreOptions(NAME_CHANGE_EVENT_LIST,nameChangeEventListSearchCounter++, field, verb, value);
 		return this;
 	}
@@ -282,7 +282,7 @@ public class ChangeRequestTokens extends CommonTokens{
 	}
 	
 	public ChangeRequestTokens searchAllTextOfAccountChangeList(String verb, String value){	
-		String field = "id|name|type|currentStatus";
+		String field = "id|name|type";
 		addSearchMoreOptions(ACCOUNT_CHANGE_LIST,accountChangeListSearchCounter++, field, verb, value);
 		return this;
 	}

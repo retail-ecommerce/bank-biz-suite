@@ -169,7 +169,7 @@ public class PlatformManagerImpl extends CustomBankCheckerManager implements Pla
  	
 
 
-	public Platform createPlatform(BankUserContext userContext,String name, String founder, String description) throws Exception
+	public Platform createPlatform(BankUserContext userContext,String name) throws Exception
 	{
 		
 		
@@ -177,8 +177,6 @@ public class PlatformManagerImpl extends CustomBankCheckerManager implements Pla
 		
 
 		userContext.getChecker().checkNameOfPlatform(name);
-		userContext.getChecker().checkFounderOfPlatform(founder);
-		userContext.getChecker().checkDescriptionOfPlatform(description);
 	
 		userContext.getChecker().throwExceptionIfHasErrors(PlatformManagerException.class);
 
@@ -186,9 +184,7 @@ public class PlatformManagerImpl extends CustomBankCheckerManager implements Pla
 		Platform platform=createNewPlatform();	
 
 		platform.setName(name);
-		platform.setFounder(founder);
 		platform.setFounded(userContext.now());
-		platform.setDescription(description);
 
 		platform = savePlatform(userContext, platform, emptyOptions());
 		
@@ -215,12 +211,6 @@ public class PlatformManagerImpl extends CustomBankCheckerManager implements Pla
 
 		if(Platform.NAME_PROPERTY.equals(property)){
 			userContext.getChecker().checkNameOfPlatform(parseString(newValueExpr));
-		}
-		if(Platform.FOUNDER_PROPERTY.equals(property)){
-			userContext.getChecker().checkFounderOfPlatform(parseString(newValueExpr));
-		}
-		if(Platform.DESCRIPTION_PROPERTY.equals(property)){
-			userContext.getChecker().checkDescriptionOfPlatform(parseString(newValueExpr));
 		}
 	
 		userContext.getChecker().throwExceptionIfHasErrors(PlatformManagerException.class);

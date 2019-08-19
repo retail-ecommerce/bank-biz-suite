@@ -13,9 +13,7 @@ public class PlatformMapper extends BaseRowMapper<Platform>{
 		 		
  		setId(platform, rs, rowNumber); 		
  		setName(platform, rs, rowNumber); 		
- 		setFounder(platform, rs, rowNumber); 		
  		setFounded(platform, rs, rowNumber); 		
- 		setDescription(platform, rs, rowNumber); 		
  		setVersion(platform, rs, rowNumber);
 
 		return platform;
@@ -49,18 +47,6 @@ public class PlatformMapper extends BaseRowMapper<Platform>{
 		platform.setName(name);
 	}
 		
-	protected void setFounder(Platform platform, ResultSet rs, int rowNumber) throws SQLException{
-	
-		//there will be issue when the type is double/int/long
-		String founder = rs.getString(PlatformTable.COLUMN_FOUNDER);
-		if(founder == null){
-			//do nothing when nothing found in database
-			return;
-		}
-		
-		platform.setFounder(founder);
-	}
-		
 	protected void setFounded(Platform platform, ResultSet rs, int rowNumber) throws SQLException{
 	
 		//there will be issue when the type is double/int/long
@@ -71,18 +57,6 @@ public class PlatformMapper extends BaseRowMapper<Platform>{
 		}
 		
 		platform.setFounded(convertToDateTime(founded));
-	}
-		
-	protected void setDescription(Platform platform, ResultSet rs, int rowNumber) throws SQLException{
-	
-		//there will be issue when the type is double/int/long
-		String description = rs.getString(PlatformTable.COLUMN_DESCRIPTION);
-		if(description == null){
-			//do nothing when nothing found in database
-			return;
-		}
-		
-		platform.setDescription(description);
 	}
 		
 	protected void setVersion(Platform platform, ResultSet rs, int rowNumber) throws SQLException{

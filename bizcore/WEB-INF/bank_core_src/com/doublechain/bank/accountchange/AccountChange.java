@@ -21,13 +21,12 @@ public class AccountChange extends BaseEntity implements  java.io.Serializable{
 	
 	public static final String ID_PROPERTY                    = "id"                ;
 	public static final String NAME_PROPERTY                  = "name"              ;
+	public static final String ACCOUNT_PROPERTY               = "account"           ;
 	public static final String PREVIOUS_BALANCE_PROPERTY      = "previousBalance"   ;
 	public static final String TYPE_PROPERTY                  = "type"              ;
 	public static final String AMOUNT_PROPERTY                = "amount"            ;
 	public static final String CURRENT_BALANCE_PROPERTY       = "currentBalance"    ;
-	public static final String ACCOUNT_PROPERTY               = "account"           ;
 	public static final String CHANGE_REQUEST_PROPERTY        = "changeRequest"     ;
-	public static final String CURRENT_STATUS_PROPERTY        = "currentStatus"     ;
 	public static final String VERSION_PROPERTY               = "version"           ;
 
 
@@ -52,13 +51,12 @@ public class AccountChange extends BaseEntity implements  java.io.Serializable{
 
 	protected		String              	mId                 ;
 	protected		String              	mName               ;
+	protected		Account             	mAccount            ;
 	protected		BigDecimal          	mPreviousBalance    ;
 	protected		String              	mType               ;
 	protected		BigDecimal          	mAmount             ;
 	protected		BigDecimal          	mCurrentBalance     ;
-	protected		Account             	mAccount            ;
 	protected		ChangeRequest       	mChangeRequest      ;
-	protected		String              	mCurrentStatus      ;
 	protected		int                 	mVersion            ;
 	
 	
@@ -75,15 +73,15 @@ public class AccountChange extends BaseEntity implements  java.io.Serializable{
 		this.changed = true;
 	}
 	
-	public 	AccountChange(String name, BigDecimal previousBalance, String type, BigDecimal amount, BigDecimal currentBalance, Account account, String currentStatus)
+	public 	AccountChange(String name, Account account, BigDecimal previousBalance, String type, BigDecimal amount, BigDecimal currentBalance, ChangeRequest changeRequest)
 	{
 		setName(name);
+		setAccount(account);
 		setPreviousBalance(previousBalance);
 		setType(type);
 		setAmount(amount);
 		setCurrentBalance(currentBalance);
-		setAccount(account);
-		setCurrentStatus(currentStatus);
+		setChangeRequest(changeRequest);
 	
 	}
 	
@@ -194,6 +192,9 @@ public class AccountChange extends BaseEntity implements  java.io.Serializable{
 		if(NAME_PROPERTY.equals(property)){
 			return getName();
 		}
+		if(ACCOUNT_PROPERTY.equals(property)){
+			return getAccount();
+		}
 		if(PREVIOUS_BALANCE_PROPERTY.equals(property)){
 			return getPreviousBalance();
 		}
@@ -206,14 +207,8 @@ public class AccountChange extends BaseEntity implements  java.io.Serializable{
 		if(CURRENT_BALANCE_PROPERTY.equals(property)){
 			return getCurrentBalance();
 		}
-		if(ACCOUNT_PROPERTY.equals(property)){
-			return getAccount();
-		}
 		if(CHANGE_REQUEST_PROPERTY.equals(property)){
 			return getChangeRequest();
-		}
-		if(CURRENT_STATUS_PROPERTY.equals(property)){
-			return getCurrentStatus();
 		}
 
     		//other property not include here
@@ -257,6 +252,27 @@ public class AccountChange extends BaseEntity implements  java.io.Serializable{
 		if(name != null) { setName(name);}
 	}
 	
+	
+	public void setAccount(Account account){
+		this.mAccount = account;;
+	}
+	public Account getAccount(){
+		return this.mAccount;
+	}
+	public AccountChange updateAccount(Account account){
+		this.mAccount = account;;
+		this.changed = true;
+		return this;
+	}
+	public void mergeAccount(Account account){
+		if(account != null) { setAccount(account);}
+	}
+	
+	
+	public void clearAccount(){
+		setAccount ( null );
+		this.changed = true;
+	}
 	
 	public void setPreviousBalance(BigDecimal previousBalance){
 		this.mPreviousBalance = previousBalance;;
@@ -322,27 +338,6 @@ public class AccountChange extends BaseEntity implements  java.io.Serializable{
 	}
 	
 	
-	public void setAccount(Account account){
-		this.mAccount = account;;
-	}
-	public Account getAccount(){
-		return this.mAccount;
-	}
-	public AccountChange updateAccount(Account account){
-		this.mAccount = account;;
-		this.changed = true;
-		return this;
-	}
-	public void mergeAccount(Account account){
-		if(account != null) { setAccount(account);}
-	}
-	
-	
-	public void clearAccount(){
-		setAccount ( null );
-		this.changed = true;
-	}
-	
 	public void setChangeRequest(ChangeRequest changeRequest){
 		this.mChangeRequest = changeRequest;;
 	}
@@ -363,22 +358,6 @@ public class AccountChange extends BaseEntity implements  java.io.Serializable{
 		setChangeRequest ( null );
 		this.changed = true;
 	}
-	
-	public void setCurrentStatus(String currentStatus){
-		this.mCurrentStatus = trimString(currentStatus);;
-	}
-	public String getCurrentStatus(){
-		return this.mCurrentStatus;
-	}
-	public AccountChange updateCurrentStatus(String currentStatus){
-		this.mCurrentStatus = trimString(currentStatus);;
-		this.changed = true;
-		return this;
-	}
-	public void mergeCurrentStatus(String currentStatus){
-		if(currentStatus != null) { setCurrentStatus(currentStatus);}
-	}
-	
 	
 	public void setVersion(int version){
 		this.mVersion = version;;
@@ -426,13 +405,12 @@ public class AccountChange extends BaseEntity implements  java.io.Serializable{
 
 		appendKeyValuePair(result, ID_PROPERTY, getId());
 		appendKeyValuePair(result, NAME_PROPERTY, getName());
+		appendKeyValuePair(result, ACCOUNT_PROPERTY, getAccount());
 		appendKeyValuePair(result, PREVIOUS_BALANCE_PROPERTY, getPreviousBalance());
 		appendKeyValuePair(result, TYPE_PROPERTY, getType());
 		appendKeyValuePair(result, AMOUNT_PROPERTY, getAmount());
 		appendKeyValuePair(result, CURRENT_BALANCE_PROPERTY, getCurrentBalance());
-		appendKeyValuePair(result, ACCOUNT_PROPERTY, getAccount());
 		appendKeyValuePair(result, CHANGE_REQUEST_PROPERTY, getChangeRequest());
-		appendKeyValuePair(result, CURRENT_STATUS_PROPERTY, getCurrentStatus());
 		appendKeyValuePair(result, VERSION_PROPERTY, getVersion());
 
 		
@@ -450,13 +428,12 @@ public class AccountChange extends BaseEntity implements  java.io.Serializable{
 		
 			dest.setId(getId());
 			dest.setName(getName());
+			dest.setAccount(getAccount());
 			dest.setPreviousBalance(getPreviousBalance());
 			dest.setType(getType());
 			dest.setAmount(getAmount());
 			dest.setCurrentBalance(getCurrentBalance());
-			dest.setAccount(getAccount());
 			dest.setChangeRequest(getChangeRequest());
-			dest.setCurrentStatus(getCurrentStatus());
 			dest.setVersion(getVersion());
 
 		}
@@ -473,13 +450,12 @@ public class AccountChange extends BaseEntity implements  java.io.Serializable{
 		
 			dest.mergeId(getId());
 			dest.mergeName(getName());
+			dest.mergeAccount(getAccount());
 			dest.mergePreviousBalance(getPreviousBalance());
 			dest.mergeType(getType());
 			dest.mergeAmount(getAmount());
 			dest.mergeCurrentBalance(getCurrentBalance());
-			dest.mergeAccount(getAccount());
 			dest.mergeChangeRequest(getChangeRequest());
-			dest.mergeCurrentStatus(getCurrentStatus());
 			dest.mergeVersion(getVersion());
 
 		}
@@ -501,7 +477,6 @@ public class AccountChange extends BaseEntity implements  java.io.Serializable{
 			dest.mergeType(getType());
 			dest.mergeAmount(getAmount());
 			dest.mergeCurrentBalance(getCurrentBalance());
-			dest.mergeCurrentStatus(getCurrentStatus());
 			dest.mergeVersion(getVersion());
 
 		}
@@ -514,17 +489,16 @@ public class AccountChange extends BaseEntity implements  java.io.Serializable{
 		stringBuilder.append("AccountChange{");
 		stringBuilder.append("\tid='"+getId()+"';");
 		stringBuilder.append("\tname='"+getName()+"';");
+		if(getAccount() != null ){
+ 			stringBuilder.append("\taccount='Account("+getAccount().getId()+")';");
+ 		}
 		stringBuilder.append("\tpreviousBalance='"+getPreviousBalance()+"';");
 		stringBuilder.append("\ttype='"+getType()+"';");
 		stringBuilder.append("\tamount='"+getAmount()+"';");
 		stringBuilder.append("\tcurrentBalance='"+getCurrentBalance()+"';");
-		if(getAccount() != null ){
- 			stringBuilder.append("\taccount='Account("+getAccount().getId()+")';");
- 		}
 		if(getChangeRequest() != null ){
  			stringBuilder.append("\tchangeRequest='ChangeRequest("+getChangeRequest().getId()+")';");
  		}
-		stringBuilder.append("\tcurrentStatus='"+getCurrentStatus()+"';");
 		stringBuilder.append("\tversion='"+getVersion()+"';");
 		stringBuilder.append("}");
 

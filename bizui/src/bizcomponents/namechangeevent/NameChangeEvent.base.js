@@ -61,10 +61,10 @@ const renderItemOfList=(nameChangeEvent,targetComponent)=>{
       <DescriptionList  key={nameChangeEvent.id} size="small" col="4">
         <Description term="ID">{nameChangeEvent.id}</Description> 
         <Description term="名称">{nameChangeEvent.name}</Description> 
-        <Description term="账户">{nameChangeEvent.account==null?appLocaleName(userContext,"NotAssigned"):`${nameChangeEvent.account.displayName}(${nameChangeEvent.account.id})`}
-        </Description>
-        <Description term="变更请求">{nameChangeEvent.changeRequest==null?appLocaleName(userContext,"NotAssigned"):`${nameChangeEvent.changeRequest.displayName}(${nameChangeEvent.changeRequest.id})`}
-        </Description>
+        <Description term="账户"><div>{nameChangeEvent.account==null?appLocaleName(userContext,"NotAssigned"):`${nameChangeEvent.account.displayName}(${nameChangeEvent.account.id})`}
+        </div></Description>
+        <Description term="变更请求"><div>{nameChangeEvent.changeRequest==null?appLocaleName(userContext,"NotAssigned"):`${nameChangeEvent.changeRequest.displayName}(${nameChangeEvent.changeRequest.id})`}
+        </div></Description>
 	
         
       </DescriptionList>

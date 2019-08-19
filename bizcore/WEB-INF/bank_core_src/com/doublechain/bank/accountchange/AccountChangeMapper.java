@@ -15,13 +15,12 @@ public class AccountChangeMapper extends BaseRowMapper<AccountChange>{
 		 		
  		setId(accountChange, rs, rowNumber); 		
  		setName(accountChange, rs, rowNumber); 		
+ 		setAccount(accountChange, rs, rowNumber); 		
  		setPreviousBalance(accountChange, rs, rowNumber); 		
  		setType(accountChange, rs, rowNumber); 		
  		setAmount(accountChange, rs, rowNumber); 		
  		setCurrentBalance(accountChange, rs, rowNumber); 		
- 		setAccount(accountChange, rs, rowNumber); 		
  		setChangeRequest(accountChange, rs, rowNumber); 		
- 		setCurrentStatus(accountChange, rs, rowNumber); 		
  		setVersion(accountChange, rs, rowNumber);
 
 		return accountChange;
@@ -54,7 +53,25 @@ public class AccountChangeMapper extends BaseRowMapper<AccountChange>{
 		
 		accountChange.setName(name);
 	}
-		
+		 		
+ 	protected void setAccount(AccountChange accountChange, ResultSet rs, int rowNumber) throws SQLException{
+ 		String accountId = rs.getString(AccountChangeTable.COLUMN_ACCOUNT);
+ 		if( accountId == null){
+ 			return;
+ 		}
+ 		if( accountId.isEmpty()){
+ 			return;
+ 		}
+ 		Account laccount = accountChange.getAccount();
+ 		if( laccount != null ){
+ 			//if the root object 'accountChange' already have the property, just set the id for it;
+ 			laccount.setId(accountId);
+ 			
+ 			return;
+ 		}
+ 		accountChange.setAccount(createEmptyAccount(accountId));
+ 	}
+ 	
 	protected void setPreviousBalance(AccountChange accountChange, ResultSet rs, int rowNumber) throws SQLException{
 	
 		//there will be issue when the type is double/int/long
@@ -103,24 +120,6 @@ public class AccountChangeMapper extends BaseRowMapper<AccountChange>{
 		accountChange.setCurrentBalance(currentBalance);
 	}
 		 		
- 	protected void setAccount(AccountChange accountChange, ResultSet rs, int rowNumber) throws SQLException{
- 		String accountId = rs.getString(AccountChangeTable.COLUMN_ACCOUNT);
- 		if( accountId == null){
- 			return;
- 		}
- 		if( accountId.isEmpty()){
- 			return;
- 		}
- 		Account laccount = accountChange.getAccount();
- 		if( laccount != null ){
- 			//if the root object 'accountChange' already have the property, just set the id for it;
- 			laccount.setId(accountId);
- 			
- 			return;
- 		}
- 		accountChange.setAccount(createEmptyAccount(accountId));
- 	}
- 	 		
  	protected void setChangeRequest(AccountChange accountChange, ResultSet rs, int rowNumber) throws SQLException{
  		String changeRequestId = rs.getString(AccountChangeTable.COLUMN_CHANGE_REQUEST);
  		if( changeRequestId == null){
@@ -139,18 +138,6 @@ public class AccountChangeMapper extends BaseRowMapper<AccountChange>{
  		accountChange.setChangeRequest(createEmptyChangeRequest(changeRequestId));
  	}
  	
-	protected void setCurrentStatus(AccountChange accountChange, ResultSet rs, int rowNumber) throws SQLException{
-	
-		//there will be issue when the type is double/int/long
-		String currentStatus = rs.getString(AccountChangeTable.COLUMN_CURRENT_STATUS);
-		if(currentStatus == null){
-			//do nothing when nothing found in database
-			return;
-		}
-		
-		accountChange.setCurrentStatus(currentStatus);
-	}
-		
 	protected void setVersion(AccountChange accountChange, ResultSet rs, int rowNumber) throws SQLException{
 	
 		//there will be issue when the type is double/int/long

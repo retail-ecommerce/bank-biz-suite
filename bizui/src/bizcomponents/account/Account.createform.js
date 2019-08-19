@@ -18,7 +18,7 @@ const testValues = {};
 /*
 const testValues = {
   name: '张三账户',
-  balance: '119.67',
+  balance: '101.20',
   platformId: 'P000001',
 }
 */

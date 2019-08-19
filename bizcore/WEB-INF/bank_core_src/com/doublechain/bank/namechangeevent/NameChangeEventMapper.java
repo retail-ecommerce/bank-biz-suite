@@ -17,7 +17,6 @@ public class NameChangeEventMapper extends BaseRowMapper<NameChangeEvent>{
  		setName(nameChangeEvent, rs, rowNumber); 		
  		setAccount(nameChangeEvent, rs, rowNumber); 		
  		setChangeRequest(nameChangeEvent, rs, rowNumber); 		
- 		setCurrentStatus(nameChangeEvent, rs, rowNumber); 		
  		setVersion(nameChangeEvent, rs, rowNumber);
 
 		return nameChangeEvent;
@@ -87,18 +86,6 @@ public class NameChangeEventMapper extends BaseRowMapper<NameChangeEvent>{
  		nameChangeEvent.setChangeRequest(createEmptyChangeRequest(changeRequestId));
  	}
  	
-	protected void setCurrentStatus(NameChangeEvent nameChangeEvent, ResultSet rs, int rowNumber) throws SQLException{
-	
-		//there will be issue when the type is double/int/long
-		String currentStatus = rs.getString(NameChangeEventTable.COLUMN_CURRENT_STATUS);
-		if(currentStatus == null){
-			//do nothing when nothing found in database
-			return;
-		}
-		
-		nameChangeEvent.setCurrentStatus(currentStatus);
-	}
-		
 	protected void setVersion(NameChangeEvent nameChangeEvent, ResultSet rs, int rowNumber) throws SQLException{
 	
 		//there will be issue when the type is double/int/long

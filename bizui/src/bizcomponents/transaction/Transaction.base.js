@@ -67,14 +67,14 @@ const renderItemOfList=(transaction,targetComponent)=>{
       <DescriptionList  key={transaction.id} size="small" col="4">
         <Description term="ID">{transaction.id}</Description> 
         <Description term="名称">{transaction.name}</Description> 
-        <Description term="从账户">{transaction.fromAccount==null?appLocaleName(userContext,"NotAssigned"):`${transaction.fromAccount.displayName}(${transaction.fromAccount.id})`}
-        </Description>
-        <Description term="承担责任">{transaction.toAccount==null?appLocaleName(userContext,"NotAssigned"):`${transaction.toAccount.displayName}(${transaction.toAccount.id})`}
-        </Description>
-        <Description term="金额">{transaction.amount}</Description> 
+        <Description term="从账户"><div>{transaction.fromAccount==null?appLocaleName(userContext,"NotAssigned"):`${transaction.fromAccount.displayName}(${transaction.fromAccount.id})`}
+        </div></Description>
+        <Description term="承担责任"><div>{transaction.toAccount==null?appLocaleName(userContext,"NotAssigned"):`${transaction.toAccount.displayName}(${transaction.toAccount.id})`}
+        </div></Description>
+        <Description term="金额"><div style={{"color":"red"}}>{transaction.amount}</div></Description> 
         <Description term="类型">{transaction.type}</Description> 
-        <Description term="变更请求">{transaction.changeRequest==null?appLocaleName(userContext,"NotAssigned"):`${transaction.changeRequest.displayName}(${transaction.changeRequest.id})`}
-        </Description>
+        <Description term="变更请求"><div>{transaction.changeRequest==null?appLocaleName(userContext,"NotAssigned"):`${transaction.changeRequest.displayName}(${transaction.changeRequest.id})`}
+        </div></Description>
 	
         
       </DescriptionList>

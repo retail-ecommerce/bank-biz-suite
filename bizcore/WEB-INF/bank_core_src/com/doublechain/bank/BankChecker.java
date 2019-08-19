@@ -27,25 +27,7 @@ public class BankChecker extends BaseChecker{
 	public BankChecker checkNameOfPlatform(String name)
 	{
 		
-	 	checkStringLengthRange(name,7, 60,NAME_OF_PLATFORM ); 		
-		
-		return this;
-	}	
-
-	public static final String  FOUNDER_OF_PLATFORM ="platform.founder";
-	public BankChecker checkFounderOfPlatform(String founder)
-	{
-		
-	 	checkStringLengthRange(founder,1, 12,FOUNDER_OF_PLATFORM ); 		
-		
-		return this;
-	}	
-
-	public static final String  DESCRIPTION_OF_PLATFORM ="platform.description";
-	public BankChecker checkDescriptionOfPlatform(String description)
-	{
-		
-	 	checkStringLengthRange(description,7, 60,DESCRIPTION_OF_PLATFORM ); 		
+	 	checkStringLengthRange(name,3, 24,NAME_OF_PLATFORM ); 		
 		
 		return this;
 	}	
@@ -149,6 +131,15 @@ public class BankChecker extends BaseChecker{
 		return this;
 	}	
 
+	public static final String  CHANGE_REQUEST_OF_TRANSACTION ="transaction.change_request";
+	public BankChecker checkChangeRequestIdOfTransaction(String changeRequestId)
+	{
+		
+	 	checkIdOfTransaction(changeRequestId ); 		
+		
+		return this;
+	}	
+
 	public static final String  VERSION_OF_TRANSACTION ="transaction.version";
 	public BankChecker checkVersionOfTransaction(int version)
 	{
@@ -181,6 +172,15 @@ public class BankChecker extends BaseChecker{
 	{
 		
 	 	checkIdOfNameChangeEvent(accountId ); 		
+		
+		return this;
+	}	
+
+	public static final String  CHANGE_REQUEST_OF_NAME_CHANGE_EVENT ="name_change_event.change_request";
+	public BankChecker checkChangeRequestIdOfNameChangeEvent(String changeRequestId)
+	{
+		
+	 	checkIdOfNameChangeEvent(changeRequestId ); 		
 		
 		return this;
 	}	
@@ -257,6 +257,15 @@ public class BankChecker extends BaseChecker{
 		return this;
 	}	
 
+	public static final String  ACCOUNT_OF_ACCOUNT_CHANGE ="account_change.account";
+	public BankChecker checkAccountIdOfAccountChange(String accountId)
+	{
+		
+	 	checkIdOfAccountChange(accountId ); 		
+		
+		return this;
+	}	
+
 	public static final String  PREVIOUS_BALANCE_OF_ACCOUNT_CHANGE ="account_change.previous_balance";
 	public BankChecker checkPreviousBalanceOfAccountChange(BigDecimal previousBalance)
 	{
@@ -293,11 +302,11 @@ public class BankChecker extends BaseChecker{
 		return this;
 	}	
 
-	public static final String  ACCOUNT_OF_ACCOUNT_CHANGE ="account_change.account";
-	public BankChecker checkAccountIdOfAccountChange(String accountId)
+	public static final String  CHANGE_REQUEST_OF_ACCOUNT_CHANGE ="account_change.change_request";
+	public BankChecker checkChangeRequestIdOfAccountChange(String changeRequestId)
 	{
 		
-	 	checkIdOfAccountChange(accountId ); 		
+	 	checkIdOfAccountChange(changeRequestId ); 		
 		
 		return this;
 	}	

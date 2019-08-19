@@ -545,28 +545,24 @@ public class PlatformJDBCTemplateDAO extends BankBaseDAOImpl implements Platform
  		return preparePlatformCreateParameters(platform);
  	}
  	protected Object[] preparePlatformUpdateParameters(Platform platform){
- 		Object[] parameters = new Object[7];
+ 		Object[] parameters = new Object[5];
  
  		parameters[0] = platform.getName();
- 		parameters[1] = platform.getFounder();
- 		parameters[2] = platform.getFounded();
- 		parameters[3] = platform.getDescription();		
- 		parameters[4] = platform.nextVersion();
- 		parameters[5] = platform.getId();
- 		parameters[6] = platform.getVersion();
+ 		parameters[1] = platform.getFounded();		
+ 		parameters[2] = platform.nextVersion();
+ 		parameters[3] = platform.getId();
+ 		parameters[4] = platform.getVersion();
  				
  		return parameters;
  	}
  	protected Object[] preparePlatformCreateParameters(Platform platform){
-		Object[] parameters = new Object[5];
+		Object[] parameters = new Object[3];
 		String newPlatformId=getNextId();
 		platform.setId(newPlatformId);
 		parameters[0] =  platform.getId();
  
  		parameters[1] = platform.getName();
- 		parameters[2] = platform.getFounder();
- 		parameters[3] = platform.getFounded();
- 		parameters[4] = platform.getDescription();		
+ 		parameters[2] = platform.getFounded();		
  				
  		return parameters;
  	}

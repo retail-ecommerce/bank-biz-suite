@@ -72,15 +72,31 @@ public interface AccountDAO{
 	public Account planToRemoveTransactionListAsFromAccount(Account account, String transactionIds[], Map<String,Object> options)throws Exception;
 
 
+	//disconnect Account with change_request in Transaction
+	public Account planToRemoveTransactionListAsFromAccountWithChangeRequest(Account account, String changeRequestId, Map<String,Object> options)throws Exception;
+	public int countTransactionListAsFromAccountWithChangeRequest(String accountId, String changeRequestId, Map<String,Object> options)throws Exception;
+	
 	public Account planToRemoveTransactionListAsToAccount(Account account, String transactionIds[], Map<String,Object> options)throws Exception;
 
 
+	//disconnect Account with change_request in Transaction
+	public Account planToRemoveTransactionListAsToAccountWithChangeRequest(Account account, String changeRequestId, Map<String,Object> options)throws Exception;
+	public int countTransactionListAsToAccountWithChangeRequest(String accountId, String changeRequestId, Map<String,Object> options)throws Exception;
+	
 	public Account planToRemoveNameChangeEventList(Account account, String nameChangeEventIds[], Map<String,Object> options)throws Exception;
 
 
+	//disconnect Account with change_request in NameChangeEvent
+	public Account planToRemoveNameChangeEventListWithChangeRequest(Account account, String changeRequestId, Map<String,Object> options)throws Exception;
+	public int countNameChangeEventListWithChangeRequest(String accountId, String changeRequestId, Map<String,Object> options)throws Exception;
+	
 	public Account planToRemoveAccountChangeList(Account account, String accountChangeIds[], Map<String,Object> options)throws Exception;
 
 
+	//disconnect Account with change_request in AccountChange
+	public Account planToRemoveAccountChangeListWithChangeRequest(Account account, String changeRequestId, Map<String,Object> options)throws Exception;
+	public int countAccountChangeListWithChangeRequest(String accountId, String changeRequestId, Map<String,Object> options)throws Exception;
+	
 	
 	public SmartList<Account> queryList(String sql, Object ... parmeters);
  

@@ -73,8 +73,8 @@ const renderItemOfList=(userApp,targetComponent)=>{
       <DescriptionList  key={userApp.id} size="small" col="4">
         <Description term="ID">{userApp.id}</Description> 
         <Description term="标题">{userApp.title}</Description> 
-        <Description term="安全用户">{userApp.secUser==null?appLocaleName(userContext,"NotAssigned"):`${userApp.secUser.displayName}(${userApp.secUser.id})`}
-        </Description>
+        <Description term="安全用户"><div>{userApp.secUser==null?appLocaleName(userContext,"NotAssigned"):`${userApp.secUser.displayName}(${userApp.secUser.id})`}
+        </div></Description>
         <Description term="应用程序图标">{userApp.appIcon}</Description> 
         <Description term="许可">{userApp.permission}</Description> 
         <Description term="访问对象类型">{userApp.objectType}</Description> 

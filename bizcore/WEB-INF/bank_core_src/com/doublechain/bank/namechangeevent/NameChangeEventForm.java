@@ -75,20 +75,6 @@ public class NameChangeEventForm extends BaseForm {
 		return changeRequestIdField("changeRequestId","");
 	}
 
-
-	public NameChangeEventForm currentStatusField(String parameterName, String initValue){
-		FormField field = currentStatusFromNameChangeEvent(parameterName, initValue);		
-		this.addFormField(field);
-		return this;
-	}
-	
-	public NameChangeEventForm currentStatusField(String initValue){
-		return currentStatusField("currentStatus",initValue);
-	}
-	public NameChangeEventForm currentStatusField(){
-		return currentStatusField("currentStatus","");
-	}
-
 	
 	
 
@@ -248,14 +234,16 @@ public class NameChangeEventForm extends BaseForm {
 	}
 
  	
- 	public NameChangeEventForm  requestChangeAction(){
+ 	public NameChangeEventForm transferToAnotherChangeRequestAction(){
 		FormAction action = new FormAction();
-		action.setLabel("变更请求");
-		action.setLocaleKey("name_change_event.requestChange");
-		action.setUrl("nameChangeEventManager/requestChange/nameChangeEventId/name/platformId");
+		action.setLabel("显示");
+		action.setLocaleKey("show");
+		action.setUrl("transferToAnotherChangeRequest/nameChangeEventId/");
 		this.addFormAction(action);
 		return this;
 	}
+
+ 
 
 	public NameChangeEventForm showAction(){
 		FormAction action = new FormAction();

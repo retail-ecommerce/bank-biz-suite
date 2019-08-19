@@ -131,21 +131,20 @@
 <c:set var="referName" value="" scope="request" />
 <sky:include page="com/doublechain/bank/account/Account$Info.jsp" />
 
-</div>
-
-
-
-
-
-
-
-
-	<div class="row">
 <c:set var="changeRequest" value="${ result.changeRequest}" scope="request" />
-<sky:include page="com/doublechain/bank/changerequest/ChangeRequest$Action.jsp" />
+<c:set var="referName" value="" scope="request" />
+<sky:include page="com/doublechain/bank/changerequest/ChangeRequest$Info.jsp" />
 
 </div>
 
+
+
+
+
+
+
+
+	
 
 
 

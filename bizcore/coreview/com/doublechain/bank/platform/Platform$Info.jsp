@@ -21,9 +21,7 @@
 	
 	<li><span>ID</span><a class="link-action-removed" href="./platformManager/view/${platform.id}/"> ${platform.id}</a></li>
 <li><span>${userContext.localeMap['platform.name']}</span> ${platform.name}</li>
-<li><span>${userContext.localeMap['platform.founder']}</span> ${platform.founder}</li>
 <li><span>${userContext.localeMap['platform.founded']}</span> <fmt:formatDate pattern="yyyy-MM-dd" value="${platform.founded}" /></li>
-<li><span>${userContext.localeMap['platform.description']}</span> ${platform.description}</li>
 
 	
 	</ul>

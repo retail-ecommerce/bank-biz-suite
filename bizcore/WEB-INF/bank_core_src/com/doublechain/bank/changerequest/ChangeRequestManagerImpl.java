@@ -610,8 +610,7 @@ public class ChangeRequestManagerImpl extends CustomBankCheckerManager implement
 		toAccount.setId(toAccountId);		
 		transaction.setToAccount(toAccount);		
 		transaction.setAmount(amount);		
-		transaction.setType(type);		
-		transaction.setCurrentStatus("INIT");
+		transaction.setType(type);
 	
 		
 		return transaction;
@@ -858,8 +857,7 @@ public class ChangeRequestManagerImpl extends CustomBankCheckerManager implement
 		nameChangeEvent.setName(name);		
 		Account  account = new Account();
 		account.setId(accountId);		
-		nameChangeEvent.setAccount(account);		
-		nameChangeEvent.setCurrentStatus("INIT");
+		nameChangeEvent.setAccount(account);
 	
 		
 		return nameChangeEvent;
@@ -1017,7 +1015,7 @@ public class ChangeRequestManagerImpl extends CustomBankCheckerManager implement
 
 
 
-	protected void checkParamsForAddingAccountChange(BankUserContext userContext, String changeRequestId, String name, BigDecimal previousBalance, String type, BigDecimal amount, BigDecimal currentBalance, String accountId,String [] tokensExpr) throws Exception{
+	protected void checkParamsForAddingAccountChange(BankUserContext userContext, String changeRequestId, String name, String accountId, BigDecimal previousBalance, String type, BigDecimal amount, BigDecimal currentBalance,String [] tokensExpr) throws Exception{
 		
 		
 
@@ -1028,6 +1026,8 @@ public class ChangeRequestManagerImpl extends CustomBankCheckerManager implement
 		
 		userContext.getChecker().checkNameOfAccountChange(name);
 		
+		userContext.getChecker().checkAccountIdOfAccountChange(accountId);
+		
 		userContext.getChecker().checkPreviousBalanceOfAccountChange(previousBalance);
 		
 		userContext.getChecker().checkTypeOfAccountChange(type);
@@ -1035,19 +1035,17 @@ public class ChangeRequestManagerImpl extends CustomBankCheckerManager implement
 		userContext.getChecker().checkAmountOfAccountChange(amount);
 		
 		userContext.getChecker().checkCurrentBalanceOfAccountChange(currentBalance);
-		
-		userContext.getChecker().checkAccountIdOfAccountChange(accountId);
 	
 		userContext.getChecker().throwExceptionIfHasErrors(ChangeRequestManagerException.class);
 
 	
 	}
-	public  ChangeRequest addAccountChange(BankUserContext userContext, String changeRequestId, String name, BigDecimal previousBalance, String type, BigDecimal amount, BigDecimal currentBalance, String accountId, String [] tokensExpr) throws Exception
+	public  ChangeRequest addAccountChange(BankUserContext userContext, String changeRequestId, String name, String accountId, BigDecimal previousBalance, String type, BigDecimal amount, BigDecimal currentBalance, String [] tokensExpr) throws Exception
 	{	
 		
-		checkParamsForAddingAccountChange(userContext,changeRequestId,name, previousBalance, type, amount, currentBalance, accountId,tokensExpr);
+		checkParamsForAddingAccountChange(userContext,changeRequestId,name, accountId, previousBalance, type, amount, currentBalance,tokensExpr);
 		
-		AccountChange accountChange = createAccountChange(userContext,name, previousBalance, type, amount, currentBalance, accountId);
+		AccountChange accountChange = createAccountChange(userContext,name, accountId, previousBalance, type, amount, currentBalance);
 		
 		ChangeRequest changeRequest = loadChangeRequest(userContext, changeRequestId, allTokens());
 		synchronized(changeRequest){ 
@@ -1106,20 +1104,19 @@ public class ChangeRequestManagerImpl extends CustomBankCheckerManager implement
 	}
 	
 	
-	protected AccountChange createAccountChange(BankUserContext userContext, String name, BigDecimal previousBalance, String type, BigDecimal amount, BigDecimal currentBalance, String accountId) throws Exception{
+	protected AccountChange createAccountChange(BankUserContext userContext, String name, String accountId, BigDecimal previousBalance, String type, BigDecimal amount, BigDecimal currentBalance) throws Exception{
 
 		AccountChange accountChange = new AccountChange();
 		
 		
 		accountChange.setName(name);		
-		accountChange.setPreviousBalance(previousBalance);		
-		accountChange.setType(type);		
-		accountChange.setAmount(amount);		
-		accountChange.setCurrentBalance(currentBalance);		
 		Account  account = new Account();
 		account.setId(accountId);		
 		accountChange.setAccount(account);		
-		accountChange.setCurrentStatus("INIT");
+		accountChange.setPreviousBalance(previousBalance);		
+		accountChange.setType(type);		
+		accountChange.setAmount(amount);		
+		accountChange.setCurrentBalance(currentBalance);
 	
 		
 		return accountChange;

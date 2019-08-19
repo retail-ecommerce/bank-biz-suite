@@ -19,7 +19,6 @@
 	
 	<li><span>${userContext.localeMap['name_change_event.id']}</span> ${nameChangeEvent.id}</li>
 <li><span>${userContext.localeMap['name_change_event.name']}</span> ${nameChangeEvent.name}</li>
-<li><span>${userContext.localeMap['name_change_event.current_status']}</span> ${nameChangeEvent.currentStatus}</li>
 
 	
 	</ul>

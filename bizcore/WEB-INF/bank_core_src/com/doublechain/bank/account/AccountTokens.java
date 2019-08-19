@@ -151,7 +151,7 @@ public class AccountTokens extends CommonTokens{
 	}
 	
 	public AccountTokens searchAllTextOfTransactionListAsFromAccount(String verb, String value){	
-		String field = "id|name|type|currentStatus";
+		String field = "id|name|type";
 		addSearchMoreOptions(TRANSACTION_LIST_AS_FROM_ACCOUNT,transactionListAsFromAccountSearchCounter++, field, verb, value);
 		return this;
 	}
@@ -217,7 +217,7 @@ public class AccountTokens extends CommonTokens{
 	}
 	
 	public AccountTokens searchAllTextOfTransactionListAsToAccount(String verb, String value){	
-		String field = "id|name|type|currentStatus";
+		String field = "id|name|type";
 		addSearchMoreOptions(TRANSACTION_LIST_AS_TO_ACCOUNT,transactionListAsToAccountSearchCounter++, field, verb, value);
 		return this;
 	}
@@ -283,7 +283,7 @@ public class AccountTokens extends CommonTokens{
 	}
 	
 	public AccountTokens searchAllTextOfNameChangeEventList(String verb, String value){	
-		String field = "id|name|currentStatus";
+		String field = "id|name";
 		addSearchMoreOptions(NAME_CHANGE_EVENT_LIST,nameChangeEventListSearchCounter++, field, verb, value);
 		return this;
 	}
@@ -349,7 +349,7 @@ public class AccountTokens extends CommonTokens{
 	}
 	
 	public AccountTokens searchAllTextOfAccountChangeList(String verb, String value){	
-		String field = "id|name|type|currentStatus";
+		String field = "id|name|type";
 		addSearchMoreOptions(ACCOUNT_CHANGE_LIST,accountChangeListSearchCounter++, field, verb, value);
 		return this;
 	}

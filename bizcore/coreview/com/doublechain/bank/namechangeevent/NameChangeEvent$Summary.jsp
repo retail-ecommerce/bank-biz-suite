@@ -40,10 +40,6 @@
 <span class="summary-label">${userContext.localeMap['name_change_event.name']}</span>
 <span >${result.name}</span>
 </div>
-<div class="col-xs-12 col-md-3 summary-section">
-<span class="summary-label">${userContext.localeMap['name_change_event.current_status']}</span>
-<span >${result.currentStatus}</span>
-</div>
 
 	</div>
 	

@@ -529,50 +529,48 @@ public class AccountChangeJDBCTemplateDAO extends BankBaseDAOImpl implements Acc
  		return prepareAccountChangeCreateParameters(accountChange);
  	}
  	protected Object[] prepareAccountChangeUpdateParameters(AccountChange accountChange){
- 		Object[] parameters = new Object[11];
+ 		Object[] parameters = new Object[10];
  
- 		parameters[0] = accountChange.getName();
- 		parameters[1] = accountChange.getPreviousBalance();
- 		parameters[2] = accountChange.getType();
- 		parameters[3] = accountChange.getAmount();
- 		parameters[4] = accountChange.getCurrentBalance(); 	
+ 		parameters[0] = accountChange.getName(); 	
  		if(accountChange.getAccount() != null){
- 			parameters[5] = accountChange.getAccount().getId();
- 		}
-  	
- 		if(accountChange.getChangeRequest() != null){
- 			parameters[6] = accountChange.getChangeRequest().getId();
+ 			parameters[1] = accountChange.getAccount().getId();
  		}
  
- 		parameters[7] = accountChange.getCurrentStatus();		
- 		parameters[8] = accountChange.nextVersion();
- 		parameters[9] = accountChange.getId();
- 		parameters[10] = accountChange.getVersion();
- 				
- 		return parameters;
- 	}
- 	protected Object[] prepareAccountChangeCreateParameters(AccountChange accountChange){
-		Object[] parameters = new Object[9];
-		String newAccountChangeId=getNextId();
-		accountChange.setId(newAccountChangeId);
-		parameters[0] =  accountChange.getId();
- 
- 		parameters[1] = accountChange.getName();
  		parameters[2] = accountChange.getPreviousBalance();
  		parameters[3] = accountChange.getType();
  		parameters[4] = accountChange.getAmount();
  		parameters[5] = accountChange.getCurrentBalance(); 	
+ 		if(accountChange.getChangeRequest() != null){
+ 			parameters[6] = accountChange.getChangeRequest().getId();
+ 		}
+ 		
+ 		parameters[7] = accountChange.nextVersion();
+ 		parameters[8] = accountChange.getId();
+ 		parameters[9] = accountChange.getVersion();
+ 				
+ 		return parameters;
+ 	}
+ 	protected Object[] prepareAccountChangeCreateParameters(AccountChange accountChange){
+		Object[] parameters = new Object[8];
+		String newAccountChangeId=getNextId();
+		accountChange.setId(newAccountChangeId);
+		parameters[0] =  accountChange.getId();
+ 
+ 		parameters[1] = accountChange.getName(); 	
  		if(accountChange.getAccount() != null){
- 			parameters[6] = accountChange.getAccount().getId();
+ 			parameters[2] = accountChange.getAccount().getId();
  		
  		}
- 		 	
+ 		
+ 		parameters[3] = accountChange.getPreviousBalance();
+ 		parameters[4] = accountChange.getType();
+ 		parameters[5] = accountChange.getAmount();
+ 		parameters[6] = accountChange.getCurrentBalance(); 	
  		if(accountChange.getChangeRequest() != null){
  			parameters[7] = accountChange.getChangeRequest().getId();
  		
  		}
- 		
- 		parameters[8] = accountChange.getCurrentStatus();		
+ 				
  				
  		return parameters;
  	}

@@ -26,7 +26,6 @@ public class Transaction extends BaseEntity implements  java.io.Serializable{
 	public static final String AMOUNT_PROPERTY                = "amount"            ;
 	public static final String TYPE_PROPERTY                  = "type"              ;
 	public static final String CHANGE_REQUEST_PROPERTY        = "changeRequest"     ;
-	public static final String CURRENT_STATUS_PROPERTY        = "currentStatus"     ;
 	public static final String VERSION_PROPERTY               = "version"           ;
 
 
@@ -56,7 +55,6 @@ public class Transaction extends BaseEntity implements  java.io.Serializable{
 	protected		BigDecimal          	mAmount             ;
 	protected		String              	mType               ;
 	protected		ChangeRequest       	mChangeRequest      ;
-	protected		String              	mCurrentStatus      ;
 	protected		int                 	mVersion            ;
 	
 	
@@ -74,14 +72,14 @@ public class Transaction extends BaseEntity implements  java.io.Serializable{
 		this.changed = true;
 	}
 	
-	public 	Transaction(String name, Account fromAccount, Account toAccount, BigDecimal amount, String type, String currentStatus)
+	public 	Transaction(String name, Account fromAccount, Account toAccount, BigDecimal amount, String type, ChangeRequest changeRequest)
 	{
 		setName(name);
 		setFromAccount(fromAccount);
 		setToAccount(toAccount);
 		setAmount(amount);
 		setType(type);
-		setCurrentStatus(currentStatus);
+		setChangeRequest(changeRequest);
 	
 	}
 	
@@ -170,9 +168,6 @@ public class Transaction extends BaseEntity implements  java.io.Serializable{
 		}
 		if(CHANGE_REQUEST_PROPERTY.equals(property)){
 			return getChangeRequest();
-		}
-		if(CURRENT_STATUS_PROPERTY.equals(property)){
-			return getCurrentStatus();
 		}
 
     		//other property not include here
@@ -312,22 +307,6 @@ public class Transaction extends BaseEntity implements  java.io.Serializable{
 		this.changed = true;
 	}
 	
-	public void setCurrentStatus(String currentStatus){
-		this.mCurrentStatus = trimString(currentStatus);;
-	}
-	public String getCurrentStatus(){
-		return this.mCurrentStatus;
-	}
-	public Transaction updateCurrentStatus(String currentStatus){
-		this.mCurrentStatus = trimString(currentStatus);;
-		this.changed = true;
-		return this;
-	}
-	public void mergeCurrentStatus(String currentStatus){
-		if(currentStatus != null) { setCurrentStatus(currentStatus);}
-	}
-	
-	
 	public void setVersion(int version){
 		this.mVersion = version;;
 	}
@@ -380,7 +359,6 @@ public class Transaction extends BaseEntity implements  java.io.Serializable{
 		appendKeyValuePair(result, AMOUNT_PROPERTY, getAmount());
 		appendKeyValuePair(result, TYPE_PROPERTY, getType());
 		appendKeyValuePair(result, CHANGE_REQUEST_PROPERTY, getChangeRequest());
-		appendKeyValuePair(result, CURRENT_STATUS_PROPERTY, getCurrentStatus());
 		appendKeyValuePair(result, VERSION_PROPERTY, getVersion());
 
 		
@@ -403,7 +381,6 @@ public class Transaction extends BaseEntity implements  java.io.Serializable{
 			dest.setAmount(getAmount());
 			dest.setType(getType());
 			dest.setChangeRequest(getChangeRequest());
-			dest.setCurrentStatus(getCurrentStatus());
 			dest.setVersion(getVersion());
 
 		}
@@ -425,7 +402,6 @@ public class Transaction extends BaseEntity implements  java.io.Serializable{
 			dest.mergeAmount(getAmount());
 			dest.mergeType(getType());
 			dest.mergeChangeRequest(getChangeRequest());
-			dest.mergeCurrentStatus(getCurrentStatus());
 			dest.mergeVersion(getVersion());
 
 		}
@@ -445,7 +421,6 @@ public class Transaction extends BaseEntity implements  java.io.Serializable{
 			dest.mergeName(getName());
 			dest.mergeAmount(getAmount());
 			dest.mergeType(getType());
-			dest.mergeCurrentStatus(getCurrentStatus());
 			dest.mergeVersion(getVersion());
 
 		}
@@ -469,7 +444,6 @@ public class Transaction extends BaseEntity implements  java.io.Serializable{
 		if(getChangeRequest() != null ){
  			stringBuilder.append("\tchangeRequest='ChangeRequest("+getChangeRequest().getId()+")';");
  		}
-		stringBuilder.append("\tcurrentStatus='"+getCurrentStatus()+"';");
 		stringBuilder.append("\tversion='"+getVersion()+"';");
 		stringBuilder.append("}");
 

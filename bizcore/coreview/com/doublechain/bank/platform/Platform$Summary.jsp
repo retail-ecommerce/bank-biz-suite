@@ -41,16 +41,8 @@
 <span >${result.name}</span>
 </div>
 <div class="col-xs-12 col-md-3 summary-section">
-<span class="summary-label">${userContext.localeMap['platform.founder']}</span>
-<span >${result.founder}</span>
-</div>
-<div class="col-xs-12 col-md-3 summary-section">
 <span class="summary-label">${userContext.localeMap['platform.founded']}</span>
 <span ><fmt:formatDate pattern="yyyy-MM-dd" value="${result.founded}" /></span>
-</div>
-<div class="col-xs-12 col-md-3 summary-section">
-<span class="summary-label">${userContext.localeMap['platform.description']}</span>
-<span >${result.description}</span>
 </div>
 
 	</div>

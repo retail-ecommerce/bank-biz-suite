@@ -454,13 +454,85 @@ public class AccountManagerImpl extends CustomBankCheckerManager implements Acco
 	}
 
 
+	//disconnect Account with change_request in Transaction
+	protected Account breakWithTransactionAsFromAccountByChangeRequest(BankUserContext userContext, String accountId, String changeRequestId,  String [] tokensExpr)
+		 throws Exception{
+			
+			//TODO add check code here
+			
+			Account account = loadAccount(userContext, accountId, allTokens());
+
+			synchronized(account){ 
+				//Will be good when the thread loaded from this JVM process cache.
+				//Also good when there is a RAM based DAO implementation
+				
+				userContext.getDAOGroup().getAccountDAO().planToRemoveTransactionListAsFromAccountWithChangeRequest(account, changeRequestId, this.emptyOptions());
+
+				account = saveAccount(userContext, account, tokens().withTransactionListAsFromAccount().done());
+				return account;
+			}
+	}
+	//disconnect Account with change_request in Transaction
+	protected Account breakWithTransactionAsToAccountByChangeRequest(BankUserContext userContext, String accountId, String changeRequestId,  String [] tokensExpr)
+		 throws Exception{
+			
+			//TODO add check code here
+			
+			Account account = loadAccount(userContext, accountId, allTokens());
+
+			synchronized(account){ 
+				//Will be good when the thread loaded from this JVM process cache.
+				//Also good when there is a RAM based DAO implementation
+				
+				userContext.getDAOGroup().getAccountDAO().planToRemoveTransactionListAsToAccountWithChangeRequest(account, changeRequestId, this.emptyOptions());
+
+				account = saveAccount(userContext, account, tokens().withTransactionListAsToAccount().done());
+				return account;
+			}
+	}
+	//disconnect Account with change_request in NameChangeEvent
+	protected Account breakWithNameChangeEventByChangeRequest(BankUserContext userContext, String accountId, String changeRequestId,  String [] tokensExpr)
+		 throws Exception{
+			
+			//TODO add check code here
+			
+			Account account = loadAccount(userContext, accountId, allTokens());
+
+			synchronized(account){ 
+				//Will be good when the thread loaded from this JVM process cache.
+				//Also good when there is a RAM based DAO implementation
+				
+				userContext.getDAOGroup().getAccountDAO().planToRemoveNameChangeEventListWithChangeRequest(account, changeRequestId, this.emptyOptions());
+
+				account = saveAccount(userContext, account, tokens().withNameChangeEventList().done());
+				return account;
+			}
+	}
+	//disconnect Account with change_request in AccountChange
+	protected Account breakWithAccountChangeByChangeRequest(BankUserContext userContext, String accountId, String changeRequestId,  String [] tokensExpr)
+		 throws Exception{
+			
+			//TODO add check code here
+			
+			Account account = loadAccount(userContext, accountId, allTokens());
+
+			synchronized(account){ 
+				//Will be good when the thread loaded from this JVM process cache.
+				//Also good when there is a RAM based DAO implementation
+				
+				userContext.getDAOGroup().getAccountDAO().planToRemoveAccountChangeListWithChangeRequest(account, changeRequestId, this.emptyOptions());
+
+				account = saveAccount(userContext, account, tokens().withAccountChangeList().done());
+				return account;
+			}
+	}
 	
 	
 	
 	
 	
 
-	protected void checkParamsForAddingTransactionAsFromAccount(BankUserContext userContext, String accountId, String name, BigDecimal amount, String type,String [] tokensExpr) throws Exception{
+	protected void checkParamsForAddingTransactionAsFromAccount(BankUserContext userContext, String accountId, String name, BigDecimal amount, String type, String changeRequestId,String [] tokensExpr) throws Exception{
 		
 		
 
@@ -474,17 +546,19 @@ public class AccountManagerImpl extends CustomBankCheckerManager implements Acco
 		userContext.getChecker().checkAmountOfTransaction(amount);
 		
 		userContext.getChecker().checkTypeOfTransaction(type);
+		
+		userContext.getChecker().checkChangeRequestIdOfTransaction(changeRequestId);
 	
 		userContext.getChecker().throwExceptionIfHasErrors(AccountManagerException.class);
 
 	
 	}
-	public  Account addTransactionAsFromAccount(BankUserContext userContext, String accountId, String name, BigDecimal amount, String type, String [] tokensExpr) throws Exception
+	public  Account addTransactionAsFromAccount(BankUserContext userContext, String accountId, String name, BigDecimal amount, String type, String changeRequestId, String [] tokensExpr) throws Exception
 	{	
 		
-		checkParamsForAddingTransactionAsFromAccount(userContext,accountId,name, amount, type,tokensExpr);
+		checkParamsForAddingTransactionAsFromAccount(userContext,accountId,name, amount, type, changeRequestId,tokensExpr);
 		
-		Transaction transaction = createTransactionAsFromAccount(userContext,name, amount, type);
+		Transaction transaction = createTransactionAsFromAccount(userContext,name, amount, type, changeRequestId);
 		
 		Account account = loadAccount(userContext, accountId, allTokens());
 		synchronized(account){ 
@@ -539,7 +613,7 @@ public class AccountManagerImpl extends CustomBankCheckerManager implements Acco
 	}
 	
 	
-	protected Transaction createTransactionAsFromAccount(BankUserContext userContext, String name, BigDecimal amount, String type) throws Exception{
+	protected Transaction createTransactionAsFromAccount(BankUserContext userContext, String name, BigDecimal amount, String type, String changeRequestId) throws Exception{
 
 		Transaction transaction = new Transaction();
 		
@@ -547,7 +621,9 @@ public class AccountManagerImpl extends CustomBankCheckerManager implements Acco
 		transaction.setName(name);		
 		transaction.setAmount(amount);		
 		transaction.setType(type);		
-		transaction.setCurrentStatus("INIT");
+		ChangeRequest  changeRequest = new ChangeRequest();
+		changeRequest.setId(changeRequestId);		
+		transaction.setChangeRequest(changeRequest);
 	
 		
 		return transaction;
@@ -707,47 +783,13 @@ public class AccountManagerImpl extends CustomBankCheckerManager implements Acco
 
 	}
 	/*
-	public  Account associateTransactionListAsFromAccountToNewChangeRequest(BankUserContext userContext, String accountId, String  transactionIds[], String name, String platformId, String [] tokensExpr) throws Exception {
 
-		
-		
-		Map<String, Object> options = tokens()
-				.allTokens()
-				.searchTransactionListAsFromAccountWith(Transaction.ID_PROPERTY, "oneof", this.joinArray("|", transactionIds)).done();
-		
-		Account account = loadAccount(userContext, accountId, options);
-		
-		ChangeRequest changeRequest = userContext.getManagerGroup().getChangeRequestManager().createChangeRequest(userContext,  name, platformId);
-		
-		for(Transaction transaction: account.getTransactionListAsFromAccount()) {
-			//TODO: need to check if already associated
-			transaction.updateChangeRequest(changeRequest);
-		}
-		return this.internalSaveAccount(userContext, account);
-	}
 	*/
 	
-	public  Account associateTransactionListAsFromAccountToChangeRequest(BankUserContext userContext, String accountId, String  transactionIds[], String changeRequestId, String [] tokensExpr) throws Exception {
-
-		
-		
-		Map<String, Object> options = tokens()
-				.allTokens()
-				.searchTransactionListAsFromAccountWith(Transaction.ID_PROPERTY, "oneof", this.joinArray("|", transactionIds)).done();
-		
-		Account account = loadAccount(userContext, accountId, options);
-		
-		ChangeRequest changeRequest = userContext.getManagerGroup().getChangeRequestManager().loadChangeRequest(userContext,changeRequestId,new String[]{"none"} );
-		
-		for(Transaction transaction: account.getTransactionListAsFromAccount()) {
-			//TODO: need to check if already associated
-			transaction.updateChangeRequest(changeRequest);
-		}
-		return this.internalSaveAccount(userContext, account);
-	}
 
 
-	protected void checkParamsForAddingTransactionAsToAccount(BankUserContext userContext, String accountId, String name, BigDecimal amount, String type,String [] tokensExpr) throws Exception{
+
+	protected void checkParamsForAddingTransactionAsToAccount(BankUserContext userContext, String accountId, String name, BigDecimal amount, String type, String changeRequestId,String [] tokensExpr) throws Exception{
 		
 		
 
@@ -761,17 +803,19 @@ public class AccountManagerImpl extends CustomBankCheckerManager implements Acco
 		userContext.getChecker().checkAmountOfTransaction(amount);
 		
 		userContext.getChecker().checkTypeOfTransaction(type);
+		
+		userContext.getChecker().checkChangeRequestIdOfTransaction(changeRequestId);
 	
 		userContext.getChecker().throwExceptionIfHasErrors(AccountManagerException.class);
 
 	
 	}
-	public  Account addTransactionAsToAccount(BankUserContext userContext, String accountId, String name, BigDecimal amount, String type, String [] tokensExpr) throws Exception
+	public  Account addTransactionAsToAccount(BankUserContext userContext, String accountId, String name, BigDecimal amount, String type, String changeRequestId, String [] tokensExpr) throws Exception
 	{	
 		
-		checkParamsForAddingTransactionAsToAccount(userContext,accountId,name, amount, type,tokensExpr);
+		checkParamsForAddingTransactionAsToAccount(userContext,accountId,name, amount, type, changeRequestId,tokensExpr);
 		
-		Transaction transaction = createTransactionAsToAccount(userContext,name, amount, type);
+		Transaction transaction = createTransactionAsToAccount(userContext,name, amount, type, changeRequestId);
 		
 		Account account = loadAccount(userContext, accountId, allTokens());
 		synchronized(account){ 
@@ -826,7 +870,7 @@ public class AccountManagerImpl extends CustomBankCheckerManager implements Acco
 	}
 	
 	
-	protected Transaction createTransactionAsToAccount(BankUserContext userContext, String name, BigDecimal amount, String type) throws Exception{
+	protected Transaction createTransactionAsToAccount(BankUserContext userContext, String name, BigDecimal amount, String type, String changeRequestId) throws Exception{
 
 		Transaction transaction = new Transaction();
 		
@@ -834,7 +878,9 @@ public class AccountManagerImpl extends CustomBankCheckerManager implements Acco
 		transaction.setName(name);		
 		transaction.setAmount(amount);		
 		transaction.setType(type);		
-		transaction.setCurrentStatus("INIT");
+		ChangeRequest  changeRequest = new ChangeRequest();
+		changeRequest.setId(changeRequestId);		
+		transaction.setChangeRequest(changeRequest);
 	
 		
 		return transaction;
@@ -994,47 +1040,13 @@ public class AccountManagerImpl extends CustomBankCheckerManager implements Acco
 
 	}
 	/*
-	public  Account associateTransactionListAsToAccountToNewChangeRequest(BankUserContext userContext, String accountId, String  transactionIds[], String name, String platformId, String [] tokensExpr) throws Exception {
 
-		
-		
-		Map<String, Object> options = tokens()
-				.allTokens()
-				.searchTransactionListAsToAccountWith(Transaction.ID_PROPERTY, "oneof", this.joinArray("|", transactionIds)).done();
-		
-		Account account = loadAccount(userContext, accountId, options);
-		
-		ChangeRequest changeRequest = userContext.getManagerGroup().getChangeRequestManager().createChangeRequest(userContext,  name, platformId);
-		
-		for(Transaction transaction: account.getTransactionListAsToAccount()) {
-			//TODO: need to check if already associated
-			transaction.updateChangeRequest(changeRequest);
-		}
-		return this.internalSaveAccount(userContext, account);
-	}
 	*/
 	
-	public  Account associateTransactionListAsToAccountToChangeRequest(BankUserContext userContext, String accountId, String  transactionIds[], String changeRequestId, String [] tokensExpr) throws Exception {
-
-		
-		
-		Map<String, Object> options = tokens()
-				.allTokens()
-				.searchTransactionListAsToAccountWith(Transaction.ID_PROPERTY, "oneof", this.joinArray("|", transactionIds)).done();
-		
-		Account account = loadAccount(userContext, accountId, options);
-		
-		ChangeRequest changeRequest = userContext.getManagerGroup().getChangeRequestManager().loadChangeRequest(userContext,changeRequestId,new String[]{"none"} );
-		
-		for(Transaction transaction: account.getTransactionListAsToAccount()) {
-			//TODO: need to check if already associated
-			transaction.updateChangeRequest(changeRequest);
-		}
-		return this.internalSaveAccount(userContext, account);
-	}
 
 
-	protected void checkParamsForAddingNameChangeEvent(BankUserContext userContext, String accountId, String name,String [] tokensExpr) throws Exception{
+
+	protected void checkParamsForAddingNameChangeEvent(BankUserContext userContext, String accountId, String name, String changeRequestId,String [] tokensExpr) throws Exception{
 		
 		
 
@@ -1044,17 +1056,19 @@ public class AccountManagerImpl extends CustomBankCheckerManager implements Acco
 
 		
 		userContext.getChecker().checkNameOfNameChangeEvent(name);
+		
+		userContext.getChecker().checkChangeRequestIdOfNameChangeEvent(changeRequestId);
 	
 		userContext.getChecker().throwExceptionIfHasErrors(AccountManagerException.class);
 
 	
 	}
-	public  Account addNameChangeEvent(BankUserContext userContext, String accountId, String name, String [] tokensExpr) throws Exception
+	public  Account addNameChangeEvent(BankUserContext userContext, String accountId, String name, String changeRequestId, String [] tokensExpr) throws Exception
 	{	
 		
-		checkParamsForAddingNameChangeEvent(userContext,accountId,name,tokensExpr);
+		checkParamsForAddingNameChangeEvent(userContext,accountId,name, changeRequestId,tokensExpr);
 		
-		NameChangeEvent nameChangeEvent = createNameChangeEvent(userContext,name);
+		NameChangeEvent nameChangeEvent = createNameChangeEvent(userContext,name, changeRequestId);
 		
 		Account account = loadAccount(userContext, accountId, allTokens());
 		synchronized(account){ 
@@ -1105,13 +1119,15 @@ public class AccountManagerImpl extends CustomBankCheckerManager implements Acco
 	}
 	
 	
-	protected NameChangeEvent createNameChangeEvent(BankUserContext userContext, String name) throws Exception{
+	protected NameChangeEvent createNameChangeEvent(BankUserContext userContext, String name, String changeRequestId) throws Exception{
 
 		NameChangeEvent nameChangeEvent = new NameChangeEvent();
 		
 		
 		nameChangeEvent.setName(name);		
-		nameChangeEvent.setCurrentStatus("INIT");
+		ChangeRequest  changeRequest = new ChangeRequest();
+		changeRequest.setId(changeRequestId);		
+		nameChangeEvent.setChangeRequest(changeRequest);
 	
 		
 		return nameChangeEvent;
@@ -1263,47 +1279,13 @@ public class AccountManagerImpl extends CustomBankCheckerManager implements Acco
 
 	}
 	/*
-	public  Account associateNameChangeEventListToNewChangeRequest(BankUserContext userContext, String accountId, String  nameChangeEventIds[], String name, String platformId, String [] tokensExpr) throws Exception {
 
-		
-		
-		Map<String, Object> options = tokens()
-				.allTokens()
-				.searchNameChangeEventListWith(NameChangeEvent.ID_PROPERTY, "oneof", this.joinArray("|", nameChangeEventIds)).done();
-		
-		Account account = loadAccount(userContext, accountId, options);
-		
-		ChangeRequest changeRequest = userContext.getManagerGroup().getChangeRequestManager().createChangeRequest(userContext,  name, platformId);
-		
-		for(NameChangeEvent nameChangeEvent: account.getNameChangeEventList()) {
-			//TODO: need to check if already associated
-			nameChangeEvent.updateChangeRequest(changeRequest);
-		}
-		return this.internalSaveAccount(userContext, account);
-	}
 	*/
 	
-	public  Account associateNameChangeEventListToChangeRequest(BankUserContext userContext, String accountId, String  nameChangeEventIds[], String changeRequestId, String [] tokensExpr) throws Exception {
-
-		
-		
-		Map<String, Object> options = tokens()
-				.allTokens()
-				.searchNameChangeEventListWith(NameChangeEvent.ID_PROPERTY, "oneof", this.joinArray("|", nameChangeEventIds)).done();
-		
-		Account account = loadAccount(userContext, accountId, options);
-		
-		ChangeRequest changeRequest = userContext.getManagerGroup().getChangeRequestManager().loadChangeRequest(userContext,changeRequestId,new String[]{"none"} );
-		
-		for(NameChangeEvent nameChangeEvent: account.getNameChangeEventList()) {
-			//TODO: need to check if already associated
-			nameChangeEvent.updateChangeRequest(changeRequest);
-		}
-		return this.internalSaveAccount(userContext, account);
-	}
 
 
-	protected void checkParamsForAddingAccountChange(BankUserContext userContext, String accountId, String name, BigDecimal previousBalance, String type, BigDecimal amount, BigDecimal currentBalance,String [] tokensExpr) throws Exception{
+
+	protected void checkParamsForAddingAccountChange(BankUserContext userContext, String accountId, String name, BigDecimal previousBalance, String type, BigDecimal amount, BigDecimal currentBalance, String changeRequestId,String [] tokensExpr) throws Exception{
 		
 		
 
@@ -1321,17 +1303,19 @@ public class AccountManagerImpl extends CustomBankCheckerManager implements Acco
 		userContext.getChecker().checkAmountOfAccountChange(amount);
 		
 		userContext.getChecker().checkCurrentBalanceOfAccountChange(currentBalance);
+		
+		userContext.getChecker().checkChangeRequestIdOfAccountChange(changeRequestId);
 	
 		userContext.getChecker().throwExceptionIfHasErrors(AccountManagerException.class);
 
 	
 	}
-	public  Account addAccountChange(BankUserContext userContext, String accountId, String name, BigDecimal previousBalance, String type, BigDecimal amount, BigDecimal currentBalance, String [] tokensExpr) throws Exception
+	public  Account addAccountChange(BankUserContext userContext, String accountId, String name, BigDecimal previousBalance, String type, BigDecimal amount, BigDecimal currentBalance, String changeRequestId, String [] tokensExpr) throws Exception
 	{	
 		
-		checkParamsForAddingAccountChange(userContext,accountId,name, previousBalance, type, amount, currentBalance,tokensExpr);
+		checkParamsForAddingAccountChange(userContext,accountId,name, previousBalance, type, amount, currentBalance, changeRequestId,tokensExpr);
 		
-		AccountChange accountChange = createAccountChange(userContext,name, previousBalance, type, amount, currentBalance);
+		AccountChange accountChange = createAccountChange(userContext,name, previousBalance, type, amount, currentBalance, changeRequestId);
 		
 		Account account = loadAccount(userContext, accountId, allTokens());
 		synchronized(account){ 
@@ -1390,7 +1374,7 @@ public class AccountManagerImpl extends CustomBankCheckerManager implements Acco
 	}
 	
 	
-	protected AccountChange createAccountChange(BankUserContext userContext, String name, BigDecimal previousBalance, String type, BigDecimal amount, BigDecimal currentBalance) throws Exception{
+	protected AccountChange createAccountChange(BankUserContext userContext, String name, BigDecimal previousBalance, String type, BigDecimal amount, BigDecimal currentBalance, String changeRequestId) throws Exception{
 
 		AccountChange accountChange = new AccountChange();
 		
@@ -1400,7 +1384,9 @@ public class AccountManagerImpl extends CustomBankCheckerManager implements Acco
 		accountChange.setType(type);		
 		accountChange.setAmount(amount);		
 		accountChange.setCurrentBalance(currentBalance);		
-		accountChange.setCurrentStatus("INIT");
+		ChangeRequest  changeRequest = new ChangeRequest();
+		changeRequest.setId(changeRequestId);		
+		accountChange.setChangeRequest(changeRequest);
 	
 		
 		return accountChange;
@@ -1568,44 +1554,10 @@ public class AccountManagerImpl extends CustomBankCheckerManager implements Acco
 
 	}
 	/*
-	public  Account associateAccountChangeListToNewChangeRequest(BankUserContext userContext, String accountId, String  accountChangeIds[], String name, String platformId, String [] tokensExpr) throws Exception {
 
-		
-		
-		Map<String, Object> options = tokens()
-				.allTokens()
-				.searchAccountChangeListWith(AccountChange.ID_PROPERTY, "oneof", this.joinArray("|", accountChangeIds)).done();
-		
-		Account account = loadAccount(userContext, accountId, options);
-		
-		ChangeRequest changeRequest = userContext.getManagerGroup().getChangeRequestManager().createChangeRequest(userContext,  name, platformId);
-		
-		for(AccountChange accountChange: account.getAccountChangeList()) {
-			//TODO: need to check if already associated
-			accountChange.updateChangeRequest(changeRequest);
-		}
-		return this.internalSaveAccount(userContext, account);
-	}
 	*/
 	
-	public  Account associateAccountChangeListToChangeRequest(BankUserContext userContext, String accountId, String  accountChangeIds[], String changeRequestId, String [] tokensExpr) throws Exception {
 
-		
-		
-		Map<String, Object> options = tokens()
-				.allTokens()
-				.searchAccountChangeListWith(AccountChange.ID_PROPERTY, "oneof", this.joinArray("|", accountChangeIds)).done();
-		
-		Account account = loadAccount(userContext, accountId, options);
-		
-		ChangeRequest changeRequest = userContext.getManagerGroup().getChangeRequestManager().loadChangeRequest(userContext,changeRequestId,new String[]{"none"} );
-		
-		for(AccountChange accountChange: account.getAccountChangeList()) {
-			//TODO: need to check if already associated
-			accountChange.updateChangeRequest(changeRequest);
-		}
-		return this.internalSaveAccount(userContext, account);
-	}
 
 
 	public void onNewInstanceCreated(BankUserContext userContext, Account newCreated) throws Exception{

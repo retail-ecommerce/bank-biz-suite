@@ -964,6 +964,50 @@ public class AccountJDBCTemplateDAO extends BankBaseDAOImpl implements AccountDA
 	}
 
 
+	//disconnect Account with change_request in Transaction
+	public Account planToRemoveTransactionListAsFromAccountWithChangeRequest(Account account, String changeRequestId, Map<String,Object> options)throws Exception{
+				//SmartList<ThreadLike> toRemoveThreadLikeList = threadLikeList.getToRemoveList();
+		//the list will not be null here, empty, maybe
+		//getThreadLikeDAO().removeThreadLikeList(toRemoveThreadLikeList,options);
+		
+		MultipleAccessKey key = new MultipleAccessKey();
+		key.put(Transaction.FROM_ACCOUNT_PROPERTY, account.getId());
+		key.put(Transaction.CHANGE_REQUEST_PROPERTY, changeRequestId);
+		
+		SmartList<Transaction> externalTransactionList = getTransactionDAO().
+				findTransactionWithKey(key, options);
+		if(externalTransactionList == null){
+			return account;
+		}
+		if(externalTransactionList.isEmpty()){
+			return account;
+		}
+		
+		for(Transaction transactionItem: externalTransactionList){
+			transactionItem.clearChangeRequest();
+			transactionItem.clearFromAccount();
+			
+		}
+		
+		
+		SmartList<Transaction> transactionList = account.getTransactionListAsFromAccount();		
+		transactionList.addAllToRemoveList(externalTransactionList);
+		return account;
+	}
+	
+	public int countTransactionListAsFromAccountWithChangeRequest(String accountId, String changeRequestId, Map<String,Object> options)throws Exception{
+				//SmartList<ThreadLike> toRemoveThreadLikeList = threadLikeList.getToRemoveList();
+		//the list will not be null here, empty, maybe
+		//getThreadLikeDAO().removeThreadLikeList(toRemoveThreadLikeList,options);
+
+		MultipleAccessKey key = new MultipleAccessKey();
+		key.put(Transaction.FROM_ACCOUNT_PROPERTY, accountId);
+		key.put(Transaction.CHANGE_REQUEST_PROPERTY, changeRequestId);
+		
+		int count = getTransactionDAO().countTransactionWithKey(key, options);
+		return count;
+	}
+	
 	public Account planToRemoveTransactionListAsToAccount(Account account, String transactionIds[], Map<String,Object> options)throws Exception{
 	
 		MultipleAccessKey key = new MultipleAccessKey();
@@ -992,6 +1036,50 @@ public class AccountJDBCTemplateDAO extends BankBaseDAOImpl implements AccountDA
 	}
 
 
+	//disconnect Account with change_request in Transaction
+	public Account planToRemoveTransactionListAsToAccountWithChangeRequest(Account account, String changeRequestId, Map<String,Object> options)throws Exception{
+				//SmartList<ThreadLike> toRemoveThreadLikeList = threadLikeList.getToRemoveList();
+		//the list will not be null here, empty, maybe
+		//getThreadLikeDAO().removeThreadLikeList(toRemoveThreadLikeList,options);
+		
+		MultipleAccessKey key = new MultipleAccessKey();
+		key.put(Transaction.FROM_ACCOUNT_PROPERTY, account.getId());
+		key.put(Transaction.CHANGE_REQUEST_PROPERTY, changeRequestId);
+		
+		SmartList<Transaction> externalTransactionList = getTransactionDAO().
+				findTransactionWithKey(key, options);
+		if(externalTransactionList == null){
+			return account;
+		}
+		if(externalTransactionList.isEmpty()){
+			return account;
+		}
+		
+		for(Transaction transactionItem: externalTransactionList){
+			transactionItem.clearChangeRequest();
+			transactionItem.clearFromAccount();
+			
+		}
+		
+		
+		SmartList<Transaction> transactionList = account.getTransactionListAsFromAccount();		
+		transactionList.addAllToRemoveList(externalTransactionList);
+		return account;
+	}
+	
+	public int countTransactionListAsToAccountWithChangeRequest(String accountId, String changeRequestId, Map<String,Object> options)throws Exception{
+				//SmartList<ThreadLike> toRemoveThreadLikeList = threadLikeList.getToRemoveList();
+		//the list will not be null here, empty, maybe
+		//getThreadLikeDAO().removeThreadLikeList(toRemoveThreadLikeList,options);
+
+		MultipleAccessKey key = new MultipleAccessKey();
+		key.put(Transaction.FROM_ACCOUNT_PROPERTY, accountId);
+		key.put(Transaction.CHANGE_REQUEST_PROPERTY, changeRequestId);
+		
+		int count = getTransactionDAO().countTransactionWithKey(key, options);
+		return count;
+	}
+	
 	public Account planToRemoveNameChangeEventList(Account account, String nameChangeEventIds[], Map<String,Object> options)throws Exception{
 	
 		MultipleAccessKey key = new MultipleAccessKey();
@@ -1020,6 +1108,50 @@ public class AccountJDBCTemplateDAO extends BankBaseDAOImpl implements AccountDA
 	}
 
 
+	//disconnect Account with change_request in NameChangeEvent
+	public Account planToRemoveNameChangeEventListWithChangeRequest(Account account, String changeRequestId, Map<String,Object> options)throws Exception{
+				//SmartList<ThreadLike> toRemoveThreadLikeList = threadLikeList.getToRemoveList();
+		//the list will not be null here, empty, maybe
+		//getThreadLikeDAO().removeThreadLikeList(toRemoveThreadLikeList,options);
+		
+		MultipleAccessKey key = new MultipleAccessKey();
+		key.put(NameChangeEvent.ACCOUNT_PROPERTY, account.getId());
+		key.put(NameChangeEvent.CHANGE_REQUEST_PROPERTY, changeRequestId);
+		
+		SmartList<NameChangeEvent> externalNameChangeEventList = getNameChangeEventDAO().
+				findNameChangeEventWithKey(key, options);
+		if(externalNameChangeEventList == null){
+			return account;
+		}
+		if(externalNameChangeEventList.isEmpty()){
+			return account;
+		}
+		
+		for(NameChangeEvent nameChangeEventItem: externalNameChangeEventList){
+			nameChangeEventItem.clearChangeRequest();
+			nameChangeEventItem.clearAccount();
+			
+		}
+		
+		
+		SmartList<NameChangeEvent> nameChangeEventList = account.getNameChangeEventList();		
+		nameChangeEventList.addAllToRemoveList(externalNameChangeEventList);
+		return account;
+	}
+	
+	public int countNameChangeEventListWithChangeRequest(String accountId, String changeRequestId, Map<String,Object> options)throws Exception{
+				//SmartList<ThreadLike> toRemoveThreadLikeList = threadLikeList.getToRemoveList();
+		//the list will not be null here, empty, maybe
+		//getThreadLikeDAO().removeThreadLikeList(toRemoveThreadLikeList,options);
+
+		MultipleAccessKey key = new MultipleAccessKey();
+		key.put(NameChangeEvent.ACCOUNT_PROPERTY, accountId);
+		key.put(NameChangeEvent.CHANGE_REQUEST_PROPERTY, changeRequestId);
+		
+		int count = getNameChangeEventDAO().countNameChangeEventWithKey(key, options);
+		return count;
+	}
+	
 	public Account planToRemoveAccountChangeList(Account account, String accountChangeIds[], Map<String,Object> options)throws Exception{
 	
 		MultipleAccessKey key = new MultipleAccessKey();
@@ -1048,6 +1180,50 @@ public class AccountJDBCTemplateDAO extends BankBaseDAOImpl implements AccountDA
 	}
 
 
+	//disconnect Account with change_request in AccountChange
+	public Account planToRemoveAccountChangeListWithChangeRequest(Account account, String changeRequestId, Map<String,Object> options)throws Exception{
+				//SmartList<ThreadLike> toRemoveThreadLikeList = threadLikeList.getToRemoveList();
+		//the list will not be null here, empty, maybe
+		//getThreadLikeDAO().removeThreadLikeList(toRemoveThreadLikeList,options);
+		
+		MultipleAccessKey key = new MultipleAccessKey();
+		key.put(AccountChange.ACCOUNT_PROPERTY, account.getId());
+		key.put(AccountChange.CHANGE_REQUEST_PROPERTY, changeRequestId);
+		
+		SmartList<AccountChange> externalAccountChangeList = getAccountChangeDAO().
+				findAccountChangeWithKey(key, options);
+		if(externalAccountChangeList == null){
+			return account;
+		}
+		if(externalAccountChangeList.isEmpty()){
+			return account;
+		}
+		
+		for(AccountChange accountChangeItem: externalAccountChangeList){
+			accountChangeItem.clearChangeRequest();
+			accountChangeItem.clearAccount();
+			
+		}
+		
+		
+		SmartList<AccountChange> accountChangeList = account.getAccountChangeList();		
+		accountChangeList.addAllToRemoveList(externalAccountChangeList);
+		return account;
+	}
+	
+	public int countAccountChangeListWithChangeRequest(String accountId, String changeRequestId, Map<String,Object> options)throws Exception{
+				//SmartList<ThreadLike> toRemoveThreadLikeList = threadLikeList.getToRemoveList();
+		//the list will not be null here, empty, maybe
+		//getThreadLikeDAO().removeThreadLikeList(toRemoveThreadLikeList,options);
+
+		MultipleAccessKey key = new MultipleAccessKey();
+		key.put(AccountChange.ACCOUNT_PROPERTY, accountId);
+		key.put(AccountChange.CHANGE_REQUEST_PROPERTY, changeRequestId);
+		
+		int count = getAccountChangeDAO().countAccountChangeWithKey(key, options);
+		return count;
+	}
+	
 
 		
 	protected Account saveTransactionListAsFromAccount(Account account, Map<String,Object> options){

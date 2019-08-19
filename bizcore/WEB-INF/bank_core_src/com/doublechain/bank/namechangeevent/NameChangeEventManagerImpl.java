@@ -27,7 +27,6 @@ import com.doublechain.bank.changerequest.CandidateChangeRequest;
 import com.doublechain.bank.account.CandidateAccount;
 
 
-import com.doublechain.bank.platform.Platform;
 
 
 
@@ -152,7 +151,7 @@ public class NameChangeEventManagerImpl extends CustomBankCheckerManager impleme
 		addAction(userContext, nameChangeEvent, tokens,"@copy","cloneNameChangeEvent","cloneNameChangeEvent/"+nameChangeEvent.getId()+"/","main","primary");
 		
 		addAction(userContext, nameChangeEvent, tokens,"name_change_event.transfer_to_account","transferToAnotherAccount","transferToAnotherAccount/"+nameChangeEvent.getId()+"/","main","primary");
-		addAction(userContext, nameChangeEvent, tokens,"name_change_event.requestChange","requestChange","requestChangeActionForm/"+nameChangeEvent.getId()+"/","main","success");
+		addAction(userContext, nameChangeEvent, tokens,"name_change_event.transfer_to_change_request","transferToAnotherChangeRequest","transferToAnotherChangeRequest/"+nameChangeEvent.getId()+"/","main","primary");
 	
 		
 		
@@ -165,7 +164,7 @@ public class NameChangeEventManagerImpl extends CustomBankCheckerManager impleme
  	
 
 
-	public NameChangeEvent createNameChangeEvent(BankUserContext userContext,String name, String accountId) throws Exception
+	public NameChangeEvent createNameChangeEvent(BankUserContext userContext,String name, String accountId, String changeRequestId) throws Exception
 	{
 		
 		
@@ -185,7 +184,11 @@ public class NameChangeEventManagerImpl extends CustomBankCheckerManager impleme
 		nameChangeEvent.setAccount(account);
 		
 		
-		nameChangeEvent.setCurrentStatus("INIT");
+			
+		ChangeRequest changeRequest = loadChangeRequest(userContext, changeRequestId,emptyOptions());
+		nameChangeEvent.setChangeRequest(changeRequest);
+		
+		
 
 		nameChangeEvent = saveNameChangeEvent(userContext, nameChangeEvent, emptyOptions());
 		
@@ -213,6 +216,8 @@ public class NameChangeEventManagerImpl extends CustomBankCheckerManager impleme
 		if(NameChangeEvent.NAME_PROPERTY.equals(property)){
 			userContext.getChecker().checkNameOfNameChangeEvent(parseString(newValueExpr));
 		}		
+
+				
 
 		
 	
@@ -318,47 +323,6 @@ public class NameChangeEventManagerImpl extends CustomBankCheckerManager impleme
 	}
 	protected Map<String,Object> mergedAllTokens(String []tokens){
 		return NameChangeEventTokens.mergeAll(tokens).done();
-	}
-	
-	private static final String [] STATUS_SEQUENCE={"CHANGE_REQUESTED"};
- 	protected String[] getNextCandidateStatus(BankUserContext userContext, String currentStatus) throws Exception{
- 	
- 		if("INIT".equals(currentStatus)){
- 			//if current status is null, just return the first status as the next status
- 			//code makes sure not throwing ArrayOutOfIndexException here.
- 			return STATUS_SEQUENCE;
- 		}
- 		/*
- 		List<String> statusList = Arrays.asList(STATUS_SEQUENCE);
- 		int index = statusList.indexOf(currentStatus);
- 		if(index < 0){
- 			throwExceptionWithMessage("The status '"+currentStatus+"' is not found from status list: "+ statusList );
- 		}
- 		if(index + 1 == statusList.size()){
- 			//this is the last status code; no next status any more
- 			return null;
- 		}
- 		
- 		//this is not the last one, just return it.
- 		*/
- 		return STATUS_SEQUENCE;
- 	
- 	}/**/
- 	protected void ensureStatus(BankUserContext userContext, NameChangeEvent nameChangeEvent, String expectedNextStatus) throws Exception{
-		String currentStatus = nameChangeEvent.getCurrentStatus();
-		//'null' is fine for function getNextStatus
-		String candidateStatus[] = getNextCandidateStatus(userContext, currentStatus);
-		
-		if(candidateStatus == null){
-			//no more next status
-			String message = "No next status for '"+currentStatus+"', but you want to put the status to 'HIDDEN'";
-			throwExceptionWithMessage(message);
-		}
-		int index = Arrays.asList(candidateStatus).indexOf(expectedNextStatus);
-		if(index<0){
-			String message = "The current status '"+currentStatus+"' next candidate status should be one of '"+candidateStatus+"', but you want to transit the status to '"+expectedNextStatus+"'";
-			throwExceptionWithMessage(message);
-		}
 	}
 	
 	protected void checkParamsForTransferingAnotherAccount(BankUserContext userContext, String nameChangeEventId, String anotherAccountId) throws Exception
@@ -486,95 +450,7 @@ public class NameChangeEventManagerImpl extends CustomBankCheckerManager impleme
 		return result;
 	}
  	
- 	
-	public static final String CHANGE_REQUESTED_STATUS = "CHANGE_REQUESTED";
- 	protected void checkParamsForChangeRequest(BankUserContext userContext, String nameChangeEventId, String name, String platformId
-) throws Exception
- 	{
- 				userContext.getChecker().checkIdOfNameChangeEvent(nameChangeEventId);
-		userContext.getChecker().checkNameOfChangeRequest(name);
-		userContext.getChecker().checkIdOfPlatform(platformId);
-
-	
-		userContext.getChecker().throwExceptionIfHasErrors(NameChangeEventManagerException.class);
-
- 	}
- 	public NameChangeEvent requestChange(BankUserContext userContext, String nameChangeEventId, String name, String platformId
-) throws Exception
- 	{
-		checkParamsForChangeRequest(userContext, nameChangeEventId, name, platformId);
-		NameChangeEvent nameChangeEvent = loadNameChangeEvent(userContext, nameChangeEventId, allTokens());	
-		synchronized(nameChangeEvent){
-			//will be good when the nameChangeEvent loaded from this JVM process cache.
-			//also good when there is a ram based DAO implementation
-			
-			checkIfEligibleForChangeRequest(userContext,nameChangeEvent);
- 		
-
-			nameChangeEvent.updateCurrentStatus(CHANGE_REQUESTED_STATUS);
-			//set the new status, it will be good if add constant to the bean definition
-			
-			//extract all referenced objects, load them respectively
-			Platform platform = loadPlatform(userContext, platformId, emptyOptions());
-
-
-			ChangeRequest changeRequest = createChangeRequest(userContext, name, platform);		
-			nameChangeEvent.updateChangeRequest(changeRequest);		
-			
-			
-			nameChangeEvent = saveNameChangeEvent(userContext, nameChangeEvent, tokens().withChangeRequest().done());
-			return present(userContext,nameChangeEvent, allTokens());
-			
-		}
-
- 	}
- 	
- 	
- 	
- 	
- 	public NameChangeEventForm requestChangeActionForm(BankUserContext userContext, String nameChangeEventId) throws Exception
- 	{
-		return new NameChangeEventForm()
-			.withTitle("requestChange")
-			.nameChangeEventIdField(nameChangeEventId)
-			.nameFieldOfChangeRequest()
-			.platformIdFieldOfChangeRequest()
-			.requestChangeAction();
- 	}
-	
- 	
- 	protected ChangeRequest createChangeRequest(BankUserContext userContext, String name, Platform platform){
- 		ChangeRequest changeRequest = new ChangeRequest();
- 		//name, platform
- 		
-		changeRequest.setName(name);
-		changeRequest.setCreateTime(userContext.now());
-		changeRequest.setPlatform(platform);
-
- 		
- 		
- 		
- 		return userContext.getDAOGroup().getChangeRequestDAO().save(changeRequest,emptyOptions());
- 	}
- 	protected void checkIfEligibleForChangeRequest(BankUserContext userContext, NameChangeEvent nameChangeEvent) throws Exception{
- 
- 		ensureStatus(userContext,nameChangeEvent, CHANGE_REQUESTED_STATUS);
- 		
- 		ChangeRequest changeRequest = nameChangeEvent.getChangeRequest();
- 		//check the current status equals to the status
- 		//String expectedCurrentStatus = changeRequest 		
- 		//if the previous is the expected status?
- 		
- 		
- 		//if already transited to this status?
- 		
- 		if( changeRequest != null){
-				throwExceptionWithMessage("The NameChangeEvent("+nameChangeEvent.getId()+") has already been "+ CHANGE_REQUESTED_STATUS+".");
-		}
- 		
- 		
- 	}
-//--------------------------------------------------------------
+ //--------------------------------------------------------------
 	
 	 	
  	protected ChangeRequest loadChangeRequest(BankUserContext userContext, String newChangeRequestId, Map<String,Object> options) throws Exception
@@ -599,16 +475,6 @@ public class NameChangeEventManagerImpl extends CustomBankCheckerManager impleme
  		return userContext.getDAOGroup().getAccountDAO().loadByName(newName, options);
  	}
  	
- 	
- 	
- 	
-	
-	 	
- 	protected Platform loadPlatform(BankUserContext userContext, String newPlatformId, Map<String,Object> options) throws Exception
- 	{
-		
- 		return userContext.getDAOGroup().getPlatformDAO().load(newPlatformId, options);
- 	}
  	
  	
  	

@@ -30,9 +30,7 @@ public class BankBaseViewScope {
 		.field(BankBaseConstants.X_LINK_TO_URL)
 		.field(Platform.ID_PROPERTY)
 		.field(Platform.NAME_PROPERTY)
-		.field(Platform.FOUNDER_PROPERTY)
 		.field(Platform.FOUNDED_PROPERTY)
-		.field(Platform.DESCRIPTION_PROPERTY)
 		;
 	/** 用于Platform的子对象的详情页时需要序列化的属性列表 */
 	public static SerializeScope getPlatformSummaryScope() {
@@ -56,7 +54,6 @@ public class BankBaseViewScope {
 		.field(Transaction.NAME_PROPERTY)
 		.field(Transaction.AMOUNT_PROPERTY)
 		.field(Transaction.TYPE_PROPERTY)
-		.field(Transaction.CURRENT_STATUS_PROPERTY)
 		;
 	/** 用于Transaction的子对象的详情页时需要序列化的属性列表 */
 	public static SerializeScope getTransactionSummaryScope() {
@@ -67,7 +64,6 @@ public class BankBaseViewScope {
 		.field(BankBaseConstants.X_LINK_TO_URL)
 		.field(NameChangeEvent.ID_PROPERTY)
 		.field(NameChangeEvent.NAME_PROPERTY)
-		.field(NameChangeEvent.CURRENT_STATUS_PROPERTY)
 		;
 	/** 用于NameChangeEvent的子对象的详情页时需要序列化的属性列表 */
 	public static SerializeScope getNameChangeEventSummaryScope() {
@@ -95,7 +91,6 @@ public class BankBaseViewScope {
 		.field(AccountChange.TYPE_PROPERTY)
 		.field(AccountChange.AMOUNT_PROPERTY)
 		.field(AccountChange.CURRENT_BALANCE_PROPERTY)
-		.field(AccountChange.CURRENT_STATUS_PROPERTY)
 		;
 	/** 用于AccountChange的子对象的详情页时需要序列化的属性列表 */
 	public static SerializeScope getAccountChangeSummaryScope() {
@@ -295,9 +290,7 @@ public class BankBaseViewScope {
 		.field(BankBaseConstants.X_LINK_TO_URL)
 		.field(Platform.ID_PROPERTY)
 		.field(Platform.NAME_PROPERTY)
-		.field(Platform.FOUNDER_PROPERTY)
 		.field(Platform.FOUNDED_PROPERTY)
-		.field(Platform.DESCRIPTION_PROPERTY)
 		;
 	/** 用于Platform的父对象的列表时需要序列化的属性列表 */
 	public static SerializeScope getPlatformSecondaryListItemScope() {
@@ -321,7 +314,6 @@ public class BankBaseViewScope {
 		.field(Transaction.NAME_PROPERTY)
 		.field(Transaction.AMOUNT_PROPERTY)
 		.field(Transaction.TYPE_PROPERTY)
-		.field(Transaction.CURRENT_STATUS_PROPERTY)
 		;
 	/** 用于Transaction的父对象的列表时需要序列化的属性列表 */
 	public static SerializeScope getTransactionSecondaryListItemScope() {
@@ -332,7 +324,6 @@ public class BankBaseViewScope {
 		.field(BankBaseConstants.X_LINK_TO_URL)
 		.field(NameChangeEvent.ID_PROPERTY)
 		.field(NameChangeEvent.NAME_PROPERTY)
-		.field(NameChangeEvent.CURRENT_STATUS_PROPERTY)
 		;
 	/** 用于NameChangeEvent的父对象的列表时需要序列化的属性列表 */
 	public static SerializeScope getNameChangeEventSecondaryListItemScope() {
@@ -360,7 +351,6 @@ public class BankBaseViewScope {
 		.field(AccountChange.TYPE_PROPERTY)
 		.field(AccountChange.AMOUNT_PROPERTY)
 		.field(AccountChange.CURRENT_BALANCE_PROPERTY)
-		.field(AccountChange.CURRENT_STATUS_PROPERTY)
 		;
 	/** 用于AccountChange的父对象的列表时需要序列化的属性列表 */
 	public static SerializeScope getAccountChangeSecondaryListItemScope() {
@@ -560,9 +550,7 @@ public class BankBaseViewScope {
 		.field(BankBaseConstants.X_LINK_TO_URL)
 		.field(Platform.ID_PROPERTY)
 		.field(Platform.NAME_PROPERTY)
-		.field(Platform.FOUNDER_PROPERTY)
 		.field(Platform.FOUNDED_PROPERTY)
-		.field(Platform.DESCRIPTION_PROPERTY)
 		.field(Platform.CHANGE_REQUEST_LIST, getChangeRequestSecondaryListItemScope())
 		.field(Platform.ACCOUNT_LIST, getAccountSecondaryListItemScope())
 		;
@@ -595,7 +583,6 @@ public class BankBaseViewScope {
 		.field(Transaction.AMOUNT_PROPERTY)
 		.field(Transaction.TYPE_PROPERTY)
 		.field(Transaction.CHANGE_REQUEST_PROPERTY, getChangeRequestSummaryScope())
-		.field(Transaction.CURRENT_STATUS_PROPERTY)
 		;
 	/** 用于Transaction对象的列表时需要序列化的属性列表 */
 	public static SerializeScope getTransactionListItemScope() {
@@ -608,7 +595,6 @@ public class BankBaseViewScope {
 		.field(NameChangeEvent.NAME_PROPERTY)
 		.field(NameChangeEvent.ACCOUNT_PROPERTY, getAccountSummaryScope())
 		.field(NameChangeEvent.CHANGE_REQUEST_PROPERTY, getChangeRequestSummaryScope())
-		.field(NameChangeEvent.CURRENT_STATUS_PROPERTY)
 		;
 	/** 用于NameChangeEvent对象的列表时需要序列化的属性列表 */
 	public static SerializeScope getNameChangeEventListItemScope() {
@@ -637,13 +623,12 @@ public class BankBaseViewScope {
 		.field(BankBaseConstants.X_LINK_TO_URL)
 		.field(AccountChange.ID_PROPERTY)
 		.field(AccountChange.NAME_PROPERTY)
+		.field(AccountChange.ACCOUNT_PROPERTY, getAccountSummaryScope())
 		.field(AccountChange.PREVIOUS_BALANCE_PROPERTY)
 		.field(AccountChange.TYPE_PROPERTY)
 		.field(AccountChange.AMOUNT_PROPERTY)
 		.field(AccountChange.CURRENT_BALANCE_PROPERTY)
-		.field(AccountChange.ACCOUNT_PROPERTY, getAccountSummaryScope())
 		.field(AccountChange.CHANGE_REQUEST_PROPERTY, getChangeRequestSummaryScope())
-		.field(AccountChange.CURRENT_STATUS_PROPERTY)
 		;
 	/** 用于AccountChange对象的列表时需要序列化的属性列表 */
 	public static SerializeScope getAccountChangeListItemScope() {
@@ -865,9 +850,7 @@ public class BankBaseViewScope {
 		.field(BankBaseConstants.X_LINK_TO_URL)
 		.field(Platform.ID_PROPERTY)
 		.field(Platform.NAME_PROPERTY)
-		.field(Platform.FOUNDER_PROPERTY)
 		.field(Platform.FOUNDED_PROPERTY)
-		.field(Platform.DESCRIPTION_PROPERTY)
 		.field(Platform.CHANGE_REQUEST_LIST, getChangeRequestListItemScope())
 		.field(Platform.ACCOUNT_LIST, getAccountListItemScope())
 		;
@@ -900,7 +883,6 @@ public class BankBaseViewScope {
 		.field(Transaction.AMOUNT_PROPERTY)
 		.field(Transaction.TYPE_PROPERTY)
 		.field(Transaction.CHANGE_REQUEST_PROPERTY, getChangeRequestSummaryScope())
-		.field(Transaction.CURRENT_STATUS_PROPERTY)
 		;
 	/** 用于Transaction对象的详情页时需要序列化的属性列表 */
 	public static SerializeScope getTransactionDetailScope() {
@@ -913,7 +895,6 @@ public class BankBaseViewScope {
 		.field(NameChangeEvent.NAME_PROPERTY)
 		.field(NameChangeEvent.ACCOUNT_PROPERTY, getAccountSummaryScope())
 		.field(NameChangeEvent.CHANGE_REQUEST_PROPERTY, getChangeRequestSummaryScope())
-		.field(NameChangeEvent.CURRENT_STATUS_PROPERTY)
 		;
 	/** 用于NameChangeEvent对象的详情页时需要序列化的属性列表 */
 	public static SerializeScope getNameChangeEventDetailScope() {
@@ -942,13 +923,12 @@ public class BankBaseViewScope {
 		.field(BankBaseConstants.X_LINK_TO_URL)
 		.field(AccountChange.ID_PROPERTY)
 		.field(AccountChange.NAME_PROPERTY)
+		.field(AccountChange.ACCOUNT_PROPERTY, getAccountSummaryScope())
 		.field(AccountChange.PREVIOUS_BALANCE_PROPERTY)
 		.field(AccountChange.TYPE_PROPERTY)
 		.field(AccountChange.AMOUNT_PROPERTY)
 		.field(AccountChange.CURRENT_BALANCE_PROPERTY)
-		.field(AccountChange.ACCOUNT_PROPERTY, getAccountSummaryScope())
 		.field(AccountChange.CHANGE_REQUEST_PROPERTY, getChangeRequestSummaryScope())
-		.field(AccountChange.CURRENT_STATUS_PROPERTY)
 		;
 	/** 用于AccountChange对象的详情页时需要序列化的属性列表 */
 	public static SerializeScope getAccountChangeDetailScope() {
