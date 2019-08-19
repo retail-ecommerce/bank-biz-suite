@@ -16,6 +16,7 @@ function RouterConfig({ history }) {
 	const {PlatformBizApp} = GlobalComponents
 	const {ChangeRequestBizApp} = GlobalComponents
 	const {TransactionBizApp} = GlobalComponents
+	const {NameChangeEventBizApp} = GlobalComponents
 	const {AccountBizApp} = GlobalComponents
 	const {AccountChangeBizApp} = GlobalComponents
 	const {UserDomainBizApp} = GlobalComponents
@@ -38,6 +39,7 @@ function RouterConfig({ history }) {
           <Route path="/platform/" component={PlatformBizApp} />
           <Route path="/changeRequest/" component={ChangeRequestBizApp} />
           <Route path="/transaction/" component={TransactionBizApp} />
+          <Route path="/nameChangeEvent/" component={NameChangeEventBizApp} />
           <Route path="/account/" component={AccountBizApp} />
           <Route path="/accountChange/" component={AccountChangeBizApp} />
           <Route path="/userDomain/" component={UserDomainBizApp} />

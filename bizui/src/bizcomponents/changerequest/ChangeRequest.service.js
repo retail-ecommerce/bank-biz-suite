@@ -60,6 +60,28 @@ const removeTransactionList = (targetObjectId, parameters) => {
 
 
 
+const addNameChangeEvent = (targetObjectId, parameters) => {
+  const url = `${PREFIX}changeRequestManager/addNameChangeEvent/changeRequestId/name/accountId/tokensExpr/`
+  const changeRequestId = targetObjectId
+  const requestParameters = { ...parameters, changeRequestId, tokensExpr: 'none' }
+  return postForm({ url,requestParameters})
+}
+
+const updateNameChangeEvent = (targetObjectId, parameters) => {
+  const url = `${PREFIX}changeRequestManager/updateNameChangeEventProperties/changeRequestId/id/name/tokensExpr/`
+  const changeRequestId = targetObjectId
+  const requestParameters = { ...parameters, changeRequestId, tokensExpr: 'none' }
+  return postForm({ url,requestParameters})
+}
+
+const removeNameChangeEventList = (targetObjectId, parameters) => {
+  const url = `${PREFIX}changeRequestManager/removeNameChangeEventList/changeRequestId/nameChangeEventIds/tokensExpr/`
+  const requestParameters = { ...parameters, changeRequestId: targetObjectId, tokensExpr: 'none' }
+  return postForm({ url,requestParameters})
+}
+
+
+
 const addAccountChange = (targetObjectId, parameters) => {
   const url = `${PREFIX}changeRequestManager/addAccountChange/changeRequestId/name/accountId/previousBalance/type/amount/currentBalance/tokensExpr/`
   const changeRequestId = targetObjectId
@@ -84,10 +106,13 @@ const removeAccountChangeList = (targetObjectId, parameters) => {
 const ChangeRequestService = { view,
   load,
   addTransaction,
+  addNameChangeEvent,
   addAccountChange,
   updateTransaction,
+  updateNameChangeEvent,
   updateAccountChange,
   removeTransactionList,
+  removeNameChangeEventList,
   removeAccountChangeList,
   requestCandidatePlatform,
   transferToAnotherPlatform }

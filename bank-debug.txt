@@ -2,7 +2,9 @@ Summary|概览
 Platform|平台
 Id|ID
 Name|名称
+Founder|创始人
 Founded|成立
+Description|描述
 Version|版本
 Change Request|变更请求
 Id|ID
@@ -17,7 +19,17 @@ From Account|从账户
 To Account|承担责任
 Amount|金额
 Type|类型
-Change Request|变更请求
+Request Change|变更请求
+Request Change|变更请求
+Current Status|当前状态
+Version|版本
+Name Change Event|名字更改事件
+Id|ID
+Name|名称
+Account|账户
+Request Change|变更请求
+Request Change|变更请求
+Current Status|当前状态
 Version|版本
 Account|账户
 Id|ID
@@ -30,12 +42,14 @@ Version|版本
 Account Change|账户变更
 Id|ID
 Name|名称
-Account|账户
 Previous Balance|以前的平衡
 Type|类型
 Amount|金额
 Current Balance|当前余额
-Change Request|变更请求
+Account|账户
+Request Change|变更请求
+Request Change|变更请求
+Current Status|当前状态
 Version|版本
 User Domain|用户域
 Id|ID
@@ -163,10 +177,12 @@ Version|版本
 Transfer to Another Platform|转到平台
 Transfer to Another From Account|转帐
 Transfer to Another To Account|转入帐户
-Transfer to Another Change Request|转换到更改请求
+Transfer to Another Request Change|转换到更改请求
+Transfer to Another Account|转到账户
+Transfer to Another Request Change|转换到更改请求
 Transfer to Another Platform|转到平台
 Transfer to Another Account|转到账户
-Transfer to Another Change Request|转换到更改请求
+Transfer to Another Request Change|转换到更改请求
 Transfer to Another Domain|转移到域
 Transfer to Another Domain|转移到域
 Transfer to Another Block|转移到阻塞

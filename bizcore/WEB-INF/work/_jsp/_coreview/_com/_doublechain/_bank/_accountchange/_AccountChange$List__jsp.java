@@ -201,13 +201,19 @@ public class _AccountChange$List__jsp extends com.caucho.jsp.JavaPage
           _caucho_expr_37.print(out, _jsp_env, false);
           out.write(_jsp_string30, 0, _jsp_string30.length);
         }
+        out.write('\n');
+        if (_caucho_expr_38.evalBoolean(_jsp_env)) {
+          out.write(_jsp_string29, 0, _jsp_string29.length);
+          _caucho_expr_39.print(out, _jsp_env, false);
+          out.write(_jsp_string30, 0, _jsp_string30.length);
+        }
         out.write(_jsp_string31, 0, _jsp_string31.length);
-        _caucho_expr_38.print(out, _jsp_env, false);
+        _caucho_expr_40.print(out, _jsp_env, false);
         out.write(_jsp_string32, 0, _jsp_string32.length);
         if (_jsp_loop_0 == null)
           _jsp_loop_0 = new com.caucho.jsp.IteratorLoopSupportTag();
         _jsp_loop_0.setParent((javax.servlet.jsp.tagext.Tag) null);
-        java.lang.Object _jsp_items_7 = _caucho_expr_39.evalObject(_jsp_env);
+        java.lang.Object _jsp_items_7 = _caucho_expr_41.evalObject(_jsp_env);
         java.util.Iterator _jsp_iter_7 = com.caucho.jstl.rt.CoreForEachTag.getIterator(_jsp_items_7);
         _jsp_loop_0.init(0, Integer.MAX_VALUE, 1);
         Object _jsp_oldVar_7 = pageContext.getAttribute("item");
@@ -216,60 +222,91 @@ public class _AccountChange$List__jsp extends com.caucho.jsp.JavaPage
           pageContext.setAttribute("item", _jsp_i_7);
           _jsp_loop_0.setCurrent(_jsp_i_7, _jsp_iter_7.hasNext());
           out.write(_jsp_string33, 0, _jsp_string33.length);
-          _caucho_expr_40.print(out, _jsp_env, false);
+          _caucho_expr_42.print(out, _jsp_env, false);
           out.write(_jsp_string34, 0, _jsp_string34.length);
-          _caucho_expr_41.print(out, _jsp_env, false);
+          _caucho_expr_43.print(out, _jsp_env, false);
           out.write(_jsp_string35, 0, _jsp_string35.length);
-          _caucho_expr_41.print(out, _jsp_env, false);
+          _caucho_expr_43.print(out, _jsp_env, false);
           out.write(_jsp_string36, 0, _jsp_string36.length);
-          _caucho_expr_41.print(out, _jsp_env, false);
+          _caucho_expr_43.print(out, _jsp_env, false);
           out.write(_jsp_string37, 0, _jsp_string37.length);
           if (_caucho_expr_24.evalBoolean(_jsp_env)) {
             out.write(_jsp_string38, 0, _jsp_string38.length);
-            _caucho_expr_42.print(out, _jsp_env, false);
+            _caucho_expr_44.print(out, _jsp_env, false);
             out.write(_jsp_string39, 0, _jsp_string39.length);
             _caucho_expr_3.print(out, _jsp_env, false);
             out.write(_jsp_string40, 0, _jsp_string40.length);
             _caucho_expr_4.print(out, _jsp_env, false);
             out.write('/');
-            _caucho_expr_41.print(out, _jsp_env, false);
+            _caucho_expr_43.print(out, _jsp_env, false);
             out.write(_jsp_string41, 0, _jsp_string41.length);
-            _caucho_expr_42.print(out, _jsp_env, false);
+            _caucho_expr_44.print(out, _jsp_env, false);
             out.write(_jsp_string42, 0, _jsp_string42.length);
           }
           if (_caucho_expr_26.evalBoolean(_jsp_env)) {
             out.write(_jsp_string43, 0, _jsp_string43.length);
+            _caucho_expr_45.print(out, _jsp_env, false);
+            out.write(_jsp_string39, 0, _jsp_string39.length);
             _caucho_expr_3.print(out, _jsp_env, false);
+            out.write(_jsp_string40, 0, _jsp_string40.length);
+            _caucho_expr_4.print(out, _jsp_env, false);
             out.write('/');
-            _caucho_expr_41.print(out, _jsp_env, false);
-            out.write(_jsp_string44, 0, _jsp_string44.length);
-            _caucho_expr_41.print(out, _jsp_env, false);
-            out.write(_jsp_string45, 0, _jsp_string45.length);
             _caucho_expr_43.print(out, _jsp_env, false);
-            out.write(_jsp_string46, 0, _jsp_string46.length);
-            if (_caucho_expr_44.evalBoolean(_jsp_env)) {
-              out.write(_jsp_string47, 0, _jsp_string47.length);
-              _caucho_expr_45.print(out, _jsp_env, false);
-              out.write(_jsp_string41, 0, _jsp_string41.length);
-              _caucho_expr_46.print(out, _jsp_env, false);
-              out.write(_jsp_string48, 0, _jsp_string48.length);
+            out.write(_jsp_string41, 0, _jsp_string41.length);
+            if (_jsp_FormatNumberTag_1 == null) {
+              _jsp_FormatNumberTag_1 = new com.caucho.jstl.rt.FormatNumberTag();
+              _jsp_FormatNumberTag_1.setPageContext(pageContext);
+              _jsp_FormatNumberTag_1.setParent(com.caucho.jsp.JspUtil.toTag(_jsp_loop_0));
+              _jsp_FormatNumberTag_1.setType("currency");
             }
-            out.write(_jsp_string49, 0, _jsp_string49.length);
-            if (_caucho_expr_47.evalBoolean(_jsp_env)) {
-              out.write(_jsp_string50, 0, _jsp_string50.length);
-            }
-            out.write(_jsp_string51, 0, _jsp_string51.length);
+
+            _jsp_FormatNumberTag_1.setValue(_caucho_expr_45.evalObject(_jsp_env));
+            _jsp_FormatNumberTag_1.doEndTag();
+            out.write(_jsp_string42, 0, _jsp_string42.length);
           }
-          out.write('\n');
           if (_caucho_expr_28.evalBoolean(_jsp_env)) {
-            out.write(_jsp_string52, 0, _jsp_string52.length);
+            out.write(_jsp_string44, 0, _jsp_string44.length);
+            _caucho_expr_46.print(out, _jsp_env, false);
+            out.write(_jsp_string39, 0, _jsp_string39.length);
+            _caucho_expr_3.print(out, _jsp_env, false);
+            out.write(_jsp_string40, 0, _jsp_string40.length);
+            _caucho_expr_4.print(out, _jsp_env, false);
+            out.write('/');
+            _caucho_expr_43.print(out, _jsp_env, false);
+            out.write(_jsp_string41, 0, _jsp_string41.length);
+            _caucho_expr_46.print(out, _jsp_env, false);
+            out.write(_jsp_string42, 0, _jsp_string42.length);
+          }
+          if (_caucho_expr_30.evalBoolean(_jsp_env)) {
+            out.write(_jsp_string45, 0, _jsp_string45.length);
+            _caucho_expr_47.print(out, _jsp_env, false);
+            out.write(_jsp_string39, 0, _jsp_string39.length);
+            _caucho_expr_3.print(out, _jsp_env, false);
+            out.write(_jsp_string40, 0, _jsp_string40.length);
+            _caucho_expr_4.print(out, _jsp_env, false);
+            out.write('/');
+            _caucho_expr_43.print(out, _jsp_env, false);
+            out.write(_jsp_string41, 0, _jsp_string41.length);
+            if (_jsp_FormatNumberTag_1 == null) {
+              _jsp_FormatNumberTag_1 = new com.caucho.jstl.rt.FormatNumberTag();
+              _jsp_FormatNumberTag_1.setPageContext(pageContext);
+              _jsp_FormatNumberTag_1.setParent(com.caucho.jsp.JspUtil.toTag(_jsp_loop_0));
+              _jsp_FormatNumberTag_1.setType("currency");
+            }
+
+            _jsp_FormatNumberTag_1.setValue(_caucho_expr_47.evalObject(_jsp_env));
+            _jsp_FormatNumberTag_1.doEndTag();
+            out.write(_jsp_string42, 0, _jsp_string42.length);
+          }
+          if (_caucho_expr_32.evalBoolean(_jsp_env)) {
+            out.write(_jsp_string46, 0, _jsp_string46.length);
             _caucho_expr_48.print(out, _jsp_env, false);
             out.write(_jsp_string39, 0, _jsp_string39.length);
             _caucho_expr_3.print(out, _jsp_env, false);
             out.write(_jsp_string40, 0, _jsp_string40.length);
             _caucho_expr_4.print(out, _jsp_env, false);
             out.write('/');
-            _caucho_expr_41.print(out, _jsp_env, false);
+            _caucho_expr_43.print(out, _jsp_env, false);
             out.write(_jsp_string41, 0, _jsp_string41.length);
             if (_jsp_FormatNumberTag_1 == null) {
               _jsp_FormatNumberTag_1 = new com.caucho.jstl.rt.FormatNumberTag();
@@ -282,104 +319,87 @@ public class _AccountChange$List__jsp extends com.caucho.jsp.JavaPage
             _jsp_FormatNumberTag_1.doEndTag();
             out.write(_jsp_string42, 0, _jsp_string42.length);
           }
-          if (_caucho_expr_30.evalBoolean(_jsp_env)) {
-            out.write(_jsp_string53, 0, _jsp_string53.length);
-            _caucho_expr_49.print(out, _jsp_env, false);
-            out.write(_jsp_string39, 0, _jsp_string39.length);
-            _caucho_expr_3.print(out, _jsp_env, false);
-            out.write(_jsp_string40, 0, _jsp_string40.length);
-            _caucho_expr_4.print(out, _jsp_env, false);
-            out.write('/');
-            _caucho_expr_41.print(out, _jsp_env, false);
-            out.write(_jsp_string41, 0, _jsp_string41.length);
-            _caucho_expr_49.print(out, _jsp_env, false);
-            out.write(_jsp_string42, 0, _jsp_string42.length);
-          }
-          if (_caucho_expr_32.evalBoolean(_jsp_env)) {
-            out.write(_jsp_string54, 0, _jsp_string54.length);
-            _caucho_expr_50.print(out, _jsp_env, false);
-            out.write(_jsp_string39, 0, _jsp_string39.length);
-            _caucho_expr_3.print(out, _jsp_env, false);
-            out.write(_jsp_string40, 0, _jsp_string40.length);
-            _caucho_expr_4.print(out, _jsp_env, false);
-            out.write('/');
-            _caucho_expr_41.print(out, _jsp_env, false);
-            out.write(_jsp_string41, 0, _jsp_string41.length);
-            if (_jsp_FormatNumberTag_1 == null) {
-              _jsp_FormatNumberTag_1 = new com.caucho.jstl.rt.FormatNumberTag();
-              _jsp_FormatNumberTag_1.setPageContext(pageContext);
-              _jsp_FormatNumberTag_1.setParent(com.caucho.jsp.JspUtil.toTag(_jsp_loop_0));
-              _jsp_FormatNumberTag_1.setType("currency");
-            }
-
-            _jsp_FormatNumberTag_1.setValue(_caucho_expr_50.evalObject(_jsp_env));
-            _jsp_FormatNumberTag_1.doEndTag();
-            out.write(_jsp_string42, 0, _jsp_string42.length);
-          }
           if (_caucho_expr_34.evalBoolean(_jsp_env)) {
-            out.write(_jsp_string55, 0, _jsp_string55.length);
-            _caucho_expr_51.print(out, _jsp_env, false);
-            out.write(_jsp_string39, 0, _jsp_string39.length);
+            out.write(_jsp_string47, 0, _jsp_string47.length);
             _caucho_expr_3.print(out, _jsp_env, false);
-            out.write(_jsp_string40, 0, _jsp_string40.length);
-            _caucho_expr_4.print(out, _jsp_env, false);
             out.write('/');
-            _caucho_expr_41.print(out, _jsp_env, false);
-            out.write(_jsp_string41, 0, _jsp_string41.length);
-            if (_jsp_FormatNumberTag_1 == null) {
-              _jsp_FormatNumberTag_1 = new com.caucho.jstl.rt.FormatNumberTag();
-              _jsp_FormatNumberTag_1.setPageContext(pageContext);
-              _jsp_FormatNumberTag_1.setParent(com.caucho.jsp.JspUtil.toTag(_jsp_loop_0));
-              _jsp_FormatNumberTag_1.setType("currency");
+            _caucho_expr_43.print(out, _jsp_env, false);
+            out.write(_jsp_string48, 0, _jsp_string48.length);
+            _caucho_expr_43.print(out, _jsp_env, false);
+            out.write(_jsp_string49, 0, _jsp_string49.length);
+            _caucho_expr_49.print(out, _jsp_env, false);
+            out.write(_jsp_string50, 0, _jsp_string50.length);
+            if (_caucho_expr_50.evalBoolean(_jsp_env)) {
+              out.write(_jsp_string51, 0, _jsp_string51.length);
+              _caucho_expr_51.print(out, _jsp_env, false);
+              out.write(_jsp_string41, 0, _jsp_string41.length);
+              _caucho_expr_52.print(out, _jsp_env, false);
+              out.write(_jsp_string52, 0, _jsp_string52.length);
             }
-
-            _jsp_FormatNumberTag_1.setValue(_caucho_expr_51.evalObject(_jsp_env));
-            _jsp_FormatNumberTag_1.doEndTag();
-            out.write(_jsp_string42, 0, _jsp_string42.length);
+            out.write(_jsp_string53, 0, _jsp_string53.length);
+            if (_caucho_expr_53.evalBoolean(_jsp_env)) {
+              out.write(_jsp_string54, 0, _jsp_string54.length);
+            }
+            out.write(_jsp_string55, 0, _jsp_string55.length);
           }
+          out.write('\n');
           if (_caucho_expr_36.evalBoolean(_jsp_env)) {
             out.write(_jsp_string56, 0, _jsp_string56.length);
             _caucho_expr_3.print(out, _jsp_env, false);
             out.write('/');
-            _caucho_expr_41.print(out, _jsp_env, false);
-            out.write(_jsp_string57, 0, _jsp_string57.length);
-            _caucho_expr_41.print(out, _jsp_env, false);
-            out.write(_jsp_string58, 0, _jsp_string58.length);
             _caucho_expr_43.print(out, _jsp_env, false);
-            out.write(_jsp_string46, 0, _jsp_string46.length);
-            if (_caucho_expr_52.evalBoolean(_jsp_env)) {
+            out.write(_jsp_string57, 0, _jsp_string57.length);
+            _caucho_expr_43.print(out, _jsp_env, false);
+            out.write(_jsp_string58, 0, _jsp_string58.length);
+            _caucho_expr_49.print(out, _jsp_env, false);
+            out.write(_jsp_string50, 0, _jsp_string50.length);
+            if (_caucho_expr_54.evalBoolean(_jsp_env)) {
               out.write(_jsp_string59, 0, _jsp_string59.length);
-              _caucho_expr_53.print(out, _jsp_env, false);
+              _caucho_expr_55.print(out, _jsp_env, false);
               out.write(_jsp_string41, 0, _jsp_string41.length);
-              _caucho_expr_54.print(out, _jsp_env, false);
-              out.write(_jsp_string48, 0, _jsp_string48.length);
+              _caucho_expr_56.print(out, _jsp_env, false);
+              out.write(_jsp_string52, 0, _jsp_string52.length);
             }
-            out.write(_jsp_string49, 0, _jsp_string49.length);
-            if (_caucho_expr_55.evalBoolean(_jsp_env)) {
-              out.write(_jsp_string50, 0, _jsp_string50.length);
+            out.write(_jsp_string53, 0, _jsp_string53.length);
+            if (_caucho_expr_57.evalBoolean(_jsp_env)) {
+              out.write(_jsp_string54, 0, _jsp_string54.length);
             }
-            out.write(_jsp_string51, 0, _jsp_string51.length);
+            out.write(_jsp_string55, 0, _jsp_string55.length);
           }
-          out.write(_jsp_string60, 0, _jsp_string60.length);
-          _caucho_expr_3.print(out, _jsp_env, false);
+          out.write('\n');
+          if (_caucho_expr_38.evalBoolean(_jsp_env)) {
+            out.write(_jsp_string60, 0, _jsp_string60.length);
+            _caucho_expr_58.print(out, _jsp_env, false);
+            out.write(_jsp_string39, 0, _jsp_string39.length);
+            _caucho_expr_3.print(out, _jsp_env, false);
+            out.write(_jsp_string40, 0, _jsp_string40.length);
+            _caucho_expr_4.print(out, _jsp_env, false);
+            out.write('/');
+            _caucho_expr_43.print(out, _jsp_env, false);
+            out.write(_jsp_string41, 0, _jsp_string41.length);
+            _caucho_expr_58.print(out, _jsp_env, false);
+            out.write(_jsp_string42, 0, _jsp_string42.length);
+          }
           out.write(_jsp_string61, 0, _jsp_string61.length);
-          _caucho_expr_4.print(out, _jsp_env, false);
-          out.write('/');
-          _caucho_expr_41.print(out, _jsp_env, false);
-          out.write(_jsp_string62, 0, _jsp_string62.length);
-          _caucho_expr_56.print(out, _jsp_env, false);
-          out.write(_jsp_string63, 0, _jsp_string63.length);
           _caucho_expr_3.print(out, _jsp_env, false);
-          out.write(_jsp_string64, 0, _jsp_string64.length);
+          out.write(_jsp_string62, 0, _jsp_string62.length);
           _caucho_expr_4.print(out, _jsp_env, false);
           out.write('/');
-          _caucho_expr_41.print(out, _jsp_env, false);
+          _caucho_expr_43.print(out, _jsp_env, false);
+          out.write(_jsp_string63, 0, _jsp_string63.length);
+          _caucho_expr_59.print(out, _jsp_env, false);
+          out.write(_jsp_string64, 0, _jsp_string64.length);
+          _caucho_expr_3.print(out, _jsp_env, false);
           out.write(_jsp_string65, 0, _jsp_string65.length);
-          _caucho_expr_57.print(out, _jsp_env, false);
+          _caucho_expr_4.print(out, _jsp_env, false);
+          out.write('/');
+          _caucho_expr_43.print(out, _jsp_env, false);
           out.write(_jsp_string66, 0, _jsp_string66.length);
+          _caucho_expr_60.print(out, _jsp_env, false);
+          out.write(_jsp_string67, 0, _jsp_string67.length);
         }
         pageContext.pageSetOrRemove("item", _jsp_oldVar_7);
-        out.write(_jsp_string67, 0, _jsp_string67.length);
+        out.write(_jsp_string68, 0, _jsp_string68.length);
       }
       out.write(_jsp_string1, 0, _jsp_string1.length);
     } catch (java.lang.Throwable _jsp_e) {
@@ -466,38 +486,41 @@ public class _AccountChange$List__jsp extends com.caucho.jsp.JavaPage
     _caucho_expr_23 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['account_change.id']}");
     _caucho_expr_24 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${param.referName ne 'name'}");
     _caucho_expr_25 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['account_change.name']}");
-    _caucho_expr_26 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${param.referName ne 'account'}");
-    _caucho_expr_27 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['account_change.account']}");
-    _caucho_expr_28 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${param.referName ne 'previousBalance'}");
-    _caucho_expr_29 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['account_change.previous_balance']}");
-    _caucho_expr_30 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${param.referName ne 'type'}");
-    _caucho_expr_31 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['account_change.type']}");
-    _caucho_expr_32 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${param.referName ne 'amount'}");
-    _caucho_expr_33 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['account_change.amount']}");
-    _caucho_expr_34 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${param.referName ne 'currentBalance'}");
-    _caucho_expr_35 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['account_change.current_balance']}");
+    _caucho_expr_26 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${param.referName ne 'previousBalance'}");
+    _caucho_expr_27 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['account_change.previous_balance']}");
+    _caucho_expr_28 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${param.referName ne 'type'}");
+    _caucho_expr_29 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['account_change.type']}");
+    _caucho_expr_30 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${param.referName ne 'amount'}");
+    _caucho_expr_31 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['account_change.amount']}");
+    _caucho_expr_32 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${param.referName ne 'currentBalance'}");
+    _caucho_expr_33 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['account_change.current_balance']}");
+    _caucho_expr_34 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${param.referName ne 'account'}");
+    _caucho_expr_35 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['account_change.account']}");
     _caucho_expr_36 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${param.referName ne 'changeRequest'}");
     _caucho_expr_37 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['account_change.change_request']}");
-    _caucho_expr_38 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['@action']}");
-    _caucho_expr_39 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${accountChangeList}");
-    _caucho_expr_40 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.version}");
-    _caucho_expr_41 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.id}");
-    _caucho_expr_42 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.name}");
-    _caucho_expr_43 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${'$'}");
-    _caucho_expr_44 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${not empty  item.account}");
-    _caucho_expr_45 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.account.id}");
-    _caucho_expr_46 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.account.displayName}");
-    _caucho_expr_47 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${empty  item.account}");
-    _caucho_expr_48 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.previousBalance}");
-    _caucho_expr_49 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.type}");
-    _caucho_expr_50 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.amount}");
-    _caucho_expr_51 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.currentBalance}");
-    _caucho_expr_52 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${not empty  item.changeRequest}");
-    _caucho_expr_53 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.changeRequest.id}");
-    _caucho_expr_54 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.changeRequest.displayName}");
-    _caucho_expr_55 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${empty  item.changeRequest}");
-    _caucho_expr_56 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['@delete']}");
-    _caucho_expr_57 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['@copy']}");
+    _caucho_expr_38 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${param.referName ne 'currentStatus'}");
+    _caucho_expr_39 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['account_change.current_status']}");
+    _caucho_expr_40 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['@action']}");
+    _caucho_expr_41 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${accountChangeList}");
+    _caucho_expr_42 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.version}");
+    _caucho_expr_43 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.id}");
+    _caucho_expr_44 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.name}");
+    _caucho_expr_45 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.previousBalance}");
+    _caucho_expr_46 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.type}");
+    _caucho_expr_47 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.amount}");
+    _caucho_expr_48 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.currentBalance}");
+    _caucho_expr_49 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${'$'}");
+    _caucho_expr_50 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${not empty  item.account}");
+    _caucho_expr_51 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.account.id}");
+    _caucho_expr_52 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.account.displayName}");
+    _caucho_expr_53 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${empty  item.account}");
+    _caucho_expr_54 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${not empty  item.changeRequest}");
+    _caucho_expr_55 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.changeRequest.id}");
+    _caucho_expr_56 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.changeRequest.displayName}");
+    _caucho_expr_57 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${empty  item.changeRequest}");
+    _caucho_expr_58 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.currentStatus}");
+    _caucho_expr_59 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['@delete']}");
+    _caucho_expr_60 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['@copy']}");
   }
 
   public void destroy()
@@ -518,7 +541,7 @@ public class _AccountChange$List__jsp extends com.caucho.jsp.JavaPage
     String resourcePath = loader.getResourcePathSpecificFirst();
     mergePath.addClassPath(resourcePath);
     com.caucho.vfs.Depend depend;
-    depend = new com.caucho.vfs.Depend(appDir.lookup("coreview/com/doublechain/bank/accountchange/AccountChange$List.jsp"), 2789443485878015344L, false);
+    depend = new com.caucho.vfs.Depend(appDir.lookup("coreview/com/doublechain/bank/accountchange/AccountChange$List.jsp"), 2790476835763669939L, false);
     com.caucho.jsp.JavaPage.addDepend(_caucho_depends, depend);
     depend = new com.caucho.vfs.Depend(mergePath.lookup("jar:file:/opt/resin-3.1.12/lib/resin.jar!/com/caucho/jstl/fmt.tld"), 8594578285720415164L, false);
     com.caucho.jsp.JavaPage.addDepend(_caucho_depends, depend);
@@ -591,30 +614,33 @@ public class _AccountChange$List__jsp extends com.caucho.jsp.JavaPage
   private static com.caucho.el.Expr _caucho_expr_55;
   private static com.caucho.el.Expr _caucho_expr_56;
   private static com.caucho.el.Expr _caucho_expr_57;
+  private static com.caucho.el.Expr _caucho_expr_58;
+  private static com.caucho.el.Expr _caucho_expr_59;
+  private static com.caucho.el.Expr _caucho_expr_60;
 
   private final static char []_jsp_string34;
-  private final static char []_jsp_string46;
+  private final static char []_jsp_string50;
   private final static char []_jsp_string22;
-  private final static char []_jsp_string67;
-  private final static char []_jsp_string53;
-  private final static char []_jsp_string54;
+  private final static char []_jsp_string68;
+  private final static char []_jsp_string44;
+  private final static char []_jsp_string45;
   private final static char []_jsp_string13;
-  private final static char []_jsp_string43;
+  private final static char []_jsp_string47;
   private final static char []_jsp_string12;
   private final static char []_jsp_string25;
   private final static char []_jsp_string0;
   private final static char []_jsp_string29;
   private final static char []_jsp_string14;
-  private final static char []_jsp_string60;
   private final static char []_jsp_string26;
-  private final static char []_jsp_string65;
-  private final static char []_jsp_string61;
+  private final static char []_jsp_string66;
+  private final static char []_jsp_string62;
   private final static char []_jsp_string27;
   private final static char []_jsp_string4;
-  private final static char []_jsp_string64;
-  private final static char []_jsp_string49;
+  private final static char []_jsp_string65;
+  private final static char []_jsp_string53;
   private final static char []_jsp_string37;
   private final static char []_jsp_string21;
+  private final static char []_jsp_string60;
   private final static char []_jsp_string20;
   private final static char []_jsp_string18;
   private final static char []_jsp_string11;
@@ -625,65 +651,66 @@ public class _AccountChange$List__jsp extends com.caucho.jsp.JavaPage
   private final static char []_jsp_string33;
   private final static char []_jsp_string59;
   private final static char []_jsp_string57;
-  private final static char []_jsp_string44;
+  private final static char []_jsp_string48;
   private final static char []_jsp_string30;
   private final static char []_jsp_string8;
-  private final static char []_jsp_string51;
+  private final static char []_jsp_string55;
   private final static char []_jsp_string2;
   private final static char []_jsp_string17;
   private final static char []_jsp_string28;
-  private final static char []_jsp_string66;
+  private final static char []_jsp_string67;
+  private final static char []_jsp_string61;
   private final static char []_jsp_string16;
   private final static char []_jsp_string38;
   private final static char []_jsp_string9;
-  private final static char []_jsp_string48;
+  private final static char []_jsp_string52;
   private final static char []_jsp_string3;
   private final static char []_jsp_string5;
   private final static char []_jsp_string41;
-  private final static char []_jsp_string52;
-  private final static char []_jsp_string63;
+  private final static char []_jsp_string43;
+  private final static char []_jsp_string64;
   private final static char []_jsp_string10;
   private final static char []_jsp_string39;
-  private final static char []_jsp_string55;
+  private final static char []_jsp_string46;
   private final static char []_jsp_string24;
   private final static char []_jsp_string32;
-  private final static char []_jsp_string62;
+  private final static char []_jsp_string63;
   private final static char []_jsp_string31;
-  private final static char []_jsp_string45;
+  private final static char []_jsp_string49;
   private final static char []_jsp_string56;
-  private final static char []_jsp_string47;
+  private final static char []_jsp_string51;
   private final static char []_jsp_string23;
   private final static char []_jsp_string7;
   private final static char []_jsp_string35;
   private final static char []_jsp_string19;
   private final static char []_jsp_string42;
-  private final static char []_jsp_string50;
+  private final static char []_jsp_string54;
   private final static char []_jsp_string15;
   private final static char []_jsp_string40;
   static {
     _jsp_string34 = "' id=\"accountChange-".toCharArray();
-    _jsp_string46 = "{ID}/\">\n		<span class=\"display_span\">\n			".toCharArray();
+    _jsp_string50 = "{ID}/\">\n		<span class=\"display_span\">\n			".toCharArray();
     _jsp_string22 = "Manager/load".toCharArray();
-    _jsp_string67 = "\n		\n		</tbody>\n	</table>	\n	\n\n</div>".toCharArray();
-    _jsp_string53 = "	<td contenteditable='true' class='edit-value'  propertyToChange='type' storedCellValue='".toCharArray();
-    _jsp_string54 = "	<td contenteditable='true' class='edit-value money'  propertyToChange='amount' storedCellValue='".toCharArray();
+    _jsp_string68 = "\n		\n		</tbody>\n	</table>	\n	\n\n</div>".toCharArray();
+    _jsp_string44 = "	<td contenteditable='true' class='edit-value'  propertyToChange='type' storedCellValue='".toCharArray();
+    _jsp_string45 = "	<td contenteditable='true' class='edit-value money'  propertyToChange='amount' storedCellValue='".toCharArray();
     _jsp_string13 = " btn-sm\" href=\"".toCharArray();
-    _jsp_string43 = "\n	<td class=\"select_candidate_td\"\n			data-candidate-method=\"./accountChangeManager/requestCandidateAccount/".toCharArray();
+    _jsp_string47 = "\n	<td class=\"select_candidate_td\"\n			data-candidate-method=\"./accountChangeManager/requestCandidateAccount/".toCharArray();
     _jsp_string12 = "\n		<a class=\"btn btn-".toCharArray();
     _jsp_string25 = "/' \n			class='page-link page-action '>".toCharArray();
     _jsp_string0 = "\n\n\n\n\n\n\n".toCharArray();
     _jsp_string29 = "\n	<th>".toCharArray();
     _jsp_string14 = "\">".toCharArray();
-    _jsp_string60 = "\n\n				<td>\n\n				<a href='#".toCharArray();
     _jsp_string26 = "</a>\n	</li>\n".toCharArray();
-    _jsp_string65 = "/' class='copy-action btn btn-success btn-xs'><i class=\"fa fa-files-o fa-lg\"></i> ".toCharArray();
-    _jsp_string61 = "Manager/removeAccountChange/".toCharArray();
+    _jsp_string66 = "/' class='copy-action btn btn-success btn-xs'><i class=\"fa fa-files-o fa-lg\"></i> ".toCharArray();
+    _jsp_string62 = "Manager/removeAccountChange/".toCharArray();
     _jsp_string27 = "\n </ul>\n</nav>\n\n\n   \n\n\n	<table class=\"table table-striped\" pageToken='accountChangeListCurrentPage=".toCharArray();
     _jsp_string4 = "Manager/addAccountChange/".toCharArray();
-    _jsp_string64 = "Manager/copyAccountChangeFrom/".toCharArray();
-    _jsp_string49 = "\n			".toCharArray();
+    _jsp_string65 = "Manager/copyAccountChangeFrom/".toCharArray();
+    _jsp_string53 = "\n			".toCharArray();
     _jsp_string37 = "</a></td>\n".toCharArray();
     _jsp_string21 = "\">\n		<a href='#".toCharArray();
+    _jsp_string60 = "	<td contenteditable='true' class='edit-value'  propertyToChange='currentStatus' storedCellValue='".toCharArray();
     _jsp_string20 = "\n\n\n	<li class=\"page-item ".toCharArray();
     _jsp_string18 = "	\n\n\n\n<nav aria-label=\"Page navigation example\">\n  <ul class=\"pagination\">\n".toCharArray();
     _jsp_string11 = "\n		".toCharArray();
@@ -694,39 +721,40 @@ public class _AccountChange$List__jsp extends com.caucho.jsp.JavaPage
     _jsp_string33 = "\n				<tr currentVersion='".toCharArray();
     _jsp_string59 = "\n			<a href='./changeRequestManager/view/".toCharArray();
     _jsp_string57 = "/\"\n			data-switch-method=\"./accountChangeManager/transferToAnotherChangeRequest/".toCharArray();
-    _jsp_string44 = "/\"\n			data-switch-method=\"./accountChangeManager/transferToAnotherAccount/".toCharArray();
+    _jsp_string48 = "/\"\n			data-switch-method=\"./accountChangeManager/transferToAnotherAccount/".toCharArray();
     _jsp_string30 = "</th>\n".toCharArray();
     _jsp_string8 = "\n    \n 	   \n    <div class=\"row\" style=\"font-size: 30px;\">\n		<div class=\"col-xs-12 col-md-12\" style=\"padding-left:20px\">\n		<i class='fa fa-table'></i> ".toCharArray();
-    _jsp_string51 = "\n			<button class=\"btn btn-link candidate-action\">...</button>\n		</span>\n		<div class=\"candidate_span\" style=\"display:none;\">\n			<input type=\"text\" data-provide=\"typeahead\" class=\"input-sm form-control candidate-filter-input\" autocomplete=\"off\" />\n		</div>\n	</td>\n".toCharArray();
+    _jsp_string55 = "\n			<button class=\"btn btn-link candidate-action\">...</button>\n		</span>\n		<div class=\"candidate_span\" style=\"display:none;\">\n			<input type=\"text\" data-provide=\"typeahead\" class=\"input-sm form-control candidate-filter-input\" autocomplete=\"off\" />\n		</div>\n	</td>\n".toCharArray();
     _jsp_string2 = "\n	<div class=\"row\" style=\"font-size: 30px;\">\n		<div class=\"col-xs-12 col-md-12\" style=\"padding-left:20px\">\n		 ".toCharArray();
     _jsp_string17 = "\n	</div><!--end of div class=\"btn-group\" -->\n	\n		 \n		 \n		 \n		 </div>\n </div>\n    \n    \n<div class=\"table-responsive\">\n\n\n".toCharArray();
     _jsp_string28 = "'>\n		<thead><tr>\n		".toCharArray();
-    _jsp_string66 = " </a>\n\n				</td>\n				</tr>\n			".toCharArray();
+    _jsp_string67 = " </a>\n\n				</td>\n				</tr>\n			".toCharArray();
+    _jsp_string61 = "\n				<td>\n\n				<a href='#".toCharArray();
     _jsp_string16 = "\n	".toCharArray();
     _jsp_string38 = "	<td contenteditable='true' class='edit-value'  propertyToChange='name' storedCellValue='".toCharArray();
     _jsp_string9 = ")\n		<a href=\"./".toCharArray();
-    _jsp_string48 = "</a>\n			".toCharArray();
+    _jsp_string52 = "</a>\n			".toCharArray();
     _jsp_string3 = "! \n		 <a href=\"./".toCharArray();
     _jsp_string5 = "/\"><i class=\"fa fa-plus-square\" aria-hidden=\"true\"></i></a>\n		 \n		 \n		 \n		 </div>\n	</div>\n\n".toCharArray();
     _jsp_string41 = "/'>".toCharArray();
-    _jsp_string52 = "	<td contenteditable='true' class='edit-value money'  propertyToChange='previousBalance' storedCellValue='".toCharArray();
-    _jsp_string63 = "</a>\n				<a href='#".toCharArray();
+    _jsp_string43 = "	<td contenteditable='true' class='edit-value money'  propertyToChange='previousBalance' storedCellValue='".toCharArray();
+    _jsp_string64 = "</a>\n				<a href='#".toCharArray();
     _jsp_string10 = "/\"><i class=\"fa fa-plus-square\" aria-hidden=\"true\"></i></a>\n		 \n		 		 	<div class=\"btn-group\" role=\"group\" aria-label=\"Button group with nested dropdown\">		\n	".toCharArray();
     _jsp_string39 = "' prefix='".toCharArray();
-    _jsp_string55 = "	<td contenteditable='true' class='edit-value money'  propertyToChange='currentBalance' storedCellValue='".toCharArray();
+    _jsp_string46 = "	<td contenteditable='true' class='edit-value money'  propertyToChange='currentBalance' storedCellValue='".toCharArray();
     _jsp_string24 = "RowsPerPage=".toCharArray();
     _jsp_string32 = "</th>\n		</tr></thead>\n		<tbody>\n			\n			".toCharArray();
-    _jsp_string62 = "/' class='delete-action btn btn-danger btn-xs'><i class=\"fa fa-trash-o fa-lg\"></i> ".toCharArray();
+    _jsp_string63 = "/' class='delete-action btn btn-danger btn-xs'><i class=\"fa fa-trash-o fa-lg\"></i> ".toCharArray();
     _jsp_string31 = "\n<th>".toCharArray();
-    _jsp_string45 = "/\"\n			data-link-template=\"./accountManager/view/".toCharArray();
+    _jsp_string49 = "/\"\n			data-link-template=\"./accountManager/view/".toCharArray();
     _jsp_string56 = "\n	<td class=\"select_candidate_td\"\n			data-candidate-method=\"./accountChangeManager/requestCandidateChangeRequest/".toCharArray();
-    _jsp_string47 = "\n			<a href='./accountManager/view/".toCharArray();
+    _jsp_string51 = "\n			<a href='./accountManager/view/".toCharArray();
     _jsp_string23 = "CurrentPage=".toCharArray();
     _jsp_string7 = "\n    \n    \n".toCharArray();
     _jsp_string35 = "\" ><td><a class=\"link-action-removed\" href=\"./accountChangeManager/view/".toCharArray();
     _jsp_string19 = " \n".toCharArray();
     _jsp_string42 = "</td>\n".toCharArray();
-    _jsp_string50 = "\n			<a href='#'></a>\n			".toCharArray();
+    _jsp_string54 = "\n			<a href='#'></a>\n			".toCharArray();
     _jsp_string15 = "</a>\n		".toCharArray();
     _jsp_string40 = "Manager/updateAccountChange/".toCharArray();
   }

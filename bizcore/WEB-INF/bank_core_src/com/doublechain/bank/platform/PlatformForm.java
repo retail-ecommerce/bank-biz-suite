@@ -48,6 +48,20 @@ public class PlatformForm extends BaseForm {
 	}
 
 
+	public PlatformForm founderField(String parameterName, String initValue){
+		FormField field = founderFromPlatform(parameterName, initValue);		
+		this.addFormField(field);
+		return this;
+	}
+	
+	public PlatformForm founderField(String initValue){
+		return founderField("founder",initValue);
+	}
+	public PlatformForm founderField(){
+		return founderField("founder","");
+	}
+
+
 	public PlatformForm foundedField(String parameterName, String initValue){
 		FormField field = foundedFromPlatform(parameterName, initValue);		
 		this.addFormField(field);
@@ -59,6 +73,20 @@ public class PlatformForm extends BaseForm {
 	}
 	public PlatformForm foundedField(){
 		return foundedField("founded","");
+	}
+
+
+	public PlatformForm descriptionField(String parameterName, String initValue){
+		FormField field = descriptionFromPlatform(parameterName, initValue);		
+		this.addFormField(field);
+		return this;
+	}
+	
+	public PlatformForm descriptionField(String initValue){
+		return descriptionField("description",initValue);
+	}
+	public PlatformForm descriptionField(){
+		return descriptionField("description","");
 	}
 
 	

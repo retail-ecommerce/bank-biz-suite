@@ -5,6 +5,7 @@ import java.util.Map;
 import com.doublechain.bank.platform.Platform;
 import com.doublechain.bank.changerequest.ChangeRequest;
 import com.doublechain.bank.transaction.Transaction;
+import com.doublechain.bank.namechangeevent.NameChangeEvent;
 import com.doublechain.bank.account.Account;
 import com.doublechain.bank.accountchange.AccountChange;
 import com.doublechain.bank.userdomain.UserDomain;
@@ -36,6 +37,11 @@ public class BeanFactoryImpl{
 
 	public Transaction createTransaction(Map<String,Object> options){
 		return new Transaction();
+	}
+
+
+	public NameChangeEvent createNameChangeEvent(Map<String,Object> options){
+		return new NameChangeEvent();
 	}
 
 

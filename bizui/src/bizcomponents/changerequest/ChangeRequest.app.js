@@ -211,6 +211,55 @@ class ChangeRequestBizApp extends React.PureComponent {
     }))(TransactionUpdateForm)
   }
 
+  getNameChangeEventSearch = () => {
+    const {NameChangeEventSearch} = GlobalComponents;
+    const userContext = null
+    return connect(state => ({
+      rule: state.rule,
+      name: "名字更改事件",
+      role: "nameChangeEvent",
+      data: state._changeRequest.nameChangeEventList,
+      metaInfo: state._changeRequest.nameChangeEventListMetaInfo,
+      count: state._changeRequest.nameChangeEventCount,
+      currentPage: state._changeRequest.nameChangeEventCurrentPageNumber,
+      searchFormParameters: state._changeRequest.nameChangeEventSearchFormParameters,
+      searchParameters: {...state._changeRequest.searchParameters},
+      expandForm: state._changeRequest.expandForm,
+      loading: state._changeRequest.loading,
+      partialList: state._changeRequest.partialList,
+      owner: { type: '_changeRequest', id: state._changeRequest.id, 
+      referenceName: 'changeRequest', 
+      listName: 'nameChangeEventList', ref:state._changeRequest, 
+      listDisplayName: appLocaleName(userContext,"List") }, // this is for model namespace and
+    }))(NameChangeEventSearch)
+  }
+  getNameChangeEventCreateForm = () => {
+   	const {NameChangeEventCreateForm} = GlobalComponents;
+   	const userContext = null
+    return connect(state => ({
+      rule: state.rule,
+      role: "nameChangeEvent",
+      data: state._changeRequest.nameChangeEventList,
+      metaInfo: state._changeRequest.nameChangeEventListMetaInfo,
+      count: state._changeRequest.nameChangeEventCount,
+      currentPage: state._changeRequest.nameChangeEventCurrentPageNumber,
+      searchFormParameters: state._changeRequest.nameChangeEventSearchFormParameters,
+      loading: state._changeRequest.loading,
+      owner: { type: '_changeRequest', id: state._changeRequest.id, referenceName: 'changeRequest', listName: 'nameChangeEventList', ref:state._changeRequest, listDisplayName: appLocaleName(userContext,"List")}, // this is for model namespace and
+    }))(NameChangeEventCreateForm)
+  }
+  
+  getNameChangeEventUpdateForm = () => {
+    const userContext = null
+  	const {NameChangeEventUpdateForm} = GlobalComponents;
+    return connect(state => ({
+      selectedRows: state._changeRequest.selectedRows,
+      role: "nameChangeEvent",
+      currentUpdateIndex: state._changeRequest.currentUpdateIndex,
+      owner: { type: '_changeRequest', id: state._changeRequest.id, listName: 'nameChangeEventList', ref:state._changeRequest, listDisplayName: appLocaleName(userContext,"List") }, // this is for model namespace and
+    }))(NameChangeEventUpdateForm)
+  }
+
   getAccountChangeSearch = () => {
     const {AccountChangeSearch} = GlobalComponents;
     const userContext = null
@@ -278,6 +327,10 @@ class ChangeRequestBizApp extends React.PureComponent {
   	{path:"/changeRequest/:id/list/transactionList", component: this.getTransactionSearch()},
   	{path:"/changeRequest/:id/list/transactionCreateForm", component: this.getTransactionCreateForm()},
   	{path:"/changeRequest/:id/list/transactionUpdateForm", component: this.getTransactionUpdateForm()},
+   	
+  	{path:"/changeRequest/:id/list/nameChangeEventList", component: this.getNameChangeEventSearch()},
+  	{path:"/changeRequest/:id/list/nameChangeEventCreateForm", component: this.getNameChangeEventCreateForm()},
+  	{path:"/changeRequest/:id/list/nameChangeEventUpdateForm", component: this.getNameChangeEventUpdateForm()},
    	
   	{path:"/changeRequest/:id/list/accountChangeList", component: this.getAccountChangeSearch()},
   	{path:"/changeRequest/:id/list/accountChangeCreateForm", component: this.getAccountChangeCreateForm()},

@@ -48,20 +48,6 @@ public class AccountChangeForm extends BaseForm {
 	}
 
 
-	public AccountChangeForm accountIdField(String parameterName, String initValue){
-		FormField field = accountIdFromAccountChange(parameterName, initValue);		
-		this.addFormField(field);
-		return this;
-	}
-	
-	public AccountChangeForm accountIdField(String initValue){
-		return accountIdField("accountId",initValue);
-	}
-	public AccountChangeForm accountIdField(){
-		return accountIdField("accountId","");
-	}
-
-
 	public AccountChangeForm previousBalanceField(String parameterName, String initValue){
 		FormField field = previousBalanceFromAccountChange(parameterName, initValue);		
 		this.addFormField(field);
@@ -118,6 +104,20 @@ public class AccountChangeForm extends BaseForm {
 	}
 
 
+	public AccountChangeForm accountIdField(String parameterName, String initValue){
+		FormField field = accountIdFromAccountChange(parameterName, initValue);		
+		this.addFormField(field);
+		return this;
+	}
+	
+	public AccountChangeForm accountIdField(String initValue){
+		return accountIdField("accountId",initValue);
+	}
+	public AccountChangeForm accountIdField(){
+		return accountIdField("accountId","");
+	}
+
+
 	public AccountChangeForm changeRequestIdField(String parameterName, String initValue){
 		FormField field = changeRequestIdFromAccountChange(parameterName, initValue);		
 		this.addFormField(field);
@@ -129,6 +129,20 @@ public class AccountChangeForm extends BaseForm {
 	}
 	public AccountChangeForm changeRequestIdField(){
 		return changeRequestIdField("changeRequestId","");
+	}
+
+
+	public AccountChangeForm currentStatusField(String parameterName, String initValue){
+		FormField field = currentStatusFromAccountChange(parameterName, initValue);		
+		this.addFormField(field);
+		return this;
+	}
+	
+	public AccountChangeForm currentStatusField(String initValue){
+		return currentStatusField("currentStatus",initValue);
+	}
+	public AccountChangeForm currentStatusField(){
+		return currentStatusField("currentStatus","");
 	}
 
 	
@@ -290,16 +304,14 @@ public class AccountChangeForm extends BaseForm {
 	}
 
  	
- 	public AccountChangeForm transferToAnotherChangeRequestAction(){
+ 	public AccountChangeForm  requestChangeAction(){
 		FormAction action = new FormAction();
-		action.setLabel("显示");
-		action.setLocaleKey("show");
-		action.setUrl("transferToAnotherChangeRequest/accountChangeId/");
+		action.setLabel("变更请求");
+		action.setLocaleKey("account_change.requestChange");
+		action.setUrl("accountChangeManager/requestChange/accountChangeId/name/platformId");
 		this.addFormAction(action);
 		return this;
 	}
-
- 
 
 	public AccountChangeForm showAction(){
 		FormAction action = new FormAction();

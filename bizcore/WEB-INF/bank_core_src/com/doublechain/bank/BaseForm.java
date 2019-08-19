@@ -105,6 +105,19 @@ public class BaseForm extends GenericForm{
 		return field;
 	}
 
+	protected FormField founderFromPlatform(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("创始人");
+		field.setLocaleKey("platform.founder");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写创始人");
+		return field;
+	}
+
 	protected FormField foundedFromPlatform(String parameterName, String initValue){
 		FormField field = new FormField();
 		field.setLabel("成立");
@@ -115,6 +128,19 @@ public class BaseForm extends GenericForm{
 		field.setType("date_time");
 		field.setRequired(true);
 		field.setPlaceholder("请填写成立");
+		return field;
+	}
+
+	protected FormField descriptionFromPlatform(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("描述");
+		field.setLocaleKey("platform.description");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写描述");
 		return field;
 	}
 
@@ -261,6 +287,84 @@ public class BaseForm extends GenericForm{
 		return field;
 	}
 
+	protected FormField currentStatusFromTransaction(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("当前状态");
+		field.setLocaleKey("transaction.current_status");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写当前状态");
+		return field;
+	}
+
+	protected FormField idFromNameChangeEvent(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("ID");
+		field.setLocaleKey("name_change_event.id");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写ID");
+		return field;
+	}
+
+	protected FormField nameFromNameChangeEvent(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("名称");
+		field.setLocaleKey("name_change_event.name");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写名称");
+		return field;
+	}
+
+	protected FormField accountIdFromNameChangeEvent(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("账户");
+		field.setLocaleKey("name_change_event.account");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("Account");
+		field.setRequired(true);
+		field.setPlaceholder("请填写账户");
+		return field;
+	}
+
+	protected FormField changeRequestIdFromNameChangeEvent(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("变更请求");
+		field.setLocaleKey("name_change_event.change_request");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("ChangeRequest");
+		field.setRequired(true);
+		field.setPlaceholder("请填写变更请求");
+		return field;
+	}
+
+	protected FormField currentStatusFromNameChangeEvent(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("当前状态");
+		field.setLocaleKey("name_change_event.current_status");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写当前状态");
+		return field;
+	}
+
 	protected FormField idFromAccount(String parameterName, String initValue){
 		FormField field = new FormField();
 		field.setLabel("ID");
@@ -365,19 +469,6 @@ public class BaseForm extends GenericForm{
 		return field;
 	}
 
-	protected FormField accountIdFromAccountChange(String parameterName, String initValue){
-		FormField field = new FormField();
-		field.setLabel("账户");
-		field.setLocaleKey("account_change.account");
-		field.setParameterName(parameterName);
-		field.setDefaultValue(initValue);
-		field.setFieldGroup("基本信息");
-		field.setType("Account");
-		field.setRequired(true);
-		field.setPlaceholder("请填写账户");
-		return field;
-	}
-
 	protected FormField previousBalanceFromAccountChange(String parameterName, String initValue){
 		FormField field = new FormField();
 		field.setLabel("以前的平衡");
@@ -430,6 +521,19 @@ public class BaseForm extends GenericForm{
 		return field;
 	}
 
+	protected FormField accountIdFromAccountChange(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("账户");
+		field.setLocaleKey("account_change.account");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("Account");
+		field.setRequired(true);
+		field.setPlaceholder("请填写账户");
+		return field;
+	}
+
 	protected FormField changeRequestIdFromAccountChange(String parameterName, String initValue){
 		FormField field = new FormField();
 		field.setLabel("变更请求");
@@ -440,6 +544,19 @@ public class BaseForm extends GenericForm{
 		field.setType("ChangeRequest");
 		field.setRequired(true);
 		field.setPlaceholder("请填写变更请求");
+		return field;
+	}
+
+	protected FormField currentStatusFromAccountChange(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("当前状态");
+		field.setLocaleKey("account_change.current_status");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写当前状态");
 		return field;
 	}
 

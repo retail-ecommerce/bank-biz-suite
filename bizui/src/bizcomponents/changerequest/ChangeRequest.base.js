@@ -33,6 +33,7 @@ const renderReferenceCell=defaultRenderReferenceCell
 const menuData = {menuName:"变更请求", menuFor: "changeRequest",
   		subItems: [
   {name: 'transactionList', displayName:'事务', icon:'500px',readPermission: false,createPermission: false,deletePermission: false,updatePermission: false,executionPermission: false, viewGroup: '__no_group'},
+  {name: 'nameChangeEventList', displayName:'名字更改事件', icon:'exchange-alt',readPermission: false,createPermission: false,deletePermission: false,updatePermission: false,executionPermission: false, viewGroup: '__no_group'},
   {name: 'accountChangeList', displayName:'账户变更', icon:'exchange-alt',readPermission: false,createPermission: false,deletePermission: false,updatePermission: false,executionPermission: false, viewGroup: '__no_group'},
   
   		],

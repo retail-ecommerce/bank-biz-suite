@@ -82,6 +82,28 @@ const removeTransactionListAsToAccount = (targetObjectId, parameters) => {
 
 
 
+const addNameChangeEvent = (targetObjectId, parameters) => {
+  const url = `${PREFIX}accountManager/addNameChangeEvent/accountId/name/changeRequestId/tokensExpr/`
+  const accountId = targetObjectId
+  const requestParameters = { ...parameters, accountId, tokensExpr: 'none' }
+  return postForm({ url,requestParameters})
+}
+
+const updateNameChangeEvent = (targetObjectId, parameters) => {
+  const url = `${PREFIX}accountManager/updateNameChangeEventProperties/accountId/id/name/tokensExpr/`
+  const accountId = targetObjectId
+  const requestParameters = { ...parameters, accountId, tokensExpr: 'none' }
+  return postForm({ url,requestParameters})
+}
+
+const removeNameChangeEventList = (targetObjectId, parameters) => {
+  const url = `${PREFIX}accountManager/removeNameChangeEventList/accountId/nameChangeEventIds/tokensExpr/`
+  const requestParameters = { ...parameters, accountId: targetObjectId, tokensExpr: 'none' }
+  return postForm({ url,requestParameters})
+}
+
+
+
 const addAccountChange = (targetObjectId, parameters) => {
   const url = `${PREFIX}accountManager/addAccountChange/accountId/name/previousBalance/type/amount/currentBalance/changeRequestId/tokensExpr/`
   const accountId = targetObjectId
@@ -107,12 +129,15 @@ const AccountService = { view,
   load,
   addTransactionAsFromAccount,
   addTransactionAsToAccount,
+  addNameChangeEvent,
   addAccountChange,
   updateTransactionAsFromAccount,
   updateTransactionAsToAccount,
+  updateNameChangeEvent,
   updateAccountChange,
   removeTransactionListAsFromAccount,
   removeTransactionListAsToAccount,
+  removeNameChangeEventList,
   removeAccountChangeList,
   requestCandidatePlatform,
   transferToAnotherPlatform }

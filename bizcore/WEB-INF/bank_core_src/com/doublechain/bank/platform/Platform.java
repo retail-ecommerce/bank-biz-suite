@@ -21,7 +21,9 @@ public class Platform extends BaseEntity implements  java.io.Serializable{
 	
 	public static final String ID_PROPERTY                    = "id"                ;
 	public static final String NAME_PROPERTY                  = "name"              ;
+	public static final String FOUNDER_PROPERTY               = "founder"           ;
 	public static final String FOUNDED_PROPERTY               = "founded"           ;
+	public static final String DESCRIPTION_PROPERTY           = "description"       ;
 	public static final String VERSION_PROPERTY               = "version"           ;
 
 	public static final String CHANGE_REQUEST_LIST                      = "changeRequestList" ;
@@ -48,7 +50,9 @@ public class Platform extends BaseEntity implements  java.io.Serializable{
 
 	protected		String              	mId                 ;
 	protected		String              	mName               ;
+	protected		String              	mFounder            ;
 	protected		DateTime            	mFounded            ;
+	protected		String              	mDescription        ;
 	protected		int                 	mVersion            ;
 	
 	
@@ -65,10 +69,12 @@ public class Platform extends BaseEntity implements  java.io.Serializable{
 		this.changed = true;
 	}
 	
-	public 	Platform(String name, DateTime founded)
+	public 	Platform(String name, String founder, DateTime founded, String description)
 	{
 		setName(name);
+		setFounder(founder);
 		setFounded(founded);
+		setDescription(description);
 
 		this.mChangeRequestList = new SmartList<ChangeRequest>();
 		this.mAccountList = new SmartList<Account>();	
@@ -81,8 +87,14 @@ public class Platform extends BaseEntity implements  java.io.Serializable{
 		if(NAME_PROPERTY.equals(property)){
 			changeNameProperty(newValueExpr);
 		}
+		if(FOUNDER_PROPERTY.equals(property)){
+			changeFounderProperty(newValueExpr);
+		}
 		if(FOUNDED_PROPERTY.equals(property)){
 			changeFoundedProperty(newValueExpr);
+		}
+		if(DESCRIPTION_PROPERTY.equals(property)){
+			changeDescriptionProperty(newValueExpr);
 		}
 
       
@@ -104,6 +116,21 @@ public class Platform extends BaseEntity implements  java.io.Serializable{
 			
 			
 			
+	protected void changeFounderProperty(String newValueExpr){
+		String oldValue = getFounder();
+		String newValue = parseString(newValueExpr);
+		if(equalsString(oldValue , newValue)){
+			return;//they can be both null, or exact the same object, this is much faster than equals function
+		}
+		//they are surely different each other
+		updateFounder(newValue);
+		this.onChangeProperty(FOUNDER_PROPERTY, oldValue, newValue);
+		return;
+  
+	}
+			
+			
+			
 	protected void changeFoundedProperty(String newValueExpr){
 		DateTime oldValue = getFounded();
 		DateTime newValue = parseTimestamp(newValueExpr);
@@ -119,6 +146,21 @@ public class Platform extends BaseEntity implements  java.io.Serializable{
 			
 			
 			
+	protected void changeDescriptionProperty(String newValueExpr){
+		String oldValue = getDescription();
+		String newValue = parseString(newValueExpr);
+		if(equalsString(oldValue , newValue)){
+			return;//they can be both null, or exact the same object, this is much faster than equals function
+		}
+		//they are surely different each other
+		updateDescription(newValue);
+		this.onChangeProperty(DESCRIPTION_PROPERTY, oldValue, newValue);
+		return;
+  
+	}
+			
+			
+			
 
 
 	
@@ -127,8 +169,14 @@ public class Platform extends BaseEntity implements  java.io.Serializable{
 		if(NAME_PROPERTY.equals(property)){
 			return getName();
 		}
+		if(FOUNDER_PROPERTY.equals(property)){
+			return getFounder();
+		}
 		if(FOUNDED_PROPERTY.equals(property)){
 			return getFounded();
+		}
+		if(DESCRIPTION_PROPERTY.equals(property)){
+			return getDescription();
 		}
 		if(CHANGE_REQUEST_LIST.equals(property)){
 			List<BaseEntity> list = getChangeRequestList().stream().map(item->item).collect(Collectors.toList());
@@ -181,6 +229,22 @@ public class Platform extends BaseEntity implements  java.io.Serializable{
 	}
 	
 	
+	public void setFounder(String founder){
+		this.mFounder = trimString(founder);;
+	}
+	public String getFounder(){
+		return this.mFounder;
+	}
+	public Platform updateFounder(String founder){
+		this.mFounder = trimString(founder);;
+		this.changed = true;
+		return this;
+	}
+	public void mergeFounder(String founder){
+		if(founder != null) { setFounder(founder);}
+	}
+	
+	
 	public void setFounded(DateTime founded){
 		this.mFounded = founded;;
 	}
@@ -194,6 +258,22 @@ public class Platform extends BaseEntity implements  java.io.Serializable{
 	}
 	public void mergeFounded(DateTime founded){
 		setFounded(founded);
+	}
+	
+	
+	public void setDescription(String description){
+		this.mDescription = trimString(description);;
+	}
+	public String getDescription(){
+		return this.mDescription;
+	}
+	public Platform updateDescription(String description){
+		this.mDescription = trimString(description);;
+		this.changed = true;
+		return this;
+	}
+	public void mergeDescription(String description){
+		if(description != null) { setDescription(description);}
 	}
 	
 	
@@ -459,7 +539,9 @@ public class Platform extends BaseEntity implements  java.io.Serializable{
 
 		appendKeyValuePair(result, ID_PROPERTY, getId());
 		appendKeyValuePair(result, NAME_PROPERTY, getName());
+		appendKeyValuePair(result, FOUNDER_PROPERTY, getFounder());
 		appendKeyValuePair(result, FOUNDED_PROPERTY, getFounded());
+		appendKeyValuePair(result, DESCRIPTION_PROPERTY, getDescription());
 		appendKeyValuePair(result, VERSION_PROPERTY, getVersion());
 		appendKeyValuePair(result, CHANGE_REQUEST_LIST, getChangeRequestList());
 		if(!getChangeRequestList().isEmpty()){
@@ -487,7 +569,9 @@ public class Platform extends BaseEntity implements  java.io.Serializable{
 		
 			dest.setId(getId());
 			dest.setName(getName());
+			dest.setFounder(getFounder());
 			dest.setFounded(getFounded());
+			dest.setDescription(getDescription());
 			dest.setVersion(getVersion());
 			dest.setChangeRequestList(getChangeRequestList());
 			dest.setAccountList(getAccountList());
@@ -506,7 +590,9 @@ public class Platform extends BaseEntity implements  java.io.Serializable{
 		
 			dest.mergeId(getId());
 			dest.mergeName(getName());
+			dest.mergeFounder(getFounder());
 			dest.mergeFounded(getFounded());
+			dest.mergeDescription(getDescription());
 			dest.mergeVersion(getVersion());
 			dest.mergeChangeRequestList(getChangeRequestList());
 			dest.mergeAccountList(getAccountList());
@@ -526,7 +612,9 @@ public class Platform extends BaseEntity implements  java.io.Serializable{
 		
 			dest.mergeId(getId());
 			dest.mergeName(getName());
+			dest.mergeFounder(getFounder());
 			dest.mergeFounded(getFounded());
+			dest.mergeDescription(getDescription());
 			dest.mergeVersion(getVersion());
 
 		}
@@ -539,7 +627,9 @@ public class Platform extends BaseEntity implements  java.io.Serializable{
 		stringBuilder.append("Platform{");
 		stringBuilder.append("\tid='"+getId()+"';");
 		stringBuilder.append("\tname='"+getName()+"';");
+		stringBuilder.append("\tfounder='"+getFounder()+"';");
 		stringBuilder.append("\tfounded='"+getFounded()+"';");
+		stringBuilder.append("\tdescription='"+getDescription()+"';");
 		stringBuilder.append("\tversion='"+getVersion()+"';");
 		stringBuilder.append("}");
 

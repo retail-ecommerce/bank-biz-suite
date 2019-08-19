@@ -27,6 +27,7 @@ import com.doublechain.bank.changerequest.CandidateChangeRequest;
 import com.doublechain.bank.account.CandidateAccount;
 
 
+import com.doublechain.bank.platform.Platform;
 
 
 
@@ -151,7 +152,7 @@ public class AccountChangeManagerImpl extends CustomBankCheckerManager implement
 		addAction(userContext, accountChange, tokens,"@copy","cloneAccountChange","cloneAccountChange/"+accountChange.getId()+"/","main","primary");
 		
 		addAction(userContext, accountChange, tokens,"account_change.transfer_to_account","transferToAnotherAccount","transferToAnotherAccount/"+accountChange.getId()+"/","main","primary");
-		addAction(userContext, accountChange, tokens,"account_change.transfer_to_change_request","transferToAnotherChangeRequest","transferToAnotherChangeRequest/"+accountChange.getId()+"/","main","primary");
+		addAction(userContext, accountChange, tokens,"account_change.requestChange","requestChange","requestChangeActionForm/"+accountChange.getId()+"/","main","success");
 	
 		
 		
@@ -164,7 +165,7 @@ public class AccountChangeManagerImpl extends CustomBankCheckerManager implement
  	
 
 
-	public AccountChange createAccountChange(BankUserContext userContext,String name, String accountId, BigDecimal previousBalance, String type, BigDecimal amount, BigDecimal currentBalance, String changeRequestId) throws Exception
+	public AccountChange createAccountChange(BankUserContext userContext,String name, BigDecimal previousBalance, String type, BigDecimal amount, BigDecimal currentBalance, String accountId) throws Exception
 	{
 		
 		
@@ -183,20 +184,16 @@ public class AccountChangeManagerImpl extends CustomBankCheckerManager implement
 		AccountChange accountChange=createNewAccountChange();	
 
 		accountChange.setName(name);
-			
-		Account account = loadAccount(userContext, accountId,emptyOptions());
-		accountChange.setAccount(account);
-		
-		
 		accountChange.setPreviousBalance(previousBalance);
 		accountChange.setType(type);
 		accountChange.setAmount(amount);
 		accountChange.setCurrentBalance(currentBalance);
 			
-		ChangeRequest changeRequest = loadChangeRequest(userContext, changeRequestId,emptyOptions());
-		accountChange.setChangeRequest(changeRequest);
+		Account account = loadAccount(userContext, accountId,emptyOptions());
+		accountChange.setAccount(account);
 		
 		
+		accountChange.setCurrentStatus("INIT");
 
 		accountChange = saveAccountChange(userContext, accountChange, emptyOptions());
 		
@@ -223,9 +220,7 @@ public class AccountChangeManagerImpl extends CustomBankCheckerManager implement
 
 		if(AccountChange.NAME_PROPERTY.equals(property)){
 			userContext.getChecker().checkNameOfAccountChange(parseString(newValueExpr));
-		}		
-
-		
+		}
 		if(AccountChange.PREVIOUS_BALANCE_PROPERTY.equals(property)){
 			userContext.getChecker().checkPreviousBalanceOfAccountChange(parseBigDecimal(newValueExpr));
 		}
@@ -343,6 +338,47 @@ public class AccountChangeManagerImpl extends CustomBankCheckerManager implement
 	}
 	protected Map<String,Object> mergedAllTokens(String []tokens){
 		return AccountChangeTokens.mergeAll(tokens).done();
+	}
+	
+	private static final String [] STATUS_SEQUENCE={"CHANGE_REQUESTED"};
+ 	protected String[] getNextCandidateStatus(BankUserContext userContext, String currentStatus) throws Exception{
+ 	
+ 		if("INIT".equals(currentStatus)){
+ 			//if current status is null, just return the first status as the next status
+ 			//code makes sure not throwing ArrayOutOfIndexException here.
+ 			return STATUS_SEQUENCE;
+ 		}
+ 		/*
+ 		List<String> statusList = Arrays.asList(STATUS_SEQUENCE);
+ 		int index = statusList.indexOf(currentStatus);
+ 		if(index < 0){
+ 			throwExceptionWithMessage("The status '"+currentStatus+"' is not found from status list: "+ statusList );
+ 		}
+ 		if(index + 1 == statusList.size()){
+ 			//this is the last status code; no next status any more
+ 			return null;
+ 		}
+ 		
+ 		//this is not the last one, just return it.
+ 		*/
+ 		return STATUS_SEQUENCE;
+ 	
+ 	}/**/
+ 	protected void ensureStatus(BankUserContext userContext, AccountChange accountChange, String expectedNextStatus) throws Exception{
+		String currentStatus = accountChange.getCurrentStatus();
+		//'null' is fine for function getNextStatus
+		String candidateStatus[] = getNextCandidateStatus(userContext, currentStatus);
+		
+		if(candidateStatus == null){
+			//no more next status
+			String message = "No next status for '"+currentStatus+"', but you want to put the status to 'HIDDEN'";
+			throwExceptionWithMessage(message);
+		}
+		int index = Arrays.asList(candidateStatus).indexOf(expectedNextStatus);
+		if(index<0){
+			String message = "The current status '"+currentStatus+"' next candidate status should be one of '"+candidateStatus+"', but you want to transit the status to '"+expectedNextStatus+"'";
+			throwExceptionWithMessage(message);
+		}
 	}
 	
 	protected void checkParamsForTransferingAnotherAccount(BankUserContext userContext, String accountChangeId, String anotherAccountId) throws Exception
@@ -470,7 +506,95 @@ public class AccountChangeManagerImpl extends CustomBankCheckerManager implement
 		return result;
 	}
  	
- //--------------------------------------------------------------
+ 	
+	public static final String CHANGE_REQUESTED_STATUS = "CHANGE_REQUESTED";
+ 	protected void checkParamsForChangeRequest(BankUserContext userContext, String accountChangeId, String name, String platformId
+) throws Exception
+ 	{
+ 				userContext.getChecker().checkIdOfAccountChange(accountChangeId);
+		userContext.getChecker().checkNameOfChangeRequest(name);
+		userContext.getChecker().checkIdOfPlatform(platformId);
+
+	
+		userContext.getChecker().throwExceptionIfHasErrors(AccountChangeManagerException.class);
+
+ 	}
+ 	public AccountChange requestChange(BankUserContext userContext, String accountChangeId, String name, String platformId
+) throws Exception
+ 	{
+		checkParamsForChangeRequest(userContext, accountChangeId, name, platformId);
+		AccountChange accountChange = loadAccountChange(userContext, accountChangeId, allTokens());	
+		synchronized(accountChange){
+			//will be good when the accountChange loaded from this JVM process cache.
+			//also good when there is a ram based DAO implementation
+			
+			checkIfEligibleForChangeRequest(userContext,accountChange);
+ 		
+
+			accountChange.updateCurrentStatus(CHANGE_REQUESTED_STATUS);
+			//set the new status, it will be good if add constant to the bean definition
+			
+			//extract all referenced objects, load them respectively
+			Platform platform = loadPlatform(userContext, platformId, emptyOptions());
+
+
+			ChangeRequest changeRequest = createChangeRequest(userContext, name, platform);		
+			accountChange.updateChangeRequest(changeRequest);		
+			
+			
+			accountChange = saveAccountChange(userContext, accountChange, tokens().withChangeRequest().done());
+			return present(userContext,accountChange, allTokens());
+			
+		}
+
+ 	}
+ 	
+ 	
+ 	
+ 	
+ 	public AccountChangeForm requestChangeActionForm(BankUserContext userContext, String accountChangeId) throws Exception
+ 	{
+		return new AccountChangeForm()
+			.withTitle("requestChange")
+			.accountChangeIdField(accountChangeId)
+			.nameFieldOfChangeRequest()
+			.platformIdFieldOfChangeRequest()
+			.requestChangeAction();
+ 	}
+	
+ 	
+ 	protected ChangeRequest createChangeRequest(BankUserContext userContext, String name, Platform platform){
+ 		ChangeRequest changeRequest = new ChangeRequest();
+ 		//name, platform
+ 		
+		changeRequest.setName(name);
+		changeRequest.setCreateTime(userContext.now());
+		changeRequest.setPlatform(platform);
+
+ 		
+ 		
+ 		
+ 		return userContext.getDAOGroup().getChangeRequestDAO().save(changeRequest,emptyOptions());
+ 	}
+ 	protected void checkIfEligibleForChangeRequest(BankUserContext userContext, AccountChange accountChange) throws Exception{
+ 
+ 		ensureStatus(userContext,accountChange, CHANGE_REQUESTED_STATUS);
+ 		
+ 		ChangeRequest changeRequest = accountChange.getChangeRequest();
+ 		//check the current status equals to the status
+ 		//String expectedCurrentStatus = changeRequest 		
+ 		//if the previous is the expected status?
+ 		
+ 		
+ 		//if already transited to this status?
+ 		
+ 		if( changeRequest != null){
+				throwExceptionWithMessage("The AccountChange("+accountChange.getId()+") has already been "+ CHANGE_REQUESTED_STATUS+".");
+		}
+ 		
+ 		
+ 	}
+//--------------------------------------------------------------
 	
 	 	
  	protected ChangeRequest loadChangeRequest(BankUserContext userContext, String newChangeRequestId, Map<String,Object> options) throws Exception
@@ -495,6 +619,16 @@ public class AccountChangeManagerImpl extends CustomBankCheckerManager implement
  		return userContext.getDAOGroup().getAccountDAO().loadByName(newName, options);
  	}
  	
+ 	
+ 	
+ 	
+	
+	 	
+ 	protected Platform loadPlatform(BankUserContext userContext, String newPlatformId, Map<String,Object> options) throws Exception
+ 	{
+		
+ 		return userContext.getDAOGroup().getPlatformDAO().load(newPlatformId, options);
+ 	}
  	
  	
  	

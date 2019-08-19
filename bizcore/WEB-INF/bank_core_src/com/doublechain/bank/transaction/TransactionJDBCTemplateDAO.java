@@ -610,7 +610,7 @@ public class TransactionJDBCTemplateDAO extends BankBaseDAOImpl implements Trans
  		return prepareTransactionCreateParameters(transaction);
  	}
  	protected Object[] prepareTransactionUpdateParameters(Transaction transaction){
- 		Object[] parameters = new Object[9];
+ 		Object[] parameters = new Object[10];
  
  		parameters[0] = transaction.getName(); 	
  		if(transaction.getFromAccount() != null){
@@ -626,15 +626,16 @@ public class TransactionJDBCTemplateDAO extends BankBaseDAOImpl implements Trans
  		if(transaction.getChangeRequest() != null){
  			parameters[5] = transaction.getChangeRequest().getId();
  		}
- 		
- 		parameters[6] = transaction.nextVersion();
- 		parameters[7] = transaction.getId();
- 		parameters[8] = transaction.getVersion();
+ 
+ 		parameters[6] = transaction.getCurrentStatus();		
+ 		parameters[7] = transaction.nextVersion();
+ 		parameters[8] = transaction.getId();
+ 		parameters[9] = transaction.getVersion();
  				
  		return parameters;
  	}
  	protected Object[] prepareTransactionCreateParameters(Transaction transaction){
-		Object[] parameters = new Object[7];
+		Object[] parameters = new Object[8];
 		String newTransactionId=getNextId();
 		transaction.setId(newTransactionId);
 		parameters[0] =  transaction.getId();
@@ -656,7 +657,8 @@ public class TransactionJDBCTemplateDAO extends BankBaseDAOImpl implements Trans
  			parameters[6] = transaction.getChangeRequest().getId();
  		
  		}
- 				
+ 		
+ 		parameters[7] = transaction.getCurrentStatus();		
  				
  		return parameters;
  	}

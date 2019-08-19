@@ -19,10 +19,10 @@ const testValues = {};
 /*
 const testValues = {
   name: '存款交易',
-  previousBalance: '1025.00',
+  previousBalance: '1201.88',
   type: '存款',
-  amount: '101.95',
-  currentBalance: '943.27',
+  amount: '121.72',
+  currentBalance: '1265.10',
   accountId: 'A000001',
   changeRequestId: 'CR000001',
 }
@@ -153,7 +153,7 @@ class AccountChangeAssociateForm extends Component {
                   {getFieldDecorator('previousBalance', {
                     rules: [{ required: true, message: appLocaleName(userContext,"PleaseInput") }],
                   })(
-                    <Input size="large" prefix={`${appLocaleName(userContext,"Currency")}`} placeholder="以前的平衡" />
+                    <Input size="large" prefix={`${appLocaleName(userContext,"Currency")}`} placeholder="初期余额" />
                   )}
                 </Form.Item>
               </Col>

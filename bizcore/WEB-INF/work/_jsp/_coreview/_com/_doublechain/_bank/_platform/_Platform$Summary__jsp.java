@@ -86,6 +86,10 @@ public class _Platform$Summary__jsp extends com.caucho.jsp.JavaPage
         out.write(_jsp_string12, 0, _jsp_string12.length);
         _caucho_expr_14.print(out, _jsp_env, false);
         out.write(_jsp_string11, 0, _jsp_string11.length);
+        _caucho_expr_15.print(out, _jsp_env, false);
+        out.write(_jsp_string12, 0, _jsp_string12.length);
+        _caucho_expr_16.print(out, _jsp_env, false);
+        out.write(_jsp_string11, 0, _jsp_string11.length);
         if (_jsp_FormatDateTag_1 == null) {
           _jsp_FormatDateTag_1 = new com.caucho.jstl.rt.FormatDateTag();
           _jsp_FormatDateTag_1.setPageContext(pageContext);
@@ -93,8 +97,12 @@ public class _Platform$Summary__jsp extends com.caucho.jsp.JavaPage
           _jsp_FormatDateTag_1.setPattern("yyyy-MM-dd");
         }
 
-        _jsp_FormatDateTag_1.setValue(_caucho_expr_15.evalObject(_jsp_env));
+        _jsp_FormatDateTag_1.setValue(_caucho_expr_17.evalObject(_jsp_env));
         _jsp_FormatDateTag_1.doEndTag();
+        out.write(_jsp_string12, 0, _jsp_string12.length);
+        _caucho_expr_18.print(out, _jsp_env, false);
+        out.write(_jsp_string11, 0, _jsp_string11.length);
+        _caucho_expr_19.print(out, _jsp_env, false);
         out.write(_jsp_string13, 0, _jsp_string13.length);
       }
       out.write(_jsp_string14, 0, _jsp_string14.length);
@@ -170,8 +178,12 @@ public class _Platform$Summary__jsp extends com.caucho.jsp.JavaPage
     _caucho_expr_11 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${result.id}");
     _caucho_expr_12 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['platform.name']}");
     _caucho_expr_13 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${result.name}");
-    _caucho_expr_14 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['platform.founded']}");
-    _caucho_expr_15 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${result.founded}");
+    _caucho_expr_14 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['platform.founder']}");
+    _caucho_expr_15 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${result.founder}");
+    _caucho_expr_16 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['platform.founded']}");
+    _caucho_expr_17 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${result.founded}");
+    _caucho_expr_18 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['platform.description']}");
+    _caucho_expr_19 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${result.description}");
   }
 
   public void destroy()
@@ -192,7 +204,7 @@ public class _Platform$Summary__jsp extends com.caucho.jsp.JavaPage
     String resourcePath = loader.getResourcePathSpecificFirst();
     mergePath.addClassPath(resourcePath);
     com.caucho.vfs.Depend depend;
-    depend = new com.caucho.vfs.Depend(appDir.lookup("coreview/com/doublechain/bank/platform/Platform$Summary.jsp"), 4004323853293106434L, false);
+    depend = new com.caucho.vfs.Depend(appDir.lookup("coreview/com/doublechain/bank/platform/Platform$Summary.jsp"), 8516470827902475937L, false);
     com.caucho.jsp.JavaPage.addDepend(_caucho_depends, depend);
     depend = new com.caucho.vfs.Depend(mergePath.lookup("jar:file:/opt/resin-3.1.12/lib/resin.jar!/com/caucho/jstl/fmt.tld"), 8594578285720415164L, false);
     com.caucho.jsp.JavaPage.addDepend(_caucho_depends, depend);
@@ -223,6 +235,10 @@ public class _Platform$Summary__jsp extends com.caucho.jsp.JavaPage
   private static com.caucho.el.Expr _caucho_expr_13;
   private static com.caucho.el.Expr _caucho_expr_14;
   private static com.caucho.el.Expr _caucho_expr_15;
+  private static com.caucho.el.Expr _caucho_expr_16;
+  private static com.caucho.el.Expr _caucho_expr_17;
+  private static com.caucho.el.Expr _caucho_expr_18;
+  private static com.caucho.el.Expr _caucho_expr_19;
 
   private final static char []_jsp_string6;
   private final static char []_jsp_string8;

@@ -117,7 +117,7 @@ class AccountDashboard extends Component {
 
   render() {
     // eslint-disable-next-line max-len
-    const { id,displayName, transactionListAsFromAccountMetaInfo, transactionListAsToAccountMetaInfo, accountChangeListMetaInfo, transactionAsFromAccountCount, transactionAsToAccountCount, accountChangeCount } = this.props.account
+    const { id,displayName, transactionListAsFromAccountMetaInfo, transactionListAsToAccountMetaInfo, nameChangeEventListMetaInfo, accountChangeListMetaInfo, transactionAsFromAccountCount, transactionAsToAccountCount, nameChangeEventCount, accountChangeCount } = this.props.account
     if(!this.props.account.class){
       return null
     }
@@ -128,6 +128,7 @@ class AccountDashboard extends Component {
   		subItems: [
 {name: 'transactionListAsFromAccount', displayName:'事务(交易清单从帐户)',type:'transaction',count:transactionAsFromAccountCount,addFunction: true, role: 'transactionAsFromAccount', metaInfo: transactionListAsFromAccountMetaInfo, renderItem: GlobalComponents.TransactionBase.renderItemOfList},
 {name: 'transactionListAsToAccount', displayName:'事务(交易清单作为帐户)',type:'transaction',count:transactionAsToAccountCount,addFunction: true, role: 'transactionAsToAccount', metaInfo: transactionListAsToAccountMetaInfo, renderItem: GlobalComponents.TransactionBase.renderItemOfList},
+{name: 'nameChangeEventList', displayName:'名字更改事件',type:'nameChangeEvent',count:nameChangeEventCount,addFunction: true, role: 'nameChangeEvent', metaInfo: nameChangeEventListMetaInfo, renderItem: GlobalComponents.NameChangeEventBase.renderItemOfList},
 {name: 'accountChangeList', displayName:'账户变更',type:'accountChange',count:accountChangeCount,addFunction: true, role: 'accountChange', metaInfo: accountChangeListMetaInfo, renderItem: GlobalComponents.AccountChangeBase.renderItemOfList},
     
       	],

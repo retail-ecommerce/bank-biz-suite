@@ -13,6 +13,9 @@ import com.doublechain.bank.changerequest.ChangeRequestTokens;
 import com.doublechain.bank.transaction.Transaction;
 import com.doublechain.bank.transaction.TransactionDAO;
 import com.doublechain.bank.transaction.TransactionTokens;
+import com.doublechain.bank.namechangeevent.NameChangeEvent;
+import com.doublechain.bank.namechangeevent.NameChangeEventDAO;
+import com.doublechain.bank.namechangeevent.NameChangeEventTokens;
 import com.doublechain.bank.account.Account;
 import com.doublechain.bank.account.AccountDAO;
 import com.doublechain.bank.account.AccountTokens;
@@ -67,6 +70,8 @@ public class DAOGroup {
 
 	protected TransactionDAO transactionDAO;
 
+	protected NameChangeEventDAO nameChangeEventDAO;
+
 	protected AccountDAO accountDAO;
 
 	protected AccountChangeDAO accountChangeDAO;
@@ -120,6 +125,14 @@ public class DAOGroup {
 	}
 	public void setTransactionDAO(TransactionDAO dao){
 		this.transactionDAO = dao;
+	}
+
+
+	public NameChangeEventDAO getNameChangeEventDAO(){
+		return this.nameChangeEventDAO;
+	}
+	public void setNameChangeEventDAO(NameChangeEventDAO dao){
+		this.nameChangeEventDAO = dao;
 	}
 
 
@@ -307,6 +320,25 @@ public class DAOGroup {
 			@Override
 			public BaseEntity present(DAOGroup daoGoup, BaseEntity data, Map<String, Object> tokens) throws Exception {
 				return daoGoup.getTransactionDAO().present((Transaction)data, tokens);
+			}
+		});
+
+		internalLoaderMap.put("NameChangeEvent", new BasicLoader() {
+			@Override
+			public BaseEntity loadBasicData(DAOGroup daoGoup, String id) throws Exception {
+				return daoGoup.getNameChangeEventDAO().load(id, NameChangeEventTokens.withoutLists());
+			}
+			@Override
+			public void enhanceList(DAOGroup daoGoup, List list) throws Exception {
+				daoGoup.getNameChangeEventDAO().enhanceList((List<NameChangeEvent>)list);
+			}
+			@Override
+			public BaseEntity loadBasicDataWithToken(DAOGroup daoGoup, String id, Map<String, Object> tokens) throws Exception {
+				return daoGoup.getNameChangeEventDAO().load(id, tokens);
+			}
+			@Override
+			public BaseEntity present(DAOGroup daoGoup, BaseEntity data, Map<String, Object> tokens) throws Exception {
+				return daoGoup.getNameChangeEventDAO().present((NameChangeEvent)data, tokens);
 			}
 		});
 

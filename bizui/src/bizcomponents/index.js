@@ -44,6 +44,20 @@ import TransactionPermission from './transaction/Transaction.permission';
 import TransactionProfile from './transaction/Transaction.profile';
 import TransactionService from './transaction/Transaction.service';
 import TransactionUpdateForm from './transaction/Transaction.updateform';
+import NameChangeEventBase from './namechangeevent/NameChangeEvent.base';
+import NameChangeEventBizApp from './namechangeevent/NameChangeEvent.app';
+import NameChangeEventModel from './namechangeevent/NameChangeEvent.model';
+import NameChangeEventDashboard from './namechangeevent/NameChangeEvent.dashboard';
+import NameChangeEventModalTable from './namechangeevent/NameChangeEvent.modaltable';
+import NameChangeEventSearch from './namechangeevent/NameChangeEvent.search';
+import NameChangeEventSearchForm from './namechangeevent/NameChangeEvent.searchform';
+import NameChangeEventCreateForm from './namechangeevent/NameChangeEvent.createform';
+import NameChangeEventAssociateForm from './namechangeevent/NameChangeEvent.associateform';
+import NameChangeEventTable from './namechangeevent/NameChangeEvent.table';
+import NameChangeEventPermission from './namechangeevent/NameChangeEvent.permission';
+import NameChangeEventProfile from './namechangeevent/NameChangeEvent.profile';
+import NameChangeEventService from './namechangeevent/NameChangeEvent.service';
+import NameChangeEventUpdateForm from './namechangeevent/NameChangeEvent.updateform';
 import AccountBase from './account/Account.base';
 import AccountBizApp from './account/Account.app';
 import AccountModel from './account/Account.model';
@@ -190,6 +204,7 @@ const BizModels = [
 	PlatformModel,
 	ChangeRequestModel,
 	TransactionModel,
+	NameChangeEventModel,
 	AccountModel,
 	AccountChangeModel,
 	UserDomainModel,
@@ -220,6 +235,7 @@ const menuLibrary = []
 menuLibrary['platform'] = PlatformBase.menuData
 menuLibrary['changeRequest'] = ChangeRequestBase.menuData
 menuLibrary['transaction'] = TransactionBase.menuData
+menuLibrary['nameChangeEvent'] = NameChangeEventBase.menuData
 menuLibrary['account'] = AccountBase.menuData
 menuLibrary['accountChange'] = AccountChangeBase.menuData
 menuLibrary['userDomain'] = UserDomainBase.menuData
@@ -253,6 +269,7 @@ const ViewMapping = {
   'com.doublechain.bank.platform.Platform': {name:'platform'},
   'com.doublechain.bank.changerequest.ChangeRequest': {name:'changeRequest'},
   'com.doublechain.bank.transaction.Transaction': {name:'transaction'},
+  'com.doublechain.bank.namechangeevent.NameChangeEvent': {name:'nameChangeEvent'},
   'com.doublechain.bank.account.Account': {name:'account'},
   'com.doublechain.bank.accountchange.AccountChange': {name:'accountChange'},
   'com.doublechain.bank.userdomain.UserDomain': {name:'userDomain'},
@@ -350,6 +367,20 @@ const OOTBComponents={
     TransactionProfile,
     TransactionService,
     TransactionUpdateForm,
+    NameChangeEventBase,
+    NameChangeEventBizApp,
+    NameChangeEventModel,
+    NameChangeEventDashboard,
+    NameChangeEventModalTable,
+    NameChangeEventSearch,
+    NameChangeEventSearchForm,
+    NameChangeEventCreateForm,
+    NameChangeEventAssociateForm,
+    NameChangeEventTable,
+    NameChangeEventPermission,
+    NameChangeEventProfile,
+    NameChangeEventService,
+    NameChangeEventUpdateForm,
     AccountBase,
     AccountBizApp,
     AccountModel,

@@ -23,6 +23,7 @@
 <li><span>${userContext.localeMap['transaction.name']}</span> ${transaction.name}</li>
 <li><span>${userContext.localeMap['transaction.amount']}</span> <fmt:formatNumber type="currency"  value="${transaction.amount}" /></li>
 <li><span>${userContext.localeMap['transaction.type']}</span> ${transaction.type}</li>
+<li><span>${userContext.localeMap['transaction.current_status']}</span> ${transaction.currentStatus}</li>
 
 	
 	</ul>

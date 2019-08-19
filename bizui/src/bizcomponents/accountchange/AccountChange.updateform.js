@@ -285,7 +285,7 @@ class AccountChangeUpdateForm extends Component {
                     initialValue: selectedRow.previousBalance,
                     rules: [{ required: true, message: appLocaleName(userContext,"PleaseInput") }],
                   })(
-                    <Input size="large" prefix={`${appLocaleName(userContext,"Currency")}`} placeholder="以前的平衡" />
+                    <Input size="large" prefix={`${appLocaleName(userContext,"Currency")}`} placeholder="初期余额" />
                     
                   )}
                 </Form.Item>

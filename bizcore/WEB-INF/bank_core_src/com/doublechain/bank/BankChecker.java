@@ -27,7 +27,25 @@ public class BankChecker extends BaseChecker{
 	public BankChecker checkNameOfPlatform(String name)
 	{
 		
-	 	checkStringLengthRange(name,3, 24,NAME_OF_PLATFORM ); 		
+	 	checkStringLengthRange(name,7, 60,NAME_OF_PLATFORM ); 		
+		
+		return this;
+	}	
+
+	public static final String  FOUNDER_OF_PLATFORM ="platform.founder";
+	public BankChecker checkFounderOfPlatform(String founder)
+	{
+		
+	 	checkStringLengthRange(founder,1, 12,FOUNDER_OF_PLATFORM ); 		
+		
+		return this;
+	}	
+
+	public static final String  DESCRIPTION_OF_PLATFORM ="platform.description";
+	public BankChecker checkDescriptionOfPlatform(String description)
+	{
+		
+	 	checkStringLengthRange(description,7, 60,DESCRIPTION_OF_PLATFORM ); 		
 		
 		return this;
 	}	
@@ -131,20 +149,47 @@ public class BankChecker extends BaseChecker{
 		return this;
 	}	
 
-	public static final String  CHANGE_REQUEST_OF_TRANSACTION ="transaction.change_request";
-	public BankChecker checkChangeRequestIdOfTransaction(String changeRequestId)
-	{
-		
-	 	checkIdOfTransaction(changeRequestId ); 		
-		
-		return this;
-	}	
-
 	public static final String  VERSION_OF_TRANSACTION ="transaction.version";
 	public BankChecker checkVersionOfTransaction(int version)
 	{
 		
 	 	checkIntegerRange(version,0, Integer.MAX_VALUE,VERSION_OF_TRANSACTION ); 		
+		
+		return this;
+	}	
+
+	public static final String  ID_OF_NAME_CHANGE_EVENT ="name_change_event.id";
+	public BankChecker checkIdOfNameChangeEvent(String id)
+	{
+		
+	 	checkStringLengthRange(id,2, 64,ID_OF_NAME_CHANGE_EVENT ); 		
+		
+		return this;
+	}	
+
+	public static final String  NAME_OF_NAME_CHANGE_EVENT ="name_change_event.name";
+	public BankChecker checkNameOfNameChangeEvent(String name)
+	{
+		
+	 	checkStringLengthRange(name,3, 32,NAME_OF_NAME_CHANGE_EVENT ); 		
+		
+		return this;
+	}	
+
+	public static final String  ACCOUNT_OF_NAME_CHANGE_EVENT ="name_change_event.account";
+	public BankChecker checkAccountIdOfNameChangeEvent(String accountId)
+	{
+		
+	 	checkIdOfNameChangeEvent(accountId ); 		
+		
+		return this;
+	}	
+
+	public static final String  VERSION_OF_NAME_CHANGE_EVENT ="name_change_event.version";
+	public BankChecker checkVersionOfNameChangeEvent(int version)
+	{
+		
+	 	checkIntegerRange(version,0, Integer.MAX_VALUE,VERSION_OF_NAME_CHANGE_EVENT ); 		
 		
 		return this;
 	}	
@@ -212,15 +257,6 @@ public class BankChecker extends BaseChecker{
 		return this;
 	}	
 
-	public static final String  ACCOUNT_OF_ACCOUNT_CHANGE ="account_change.account";
-	public BankChecker checkAccountIdOfAccountChange(String accountId)
-	{
-		
-	 	checkIdOfAccountChange(accountId ); 		
-		
-		return this;
-	}	
-
 	public static final String  PREVIOUS_BALANCE_OF_ACCOUNT_CHANGE ="account_change.previous_balance";
 	public BankChecker checkPreviousBalanceOfAccountChange(BigDecimal previousBalance)
 	{
@@ -257,11 +293,11 @@ public class BankChecker extends BaseChecker{
 		return this;
 	}	
 
-	public static final String  CHANGE_REQUEST_OF_ACCOUNT_CHANGE ="account_change.change_request";
-	public BankChecker checkChangeRequestIdOfAccountChange(String changeRequestId)
+	public static final String  ACCOUNT_OF_ACCOUNT_CHANGE ="account_change.account";
+	public BankChecker checkAccountIdOfAccountChange(String accountId)
 	{
 		
-	 	checkIdOfAccountChange(changeRequestId ); 		
+	 	checkIdOfAccountChange(accountId ); 		
 		
 		return this;
 	}	

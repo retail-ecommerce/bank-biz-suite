@@ -115,7 +115,7 @@ class ChangeRequestDashboard extends Component {
 
   render() {
     // eslint-disable-next-line max-len
-    const { id,displayName, transactionListMetaInfo, accountChangeListMetaInfo, transactionCount, accountChangeCount } = this.props.changeRequest
+    const { id,displayName, transactionListMetaInfo, nameChangeEventListMetaInfo, accountChangeListMetaInfo, transactionCount, nameChangeEventCount, accountChangeCount } = this.props.changeRequest
     if(!this.props.changeRequest.class){
       return null
     }
@@ -125,6 +125,7 @@ class ChangeRequestDashboard extends Component {
     	cardsSource: this.props.changeRequest,returnURL,displayName,
   		subItems: [
 {name: 'transactionList', displayName:'事务',type:'transaction',count:transactionCount,addFunction: true, role: 'transaction', metaInfo: transactionListMetaInfo, renderItem: GlobalComponents.TransactionBase.renderItemOfList},
+{name: 'nameChangeEventList', displayName:'名字更改事件',type:'nameChangeEvent',count:nameChangeEventCount,addFunction: true, role: 'nameChangeEvent', metaInfo: nameChangeEventListMetaInfo, renderItem: GlobalComponents.NameChangeEventBase.renderItemOfList},
 {name: 'accountChangeList', displayName:'账户变更',type:'accountChange',count:accountChangeCount,addFunction: true, role: 'accountChange', metaInfo: accountChangeListMetaInfo, renderItem: GlobalComponents.AccountChangeBase.renderItemOfList},
     
       	],

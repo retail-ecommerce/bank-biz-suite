@@ -20,11 +20,13 @@ import com.doublechain.bank.MultipleAccessKey;
 import com.doublechain.bank.BankUserContext;
 
 
+import com.doublechain.bank.namechangeevent.NameChangeEvent;
 import com.doublechain.bank.platform.Platform;
 import com.doublechain.bank.transaction.Transaction;
 import com.doublechain.bank.accountchange.AccountChange;
 
 import com.doublechain.bank.transaction.TransactionDAO;
+import com.doublechain.bank.namechangeevent.NameChangeEventDAO;
 import com.doublechain.bank.platform.PlatformDAO;
 import com.doublechain.bank.accountchange.AccountChangeDAO;
 
@@ -64,6 +66,25 @@ public class AccountJDBCTemplateDAO extends BankBaseDAOImpl implements AccountDA
  		}
  		
 	 	return this.transactionDAO;
+ 	}	
+ 	
+			
+		
+	
+  	private  NameChangeEventDAO  nameChangeEventDAO;
+ 	public void setNameChangeEventDAO(NameChangeEventDAO pNameChangeEventDAO){
+ 	
+ 		if(pNameChangeEventDAO == null){
+ 			throw new IllegalStateException("Do not try to set nameChangeEventDAO to null.");
+ 		}
+	 	this.nameChangeEventDAO = pNameChangeEventDAO;
+ 	}
+ 	public NameChangeEventDAO getNameChangeEventDAO(){
+ 		if(this.nameChangeEventDAO == null){
+ 			throw new IllegalStateException("The nameChangeEventDAO is not configured yet, please config it some where.");
+ 		}
+ 		
+	 	return this.nameChangeEventDAO;
  	}	
  	
 			
@@ -146,6 +167,13 @@ public class AccountJDBCTemplateDAO extends BankBaseDAOImpl implements AccountDA
  		
  		if(isSaveTransactionListAsToAccountEnabled(options)){
  			for(Transaction item: newAccount.getTransactionListAsToAccount()){
+ 				item.setVersion(0);
+ 			}
+ 		}
+		
+ 		
+ 		if(isSaveNameChangeEventListEnabled(options)){
+ 			for(NameChangeEvent item: newAccount.getNameChangeEventList()){
  				item.setVersion(0);
  			}
  		}
@@ -296,6 +324,20 @@ public class AccountJDBCTemplateDAO extends BankBaseDAOImpl implements AccountDA
  	
 		
 	
+	protected boolean isExtractNameChangeEventListEnabled(Map<String,Object> options){		
+ 		return checkOptions(options,AccountTokens.NAME_CHANGE_EVENT_LIST);
+ 	}
+ 	protected boolean isAnalyzeNameChangeEventListEnabled(Map<String,Object> options){		 		
+ 		return AccountTokens.of(options).analyzeNameChangeEventListEnabled();
+ 	}
+	
+	protected boolean isSaveNameChangeEventListEnabled(Map<String,Object> options){
+		return checkOptions(options, AccountTokens.NAME_CHANGE_EVENT_LIST);
+		
+ 	}
+ 	
+		
+	
 	protected boolean isExtractAccountChangeListEnabled(Map<String,Object> options){		
  		return checkOptions(options,AccountTokens.ACCOUNT_CHANGE_LIST);
  	}
@@ -353,6 +395,14 @@ public class AccountJDBCTemplateDAO extends BankBaseDAOImpl implements AccountDA
  		}	
  		if(isAnalyzeTransactionListAsToAccountEnabled(loadOptions)){
 	 		analyzeTransactionListAsToAccount(account, loadOptions);
+ 		}
+ 		
+		
+		if(isExtractNameChangeEventListEnabled(loadOptions)){
+	 		extractNameChangeEventList(account, loadOptions);
+ 		}	
+ 		if(isAnalyzeNameChangeEventListEnabled(loadOptions)){
+	 		analyzeNameChangeEventList(account, loadOptions);
  		}
  		
 		
@@ -486,6 +536,56 @@ public class AccountJDBCTemplateDAO extends BankBaseDAOImpl implements AccountDA
 		SmartList<Transaction> transactionListAsToAccount = account.getTransactionListAsToAccount();
 		if(transactionListAsToAccount != null){
 			getTransactionDAO().analyzeTransactionByFromAccount(transactionListAsToAccount, account.getId(), options);
+			
+		}
+		
+		return account;
+	
+	}	
+	
+		
+	protected void enhanceNameChangeEventList(SmartList<NameChangeEvent> nameChangeEventList,Map<String,Object> options){
+		//extract multiple list from difference sources
+		//Trying to use a single SQL to extract all data from database and do the work in java side, java is easier to scale to N ndoes;
+	}
+	
+	protected Account extractNameChangeEventList(Account account, Map<String,Object> options){
+		
+		
+		if(account == null){
+			return null;
+		}
+		if(account.getId() == null){
+			return account;
+		}
+
+		
+		
+		SmartList<NameChangeEvent> nameChangeEventList = getNameChangeEventDAO().findNameChangeEventByAccount(account.getId(),options);
+		if(nameChangeEventList != null){
+			enhanceNameChangeEventList(nameChangeEventList,options);
+			account.setNameChangeEventList(nameChangeEventList);
+		}
+		
+		return account;
+	
+	}	
+	
+	protected Account analyzeNameChangeEventList(Account account, Map<String,Object> options){
+		
+		
+		if(account == null){
+			return null;
+		}
+		if(account.getId() == null){
+			return account;
+		}
+
+		
+		
+		SmartList<NameChangeEvent> nameChangeEventList = account.getNameChangeEventList();
+		if(nameChangeEventList != null){
+			getNameChangeEventDAO().analyzeNameChangeEventByAccount(nameChangeEventList, account.getId(), options);
 			
 		}
 		
@@ -795,6 +895,13 @@ public class AccountJDBCTemplateDAO extends BankBaseDAOImpl implements AccountDA
 	 		
  		}		
 		
+		if(isSaveNameChangeEventListEnabled(options)){
+	 		saveNameChangeEventList(account, options);
+	 		//removeNameChangeEventList(account, options);
+	 		//Not delete the record
+	 		
+ 		}		
+		
 		if(isSaveAccountChangeListEnabled(options)){
 	 		saveAccountChangeList(account, options);
 	 		//removeAccountChangeList(account, options);
@@ -857,50 +964,6 @@ public class AccountJDBCTemplateDAO extends BankBaseDAOImpl implements AccountDA
 	}
 
 
-	//disconnect Account with change_request in Transaction
-	public Account planToRemoveTransactionListAsFromAccountWithChangeRequest(Account account, String changeRequestId, Map<String,Object> options)throws Exception{
-				//SmartList<ThreadLike> toRemoveThreadLikeList = threadLikeList.getToRemoveList();
-		//the list will not be null here, empty, maybe
-		//getThreadLikeDAO().removeThreadLikeList(toRemoveThreadLikeList,options);
-		
-		MultipleAccessKey key = new MultipleAccessKey();
-		key.put(Transaction.FROM_ACCOUNT_PROPERTY, account.getId());
-		key.put(Transaction.CHANGE_REQUEST_PROPERTY, changeRequestId);
-		
-		SmartList<Transaction> externalTransactionList = getTransactionDAO().
-				findTransactionWithKey(key, options);
-		if(externalTransactionList == null){
-			return account;
-		}
-		if(externalTransactionList.isEmpty()){
-			return account;
-		}
-		
-		for(Transaction transactionItem: externalTransactionList){
-			transactionItem.clearChangeRequest();
-			transactionItem.clearFromAccount();
-			
-		}
-		
-		
-		SmartList<Transaction> transactionList = account.getTransactionListAsFromAccount();		
-		transactionList.addAllToRemoveList(externalTransactionList);
-		return account;
-	}
-	
-	public int countTransactionListAsFromAccountWithChangeRequest(String accountId, String changeRequestId, Map<String,Object> options)throws Exception{
-				//SmartList<ThreadLike> toRemoveThreadLikeList = threadLikeList.getToRemoveList();
-		//the list will not be null here, empty, maybe
-		//getThreadLikeDAO().removeThreadLikeList(toRemoveThreadLikeList,options);
-
-		MultipleAccessKey key = new MultipleAccessKey();
-		key.put(Transaction.FROM_ACCOUNT_PROPERTY, accountId);
-		key.put(Transaction.CHANGE_REQUEST_PROPERTY, changeRequestId);
-		
-		int count = getTransactionDAO().countTransactionWithKey(key, options);
-		return count;
-	}
-	
 	public Account planToRemoveTransactionListAsToAccount(Account account, String transactionIds[], Map<String,Object> options)throws Exception{
 	
 		MultipleAccessKey key = new MultipleAccessKey();
@@ -929,50 +992,34 @@ public class AccountJDBCTemplateDAO extends BankBaseDAOImpl implements AccountDA
 	}
 
 
-	//disconnect Account with change_request in Transaction
-	public Account planToRemoveTransactionListAsToAccountWithChangeRequest(Account account, String changeRequestId, Map<String,Object> options)throws Exception{
-				//SmartList<ThreadLike> toRemoveThreadLikeList = threadLikeList.getToRemoveList();
-		//the list will not be null here, empty, maybe
-		//getThreadLikeDAO().removeThreadLikeList(toRemoveThreadLikeList,options);
-		
-		MultipleAccessKey key = new MultipleAccessKey();
-		key.put(Transaction.FROM_ACCOUNT_PROPERTY, account.getId());
-		key.put(Transaction.CHANGE_REQUEST_PROPERTY, changeRequestId);
-		
-		SmartList<Transaction> externalTransactionList = getTransactionDAO().
-				findTransactionWithKey(key, options);
-		if(externalTransactionList == null){
-			return account;
-		}
-		if(externalTransactionList.isEmpty()){
-			return account;
-		}
-		
-		for(Transaction transactionItem: externalTransactionList){
-			transactionItem.clearChangeRequest();
-			transactionItem.clearFromAccount();
-			
-		}
-		
-		
-		SmartList<Transaction> transactionList = account.getTransactionListAsFromAccount();		
-		transactionList.addAllToRemoveList(externalTransactionList);
-		return account;
-	}
+	public Account planToRemoveNameChangeEventList(Account account, String nameChangeEventIds[], Map<String,Object> options)throws Exception{
 	
-	public int countTransactionListAsToAccountWithChangeRequest(String accountId, String changeRequestId, Map<String,Object> options)throws Exception{
-				//SmartList<ThreadLike> toRemoveThreadLikeList = threadLikeList.getToRemoveList();
-		//the list will not be null here, empty, maybe
-		//getThreadLikeDAO().removeThreadLikeList(toRemoveThreadLikeList,options);
+		MultipleAccessKey key = new MultipleAccessKey();
+		key.put(NameChangeEvent.ACCOUNT_PROPERTY, account.getId());
+		key.put(NameChangeEvent.ID_PROPERTY, nameChangeEventIds);
+		
+		SmartList<NameChangeEvent> externalNameChangeEventList = getNameChangeEventDAO().
+				findNameChangeEventWithKey(key, options);
+		if(externalNameChangeEventList == null){
+			return account;
+		}
+		if(externalNameChangeEventList.isEmpty()){
+			return account;
+		}
+		
+		for(NameChangeEvent nameChangeEventItem: externalNameChangeEventList){
 
-		MultipleAccessKey key = new MultipleAccessKey();
-		key.put(Transaction.FROM_ACCOUNT_PROPERTY, accountId);
-		key.put(Transaction.CHANGE_REQUEST_PROPERTY, changeRequestId);
+			nameChangeEventItem.clearFromAll();
+		}
 		
-		int count = getTransactionDAO().countTransactionWithKey(key, options);
-		return count;
-	}
+		
+		SmartList<NameChangeEvent> nameChangeEventList = account.getNameChangeEventList();		
+		nameChangeEventList.addAllToRemoveList(externalNameChangeEventList);
+		return account;	
 	
+	}
+
+
 	public Account planToRemoveAccountChangeList(Account account, String accountChangeIds[], Map<String,Object> options)throws Exception{
 	
 		MultipleAccessKey key = new MultipleAccessKey();
@@ -1001,50 +1048,6 @@ public class AccountJDBCTemplateDAO extends BankBaseDAOImpl implements AccountDA
 	}
 
 
-	//disconnect Account with change_request in AccountChange
-	public Account planToRemoveAccountChangeListWithChangeRequest(Account account, String changeRequestId, Map<String,Object> options)throws Exception{
-				//SmartList<ThreadLike> toRemoveThreadLikeList = threadLikeList.getToRemoveList();
-		//the list will not be null here, empty, maybe
-		//getThreadLikeDAO().removeThreadLikeList(toRemoveThreadLikeList,options);
-		
-		MultipleAccessKey key = new MultipleAccessKey();
-		key.put(AccountChange.ACCOUNT_PROPERTY, account.getId());
-		key.put(AccountChange.CHANGE_REQUEST_PROPERTY, changeRequestId);
-		
-		SmartList<AccountChange> externalAccountChangeList = getAccountChangeDAO().
-				findAccountChangeWithKey(key, options);
-		if(externalAccountChangeList == null){
-			return account;
-		}
-		if(externalAccountChangeList.isEmpty()){
-			return account;
-		}
-		
-		for(AccountChange accountChangeItem: externalAccountChangeList){
-			accountChangeItem.clearChangeRequest();
-			accountChangeItem.clearAccount();
-			
-		}
-		
-		
-		SmartList<AccountChange> accountChangeList = account.getAccountChangeList();		
-		accountChangeList.addAllToRemoveList(externalAccountChangeList);
-		return account;
-	}
-	
-	public int countAccountChangeListWithChangeRequest(String accountId, String changeRequestId, Map<String,Object> options)throws Exception{
-				//SmartList<ThreadLike> toRemoveThreadLikeList = threadLikeList.getToRemoveList();
-		//the list will not be null here, empty, maybe
-		//getThreadLikeDAO().removeThreadLikeList(toRemoveThreadLikeList,options);
-
-		MultipleAccessKey key = new MultipleAccessKey();
-		key.put(AccountChange.ACCOUNT_PROPERTY, accountId);
-		key.put(AccountChange.CHANGE_REQUEST_PROPERTY, changeRequestId);
-		
-		int count = getAccountChangeDAO().countAccountChangeWithKey(key, options);
-		return count;
-	}
-	
 
 		
 	protected Account saveTransactionListAsFromAccount(Account account, Map<String,Object> options){
@@ -1179,6 +1182,72 @@ public class AccountJDBCTemplateDAO extends BankBaseDAOImpl implements AccountDA
 	
 	
 		
+	protected Account saveNameChangeEventList(Account account, Map<String,Object> options){
+		
+		
+		
+		
+		SmartList<NameChangeEvent> nameChangeEventList = account.getNameChangeEventList();
+		if(nameChangeEventList == null){
+			//null list means nothing
+			return account;
+		}
+		SmartList<NameChangeEvent> mergedUpdateNameChangeEventList = new SmartList<NameChangeEvent>();
+		
+		
+		mergedUpdateNameChangeEventList.addAll(nameChangeEventList); 
+		if(nameChangeEventList.getToRemoveList() != null){
+			//ensures the toRemoveList is not null
+			mergedUpdateNameChangeEventList.addAll(nameChangeEventList.getToRemoveList());
+			nameChangeEventList.removeAll(nameChangeEventList.getToRemoveList());
+			//OK for now, need fix later
+		}
+
+		//adding new size can improve performance
+	
+		getNameChangeEventDAO().saveNameChangeEventList(mergedUpdateNameChangeEventList,options);
+		
+		if(nameChangeEventList.getToRemoveList() != null){
+			nameChangeEventList.removeAll(nameChangeEventList.getToRemoveList());
+		}
+		
+		
+		return account;
+	
+	}
+	
+	protected Account removeNameChangeEventList(Account account, Map<String,Object> options){
+	
+	
+		SmartList<NameChangeEvent> nameChangeEventList = account.getNameChangeEventList();
+		if(nameChangeEventList == null){
+			return account;
+		}	
+	
+		SmartList<NameChangeEvent> toRemoveNameChangeEventList = nameChangeEventList.getToRemoveList();
+		
+		if(toRemoveNameChangeEventList == null){
+			return account;
+		}
+		if(toRemoveNameChangeEventList.isEmpty()){
+			return account;// Does this mean delete all from the parent object?
+		}
+		//Call DAO to remove the list
+		
+		getNameChangeEventDAO().removeNameChangeEventList(toRemoveNameChangeEventList,options);
+		
+		return account;
+	
+	}
+	
+	
+
+ 	
+ 	
+	
+	
+	
+		
 	protected Account saveAccountChangeList(Account account, Map<String,Object> options){
 		
 		
@@ -1250,6 +1319,7 @@ public class AccountJDBCTemplateDAO extends BankBaseDAOImpl implements AccountDA
 	
 		presentTransactionListAsFromAccount(account,options);
 		presentTransactionListAsToAccount(account,options);
+		presentNameChangeEventList(account,options);
 		presentAccountChangeList(account,options);
 
 		return account;
@@ -1297,6 +1367,26 @@ public class AccountJDBCTemplateDAO extends BankBaseDAOImpl implements AccountDA
 	}			
 		
 	//Using java8 feature to reduce the code significantly
+ 	protected Account presentNameChangeEventList(
+			Account account,
+			Map<String, Object> options) {
+
+		SmartList<NameChangeEvent> nameChangeEventList = account.getNameChangeEventList();		
+				SmartList<NameChangeEvent> newList= presentSubList(account.getId(),
+				nameChangeEventList,
+				options,
+				getNameChangeEventDAO()::countNameChangeEventByAccount,
+				getNameChangeEventDAO()::findNameChangeEventByAccount
+				);
+
+		
+		account.setNameChangeEventList(newList);
+		
+
+		return account;
+	}			
+		
+	//Using java8 feature to reduce the code significantly
  	protected Account presentAccountChangeList(
 			Account account,
 			Map<String, Object> options) {
@@ -1325,6 +1415,12 @@ public class AccountJDBCTemplateDAO extends BankBaseDAOImpl implements AccountDA
     }
 		
     public SmartList<Account> requestCandidateAccountForTransactionAsToAccount(BankUserContext userContext, String ownerClass, String id, String filterKey, int pageNo, int pageSize) throws Exception {
+        // NOTE: by default, ignore owner info, just return all by filter key.
+		// You need override this method if you have different candidate-logic
+		return findAllCandidateByFilter(AccountTable.COLUMN_NAME, filterKey, pageNo, pageSize, getAccountMapper());
+    }
+		
+    public SmartList<Account> requestCandidateAccountForNameChangeEvent(BankUserContext userContext, String ownerClass, String id, String filterKey, int pageNo, int pageSize) throws Exception {
         // NOTE: by default, ignore owner info, just return all by filter key.
 		// You need override this method if you have different candidate-logic
 		return findAllCandidateByFilter(AccountTable.COLUMN_NAME, filterKey, pageNo, pageSize, getAccountMapper());
@@ -1390,6 +1486,29 @@ public class AccountJDBCTemplateDAO extends BankBaseDAOImpl implements AccountDA
 			SmartList<Transaction> loadedSmartList = new SmartList<>();
 			loadedSmartList.addAll(loadedList);
 			it.setTransactionListAsToAccount(loadedSmartList);
+		});
+		return loadedObjs;
+	}
+	
+	// 需要一个加载引用我的对象的enhance方法:NameChangeEvent的account的NameChangeEventList
+	public SmartList<NameChangeEvent> loadOurNameChangeEventList(BankUserContext userContext, List<Account> us, Map<String,Object> options) throws Exception{
+		if (us == null || us.isEmpty()){
+			return new SmartList<>();
+		}
+		Set<String> ids = us.stream().map(it->it.getId()).collect(Collectors.toSet());
+		MultipleAccessKey key = new MultipleAccessKey();
+		key.put(NameChangeEvent.ACCOUNT_PROPERTY, ids.toArray(new String[ids.size()]));
+		SmartList<NameChangeEvent> loadedObjs = userContext.getDAOGroup().getNameChangeEventDAO().findNameChangeEventWithKey(key, options);
+		Map<String, List<NameChangeEvent>> loadedMap = loadedObjs.stream().collect(Collectors.groupingBy(it->it.getAccount().getId()));
+		us.forEach(it->{
+			String id = it.getId();
+			List<NameChangeEvent> loadedList = loadedMap.get(id);
+			if (loadedList == null || loadedList.isEmpty()) {
+				return;
+			}
+			SmartList<NameChangeEvent> loadedSmartList = new SmartList<>();
+			loadedSmartList.addAll(loadedList);
+			it.setNameChangeEventList(loadedSmartList);
 		});
 		return loadedObjs;
 	}

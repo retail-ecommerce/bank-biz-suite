@@ -12,7 +12,7 @@ public interface PlatformManager{
 
 		
 
-	public Platform createPlatform(BankUserContext userContext, String name) throws Exception;	
+	public Platform createPlatform(BankUserContext userContext, String name, String founder, String description) throws Exception;	
 	public Platform updatePlatform(BankUserContext userContext,String platformId, int platformVersion, String property, String newValueExpr,String [] tokensExpr) throws Exception;
 	public Platform loadPlatform(BankUserContext userContext, String platformId, String [] tokensExpr) throws Exception;
 	public Platform internalSavePlatform(BankUserContext userContext, Platform platform) throws Exception;

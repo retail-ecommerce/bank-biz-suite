@@ -56,6 +56,10 @@
 <span class="summary-label">${userContext.localeMap['account_change.current_balance']}</span>
 <span ><fmt:formatNumber type="currency"  value="${result.currentBalance}" /></span>
 </div>
+<div class="col-xs-12 col-md-3 summary-section">
+<span class="summary-label">${userContext.localeMap['account_change.current_status']}</span>
+<span >${result.currentStatus}</span>
+</div>
 
 	</div>
 	

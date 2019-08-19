@@ -7,6 +7,8 @@ import com.doublechain.bank.changerequest.ChangeRequestManager;
 
 import com.doublechain.bank.transaction.TransactionManager;
 
+import com.doublechain.bank.namechangeevent.NameChangeEventManager;
+
 import com.doublechain.bank.account.AccountManager;
 
 import com.doublechain.bank.accountchange.AccountChangeManager;
@@ -45,6 +47,8 @@ public class ManagerGroup {
 	protected ChangeRequestManager changeRequestManager;
 
 	protected TransactionManager transactionManager;
+
+	protected NameChangeEventManager nameChangeEventManager;
 
 	protected AccountManager accountManager;
 
@@ -99,6 +103,14 @@ public class ManagerGroup {
 	}
 	public void setTransactionManager(TransactionManager manager){
 		this.transactionManager = manager;
+	}
+
+
+	public NameChangeEventManager getNameChangeEventManager(){
+		return this.nameChangeEventManager;
+	}
+	public void setNameChangeEventManager(NameChangeEventManager manager){
+		this.nameChangeEventManager = manager;
 	}
 
 

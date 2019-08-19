@@ -57,7 +57,7 @@ class AccountPermission extends Component {
   render() {
     // eslint-disable-next-line max-len
     const  account = this.props.account;
-    const { id,displayName, transactionAsFromAccountCount, transactionAsToAccountCount, accountChangeCount } = account
+    const { id,displayName, transactionAsFromAccountCount, transactionAsToAccountCount, nameChangeEventCount, accountChangeCount } = account
     const cardsData = {cardsName:"账户",cardsFor: "account",cardsSource: account,
   		subItems: [
     

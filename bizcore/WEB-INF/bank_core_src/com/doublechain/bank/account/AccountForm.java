@@ -135,6 +135,20 @@ public class AccountForm extends BaseForm {
 	}
 
 
+	public AccountForm founderFieldOfPlatform(String parameterName, String initValue){
+		FormField field =  founderFromPlatform(parameterName, initValue);
+		this.addFormField(field);	
+		return this;
+	}
+	
+	public AccountForm founderFieldOfPlatform(String initValue){
+		return founderFieldOfPlatform("founder",initValue);
+	}
+	public AccountForm founderFieldOfPlatform(){
+		return founderFieldOfPlatform("founder","");
+	}
+
+
 	public AccountForm foundedFieldOfPlatform(String parameterName, String initValue){
 		FormField field =  foundedFromPlatform(parameterName, initValue);
 		this.addFormField(field);	
@@ -146,6 +160,20 @@ public class AccountForm extends BaseForm {
 	}
 	public AccountForm foundedFieldOfPlatform(){
 		return foundedFieldOfPlatform("founded","");
+	}
+
+
+	public AccountForm descriptionFieldOfPlatform(String parameterName, String initValue){
+		FormField field =  descriptionFromPlatform(parameterName, initValue);
+		this.addFormField(field);	
+		return this;
+	}
+	
+	public AccountForm descriptionFieldOfPlatform(String initValue){
+		return descriptionFieldOfPlatform("description",initValue);
+	}
+	public AccountForm descriptionFieldOfPlatform(){
+		return descriptionFieldOfPlatform("description","");
 	}
 
 	
@@ -250,6 +278,90 @@ public class AccountForm extends BaseForm {
 	}
 
 
+	public AccountForm currentStatusFieldForTransaction(String parameterName, String initValue){
+		FormField field =  currentStatusFromTransaction(parameterName, initValue);		
+		this.addFormField(field);
+		return this;
+	}
+	
+	public AccountForm currentStatusFieldForTransaction(String initValue){
+		return currentStatusFieldForTransaction("currentStatus",initValue);
+	}
+	public AccountForm currentStatusFieldForTransaction(){
+		return currentStatusFieldForTransaction("currentStatus","");
+	}
+
+
+	public AccountForm nameChangeEventIdFieldForNameChangeEvent(String parameterName, String initValue){
+		FormField field =  idFromNameChangeEvent(parameterName, initValue);		
+		this.addFormField(field);
+		return this;
+	}
+	
+	public AccountForm nameChangeEventIdFieldForNameChangeEvent(String initValue){
+		return nameChangeEventIdFieldForNameChangeEvent("nameChangeEventId",initValue);
+	}
+	public AccountForm nameChangeEventIdFieldForNameChangeEvent(){
+		return nameChangeEventIdFieldForNameChangeEvent("nameChangeEventId","");
+	}
+
+
+	public AccountForm nameFieldForNameChangeEvent(String parameterName, String initValue){
+		FormField field =  nameFromNameChangeEvent(parameterName, initValue);		
+		this.addFormField(field);
+		return this;
+	}
+	
+	public AccountForm nameFieldForNameChangeEvent(String initValue){
+		return nameFieldForNameChangeEvent("name",initValue);
+	}
+	public AccountForm nameFieldForNameChangeEvent(){
+		return nameFieldForNameChangeEvent("name","");
+	}
+
+
+	public AccountForm accountIdFieldForNameChangeEvent(String parameterName, String initValue){
+		FormField field =  accountIdFromNameChangeEvent(parameterName, initValue);		
+		this.addFormField(field);
+		return this;
+	}
+	
+	public AccountForm accountIdFieldForNameChangeEvent(String initValue){
+		return accountIdFieldForNameChangeEvent("accountId",initValue);
+	}
+	public AccountForm accountIdFieldForNameChangeEvent(){
+		return accountIdFieldForNameChangeEvent("accountId","");
+	}
+
+
+	public AccountForm changeRequestIdFieldForNameChangeEvent(String parameterName, String initValue){
+		FormField field =  changeRequestIdFromNameChangeEvent(parameterName, initValue);		
+		this.addFormField(field);
+		return this;
+	}
+	
+	public AccountForm changeRequestIdFieldForNameChangeEvent(String initValue){
+		return changeRequestIdFieldForNameChangeEvent("changeRequestId",initValue);
+	}
+	public AccountForm changeRequestIdFieldForNameChangeEvent(){
+		return changeRequestIdFieldForNameChangeEvent("changeRequestId","");
+	}
+
+
+	public AccountForm currentStatusFieldForNameChangeEvent(String parameterName, String initValue){
+		FormField field =  currentStatusFromNameChangeEvent(parameterName, initValue);		
+		this.addFormField(field);
+		return this;
+	}
+	
+	public AccountForm currentStatusFieldForNameChangeEvent(String initValue){
+		return currentStatusFieldForNameChangeEvent("currentStatus",initValue);
+	}
+	public AccountForm currentStatusFieldForNameChangeEvent(){
+		return currentStatusFieldForNameChangeEvent("currentStatus","");
+	}
+
+
 	public AccountForm accountChangeIdFieldForAccountChange(String parameterName, String initValue){
 		FormField field =  idFromAccountChange(parameterName, initValue);		
 		this.addFormField(field);
@@ -275,20 +387,6 @@ public class AccountForm extends BaseForm {
 	}
 	public AccountForm nameFieldForAccountChange(){
 		return nameFieldForAccountChange("name","");
-	}
-
-
-	public AccountForm accountIdFieldForAccountChange(String parameterName, String initValue){
-		FormField field =  accountIdFromAccountChange(parameterName, initValue);		
-		this.addFormField(field);
-		return this;
-	}
-	
-	public AccountForm accountIdFieldForAccountChange(String initValue){
-		return accountIdFieldForAccountChange("accountId",initValue);
-	}
-	public AccountForm accountIdFieldForAccountChange(){
-		return accountIdFieldForAccountChange("accountId","");
 	}
 
 
@@ -348,6 +446,20 @@ public class AccountForm extends BaseForm {
 	}
 
 
+	public AccountForm accountIdFieldForAccountChange(String parameterName, String initValue){
+		FormField field =  accountIdFromAccountChange(parameterName, initValue);		
+		this.addFormField(field);
+		return this;
+	}
+	
+	public AccountForm accountIdFieldForAccountChange(String initValue){
+		return accountIdFieldForAccountChange("accountId",initValue);
+	}
+	public AccountForm accountIdFieldForAccountChange(){
+		return accountIdFieldForAccountChange("accountId","");
+	}
+
+
 	public AccountForm changeRequestIdFieldForAccountChange(String parameterName, String initValue){
 		FormField field =  changeRequestIdFromAccountChange(parameterName, initValue);		
 		this.addFormField(field);
@@ -359,6 +471,20 @@ public class AccountForm extends BaseForm {
 	}
 	public AccountForm changeRequestIdFieldForAccountChange(){
 		return changeRequestIdFieldForAccountChange("changeRequestId","");
+	}
+
+
+	public AccountForm currentStatusFieldForAccountChange(String parameterName, String initValue){
+		FormField field =  currentStatusFromAccountChange(parameterName, initValue);		
+		this.addFormField(field);
+		return this;
+	}
+	
+	public AccountForm currentStatusFieldForAccountChange(String initValue){
+		return currentStatusFieldForAccountChange("currentStatus",initValue);
+	}
+	public AccountForm currentStatusFieldForAccountChange(){
+		return currentStatusFieldForAccountChange("currentStatus","");
 	}
 
 	

@@ -55,7 +55,7 @@ class ChangeRequestPermission extends Component {
   render() {
     // eslint-disable-next-line max-len
     const  changeRequest = this.props.changeRequest;
-    const { id,displayName, transactionCount, accountChangeCount } = changeRequest
+    const { id,displayName, transactionCount, nameChangeEventCount, accountChangeCount } = changeRequest
     const cardsData = {cardsName:"变更请求",cardsFor: "changeRequest",cardsSource: changeRequest,
   		subItems: [
     

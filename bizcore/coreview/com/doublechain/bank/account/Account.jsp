@@ -103,6 +103,7 @@
 	<% Account result = (Account)request.getAttribute("result");  %>
 			<li><a data-toggle="tab" href="#transactionListAsFromAccount" class="disabled"> ${userContext.localeMap['transaction']}</a></li>
 			<li><a data-toggle="tab" href="#transactionListAsToAccount" class="disabled"> ${userContext.localeMap['transaction']}</a></li>
+			<li><a data-toggle="tab" href="#nameChangeEventList" class="disabled"> ${userContext.localeMap['name_change_event']}</a></li>
 			<li><a data-toggle="tab" href="#accountChangeList" class="disabled"> ${userContext.localeMap['account_change']}</a></li>
  
 	</ul>
@@ -167,6 +168,14 @@
 		<div id="transactionListAsToAccount" class="tab-pane fade sublist" refer-name="to_account">
 			<sky:include page="com/doublechain/bank/transaction/Transaction$List.jsp"
 					referName="toAccount"/>
+		</div>
+	</c:if>
+	<c:if test='${not empty userContext.accessTokens["nameChangeEventList"] or ignoreListAccessControl}'>
+		<c:set var="nameChangeEventList" value="${result.nameChangeEventList}" scope="request"/>
+		<c:set var="nameChangeEventListName" value="nameChangeEventList" scope="request"/>
+		<div id="nameChangeEventList" class="tab-pane fade sublist" refer-name="account">
+			<sky:include page="com/doublechain/bank/namechangeevent/NameChangeEvent$List.jsp"
+					referName="account"/>
 		</div>
 	</c:if>
 	<c:if test='${not empty userContext.accessTokens["accountChangeList"] or ignoreListAccessControl}'>

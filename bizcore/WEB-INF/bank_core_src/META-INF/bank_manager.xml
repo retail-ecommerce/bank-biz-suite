@@ -17,6 +17,9 @@
 	<bean id="transactionManagerBase" class="com.doublechain.bank.transaction.TransactionManagerImpl"/>
 	<bean id="transactionManager" class="com.doublechain.bank.transaction.TransactionManagerImpl" parent="transactionManagerBase" ></bean>
 	
+	<bean id="nameChangeEventManagerBase" class="com.doublechain.bank.namechangeevent.NameChangeEventManagerImpl"/>
+	<bean id="nameChangeEventManager" class="com.doublechain.bank.namechangeevent.NameChangeEventManagerImpl" parent="nameChangeEventManagerBase" ></bean>
+	
 	<bean id="accountManagerBase" class="com.doublechain.bank.account.AccountManagerImpl"/>
 	<bean id="accountManager" class="com.doublechain.bank.account.AccountCustomManagerImpl" parent="accountManagerBase" ></bean>
 	
@@ -67,6 +70,7 @@
 		<property name="platformManager" ref="platformManager"/>
 		<property name="changeRequestManager" ref="changeRequestManager"/>
 		<property name="transactionManager" ref="transactionManager"/>
+		<property name="nameChangeEventManager" ref="nameChangeEventManager"/>
 		<property name="accountManager" ref="accountManager"/>
 		<property name="accountChangeManager" ref="accountChangeManager"/>
 		<property name="userDomainManager" ref="userDomainManager"/>

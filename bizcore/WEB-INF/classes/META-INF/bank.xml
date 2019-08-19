@@ -48,6 +48,8 @@
 		<property name="dataSource" ref="dataSource" /><property name="platformDAO" ref="platformDAO" />
 		<property name="transactionDAO" ref="transactionDAO" />
 		
+		<property name="nameChangeEventDAO" ref="nameChangeEventDAO" />
+		
 		<property name="accountChangeDAO" ref="accountChangeDAO" />
 		
 	</bean>
@@ -60,9 +62,17 @@
 	<bean id="transactionDAO" parent="transactionDAOBase"></bean>	
 	
 	
+	<bean id="nameChangeEventDAOBase" class="com.doublechain.bank.namechangeevent.NameChangeEventJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="changeRequestDAO" ref="changeRequestDAO" /><property name="accountDAO" ref="accountDAO" />
+	</bean>
+	<bean id="nameChangeEventDAO" parent="nameChangeEventDAOBase"></bean>	
+	
+	
 	<bean id="accountDAOBase" class="com.doublechain.bank.account.AccountJDBCTemplateDAO">
 		<property name="dataSource" ref="dataSource" /><property name="platformDAO" ref="platformDAO" />
 		<property name="transactionDAO" ref="transactionDAO" />
+		
+		<property name="nameChangeEventDAO" ref="nameChangeEventDAO" />
 		
 		<property name="accountChangeDAO" ref="accountChangeDAO" />
 		
@@ -181,6 +191,7 @@
 		<property name="platformDAO" ref="platformDAO"/>
 		<property name="changeRequestDAO" ref="changeRequestDAO"/>
 		<property name="transactionDAO" ref="transactionDAO"/>
+		<property name="nameChangeEventDAO" ref="nameChangeEventDAO"/>
 		<property name="accountDAO" ref="accountDAO"/>
 		<property name="accountChangeDAO" ref="accountChangeDAO"/>
 		<property name="userDomainDAO" ref="userDomainDAO"/>

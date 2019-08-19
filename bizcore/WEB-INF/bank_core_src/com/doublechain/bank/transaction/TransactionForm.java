@@ -117,6 +117,20 @@ public class TransactionForm extends BaseForm {
 		return changeRequestIdField("changeRequestId","");
 	}
 
+
+	public TransactionForm currentStatusField(String parameterName, String initValue){
+		FormField field = currentStatusFromTransaction(parameterName, initValue);		
+		this.addFormField(field);
+		return this;
+	}
+	
+	public TransactionForm currentStatusField(String initValue){
+		return currentStatusField("currentStatus",initValue);
+	}
+	public TransactionForm currentStatusField(){
+		return currentStatusField("currentStatus","");
+	}
+
 	
 	
 
@@ -286,16 +300,14 @@ public class TransactionForm extends BaseForm {
 	}
 
  	
- 	public TransactionForm transferToAnotherChangeRequestAction(){
+ 	public TransactionForm  requestChangeAction(){
 		FormAction action = new FormAction();
-		action.setLabel("显示");
-		action.setLocaleKey("show");
-		action.setUrl("transferToAnotherChangeRequest/transactionId/");
+		action.setLabel("变更请求");
+		action.setLocaleKey("transaction.requestChange");
+		action.setUrl("transactionManager/requestChange/transactionId/name/platformId");
 		this.addFormAction(action);
 		return this;
 	}
-
- 
 
 	public TransactionForm showAction(){
 		FormAction action = new FormAction();

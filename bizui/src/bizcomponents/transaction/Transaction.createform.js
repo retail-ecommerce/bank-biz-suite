@@ -18,7 +18,7 @@ const testValues = {};
 /*
 const testValues = {
   name: '存款交易',
-  amount: '112.83',
+  amount: '93.18',
   type: '存款',
   fromAccountId: 'A000001',
   toAccountId: 'A000001',

@@ -12,6 +12,7 @@ import com.doublechain.bank.SmartList;
 import com.doublechain.bank.KeyValuePair;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.doublechain.bank.namechangeevent.NameChangeEvent;
 import com.doublechain.bank.platform.Platform;
 import com.doublechain.bank.transaction.Transaction;
 import com.doublechain.bank.accountchange.AccountChange;
@@ -27,6 +28,7 @@ public class ChangeRequest extends BaseEntity implements  java.io.Serializable{
 	public static final String VERSION_PROPERTY               = "version"           ;
 
 	public static final String TRANSACTION_LIST                         = "transactionList"   ;
+	public static final String NAME_CHANGE_EVENT_LIST                   = "nameChangeEventList";
 	public static final String ACCOUNT_CHANGE_LIST                      = "accountChangeList" ;
 
 	public static final String INTERNAL_TYPE="ChangeRequest";
@@ -56,6 +58,7 @@ public class ChangeRequest extends BaseEntity implements  java.io.Serializable{
 	
 	
 	protected		SmartList<Transaction>	mTransactionList    ;
+	protected		SmartList<NameChangeEvent>	mNameChangeEventList;
 	protected		SmartList<AccountChange>	mAccountChangeList  ;
 	
 		
@@ -76,6 +79,7 @@ public class ChangeRequest extends BaseEntity implements  java.io.Serializable{
 		setPlatform(platform);
 
 		this.mTransactionList = new SmartList<Transaction>();
+		this.mNameChangeEventList = new SmartList<NameChangeEvent>();
 		this.mAccountChangeList = new SmartList<AccountChange>();	
 	}
 	
@@ -140,6 +144,10 @@ public class ChangeRequest extends BaseEntity implements  java.io.Serializable{
 		}
 		if(TRANSACTION_LIST.equals(property)){
 			List<BaseEntity> list = getTransactionList().stream().map(item->item).collect(Collectors.toList());
+			return list;
+		}
+		if(NAME_CHANGE_EVENT_LIST.equals(property)){
+			List<BaseEntity> list = getNameChangeEventList().stream().map(item->item).collect(Collectors.toList());
 			return list;
 		}
 		if(ACCOUNT_CHANGE_LIST.equals(property)){
@@ -350,6 +358,113 @@ public class ChangeRequest extends BaseEntity implements  java.io.Serializable{
 	
 
 
+	public  SmartList<NameChangeEvent> getNameChangeEventList(){
+		if(this.mNameChangeEventList == null){
+			this.mNameChangeEventList = new SmartList<NameChangeEvent>();
+			this.mNameChangeEventList.setListInternalName (NAME_CHANGE_EVENT_LIST );
+			//有名字，便于做权限控制
+		}
+		
+		return this.mNameChangeEventList;	
+	}
+	public  void setNameChangeEventList(SmartList<NameChangeEvent> nameChangeEventList){
+		for( NameChangeEvent nameChangeEvent:nameChangeEventList){
+			nameChangeEvent.setChangeRequest(this);
+		}
+
+		this.mNameChangeEventList = nameChangeEventList;
+		this.mNameChangeEventList.setListInternalName (NAME_CHANGE_EVENT_LIST );
+		
+	}
+	
+	public  void addNameChangeEvent(NameChangeEvent nameChangeEvent){
+		nameChangeEvent.setChangeRequest(this);
+		getNameChangeEventList().add(nameChangeEvent);
+	}
+	public  void addNameChangeEventList(SmartList<NameChangeEvent> nameChangeEventList){
+		for( NameChangeEvent nameChangeEvent:nameChangeEventList){
+			nameChangeEvent.setChangeRequest(this);
+		}
+		getNameChangeEventList().addAll(nameChangeEventList);
+	}
+	public  void mergeNameChangeEventList(SmartList<NameChangeEvent> nameChangeEventList){
+		if(nameChangeEventList==null){
+			return;
+		}
+		if(nameChangeEventList.isEmpty()){
+			return;
+		}
+		addNameChangeEventList( nameChangeEventList );
+		
+	}
+	public  NameChangeEvent removeNameChangeEvent(NameChangeEvent nameChangeEventIndex){
+		
+		int index = getNameChangeEventList().indexOf(nameChangeEventIndex);
+        if(index < 0){
+        	String message = "NameChangeEvent("+nameChangeEventIndex.getId()+") with version='"+nameChangeEventIndex.getVersion()+"' NOT found!";
+            throw new IllegalStateException(message);
+        }
+        NameChangeEvent nameChangeEvent = getNameChangeEventList().get(index);        
+        // nameChangeEvent.clearChangeRequest(); //disconnect with ChangeRequest
+        nameChangeEvent.clearFromAll(); //disconnect with ChangeRequest
+		
+		boolean result = getNameChangeEventList().planToRemove(nameChangeEvent);
+        if(!result){
+        	String message = "NameChangeEvent("+nameChangeEventIndex.getId()+") with version='"+nameChangeEventIndex.getVersion()+"' NOT found!";
+            throw new IllegalStateException(message);
+        }
+        return nameChangeEvent;
+        
+	
+	}
+	//断舍离
+	public  void breakWithNameChangeEvent(NameChangeEvent nameChangeEvent){
+		
+		if(nameChangeEvent == null){
+			return;
+		}
+		nameChangeEvent.setChangeRequest(null);
+		//getNameChangeEventList().remove();
+	
+	}
+	
+	public  boolean hasNameChangeEvent(NameChangeEvent nameChangeEvent){
+	
+		return getNameChangeEventList().contains(nameChangeEvent);
+  
+	}
+	
+	public void copyNameChangeEventFrom(NameChangeEvent nameChangeEvent) {
+
+		NameChangeEvent nameChangeEventInList = findTheNameChangeEvent(nameChangeEvent);
+		NameChangeEvent newNameChangeEvent = new NameChangeEvent();
+		nameChangeEventInList.copyTo(newNameChangeEvent);
+		newNameChangeEvent.setVersion(0);//will trigger copy
+		getNameChangeEventList().add(newNameChangeEvent);
+		addItemToFlexiableObject(COPIED_CHILD, newNameChangeEvent);
+	}
+	
+	public  NameChangeEvent findTheNameChangeEvent(NameChangeEvent nameChangeEvent){
+		
+		int index =  getNameChangeEventList().indexOf(nameChangeEvent);
+		//The input parameter must have the same id and version number.
+		if(index < 0){
+ 			String message = "NameChangeEvent("+nameChangeEvent.getId()+") with version='"+nameChangeEvent.getVersion()+"' NOT found!";
+			throw new IllegalStateException(message);
+		}
+		
+		return  getNameChangeEventList().get(index);
+		//Performance issue when using LinkedList, but it is almost an ArrayList for sure!
+	}
+	
+	public  void cleanUpNameChangeEventList(){
+		getNameChangeEventList().clear();
+	}
+	
+	
+	
+
+
 	public  SmartList<AccountChange> getAccountChangeList(){
 		if(this.mAccountChangeList == null){
 			this.mAccountChangeList = new SmartList<AccountChange>();
@@ -468,6 +583,7 @@ public class ChangeRequest extends BaseEntity implements  java.io.Serializable{
 		
 		List<BaseEntity> entityList = new ArrayList<BaseEntity>();
 		collectFromList(this, entityList, getTransactionList(), internalType);
+		collectFromList(this, entityList, getNameChangeEventList(), internalType);
 		collectFromList(this, entityList, getAccountChangeList(), internalType);
 
 		return entityList;
@@ -477,6 +593,7 @@ public class ChangeRequest extends BaseEntity implements  java.io.Serializable{
 		List<SmartList<?>> listOfList = new ArrayList<SmartList<?>>();
 		
 		listOfList.add( getTransactionList());
+		listOfList.add( getNameChangeEventList());
 		listOfList.add( getAccountChangeList());
 			
 
@@ -496,6 +613,11 @@ public class ChangeRequest extends BaseEntity implements  java.io.Serializable{
 		if(!getTransactionList().isEmpty()){
 			appendKeyValuePair(result, "transactionCount", getTransactionList().getTotalCount());
 			appendKeyValuePair(result, "transactionCurrentPageNumber", getTransactionList().getCurrentPageNumber());
+		}
+		appendKeyValuePair(result, NAME_CHANGE_EVENT_LIST, getNameChangeEventList());
+		if(!getNameChangeEventList().isEmpty()){
+			appendKeyValuePair(result, "nameChangeEventCount", getNameChangeEventList().getTotalCount());
+			appendKeyValuePair(result, "nameChangeEventCurrentPageNumber", getNameChangeEventList().getCurrentPageNumber());
 		}
 		appendKeyValuePair(result, ACCOUNT_CHANGE_LIST, getAccountChangeList());
 		if(!getAccountChangeList().isEmpty()){
@@ -522,6 +644,7 @@ public class ChangeRequest extends BaseEntity implements  java.io.Serializable{
 			dest.setPlatform(getPlatform());
 			dest.setVersion(getVersion());
 			dest.setTransactionList(getTransactionList());
+			dest.setNameChangeEventList(getNameChangeEventList());
 			dest.setAccountChangeList(getAccountChangeList());
 
 		}
@@ -542,6 +665,7 @@ public class ChangeRequest extends BaseEntity implements  java.io.Serializable{
 			dest.mergePlatform(getPlatform());
 			dest.mergeVersion(getVersion());
 			dest.mergeTransactionList(getTransactionList());
+			dest.mergeNameChangeEventList(getNameChangeEventList());
 			dest.mergeAccountChangeList(getAccountChangeList());
 
 		}

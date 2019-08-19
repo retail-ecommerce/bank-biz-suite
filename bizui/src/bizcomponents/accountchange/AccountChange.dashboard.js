@@ -89,7 +89,7 @@ const internalSummaryOf = (accountChange,targetComponent) =>{
 	      AccountChangeService.transferToAnotherAccount,"anotherAccountId",accountChange.account?accountChange.account.id:"")} 
   style={{fontSize: 20,color:"red"}} />
 </Description>
-<Description term="以前的平衡">{accountChange.previousBalance}</Description> 
+<Description term="初期余额">{accountChange.previousBalance}</Description> 
 <Description term="类型">{accountChange.type}</Description> 
 <Description term="金额">{accountChange.amount}</Description> 
 <Description term="当前余额">{accountChange.currentBalance}</Description> 

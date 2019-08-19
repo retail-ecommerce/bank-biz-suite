@@ -74,6 +74,7 @@ class ChangeRequestAssociateForm extends Component {
     const userContext = null
     
  const {TransactionModalTable} = GlobalComponents;
+ const {NameChangeEventModalTable} = GlobalComponents;
  const {AccountChangeModalTable} = GlobalComponents;
 
 
@@ -189,6 +190,7 @@ class ChangeRequestAssociateForm extends Component {
         </Card>
         
 	<TransactionModalTable data={data.transactionList} owner={owner} />
+	<NameChangeEventModalTable data={data.nameChangeEventList} owner={owner} />
 	<AccountChangeModalTable data={data.accountChangeList} owner={owner} />
         
         

@@ -9,6 +9,8 @@ public class BankObjectChecker extends BankChecker{
 
 		checkIdOfPlatform((String)platformAsBaseEntity.propertyOf("id"));
 		checkNameOfPlatform((String)platformAsBaseEntity.propertyOf("name"));
+		checkFounderOfPlatform((String)platformAsBaseEntity.propertyOf("founder"));
+		checkDescriptionOfPlatform((String)platformAsBaseEntity.propertyOf("description"));
 		checkVersionOfPlatform((int)platformAsBaseEntity.propertyOf("version"));
 		checkChangeRequestListOfPlatform((List<BaseEntity>)platformAsBaseEntity.propertyOf("changeRequestList"));
 		checkAccountListOfPlatform((List<BaseEntity>)platformAsBaseEntity.propertyOf("accountList"));
@@ -23,6 +25,7 @@ public class BankObjectChecker extends BankChecker{
 		checkPlatformOfChangeRequest((BaseEntity)changeRequestAsBaseEntity.propertyOf("platform"));
 		checkVersionOfChangeRequest((int)changeRequestAsBaseEntity.propertyOf("version"));
 		checkTransactionListOfChangeRequest((List<BaseEntity>)changeRequestAsBaseEntity.propertyOf("transactionList"));
+		checkNameChangeEventListOfChangeRequest((List<BaseEntity>)changeRequestAsBaseEntity.propertyOf("nameChangeEventList"));
 		checkAccountChangeListOfChangeRequest((List<BaseEntity>)changeRequestAsBaseEntity.propertyOf("accountChangeList"));
 		return this;
 
@@ -36,8 +39,17 @@ public class BankObjectChecker extends BankChecker{
 		checkToAccountOfTransaction((BaseEntity)transactionAsBaseEntity.propertyOf("toAccount"));
 		checkAmountOfTransaction((BigDecimal)transactionAsBaseEntity.propertyOf("amount"));
 		checkTypeOfTransaction((String)transactionAsBaseEntity.propertyOf("type"));
-		checkChangeRequestOfTransaction((BaseEntity)transactionAsBaseEntity.propertyOf("changeRequest"));
 		checkVersionOfTransaction((int)transactionAsBaseEntity.propertyOf("version"));
+		return this;
+
+	}
+
+	public BankChecker checkNameChangeEventAsObject(BaseEntity nameChangeEventAsBaseEntity){
+
+		checkIdOfNameChangeEvent((String)nameChangeEventAsBaseEntity.propertyOf("id"));
+		checkNameOfNameChangeEvent((String)nameChangeEventAsBaseEntity.propertyOf("name"));
+		checkAccountOfNameChangeEvent((BaseEntity)nameChangeEventAsBaseEntity.propertyOf("account"));
+		checkVersionOfNameChangeEvent((int)nameChangeEventAsBaseEntity.propertyOf("version"));
 		return this;
 
 	}
@@ -51,6 +63,7 @@ public class BankObjectChecker extends BankChecker{
 		checkVersionOfAccount((int)accountAsBaseEntity.propertyOf("version"));
 		checkTransactionListAsFromAccountOfAccount((List<BaseEntity>)accountAsBaseEntity.propertyOf("transactionListAsFromAccount"));
 		checkTransactionListAsToAccountOfAccount((List<BaseEntity>)accountAsBaseEntity.propertyOf("transactionListAsToAccount"));
+		checkNameChangeEventListOfAccount((List<BaseEntity>)accountAsBaseEntity.propertyOf("nameChangeEventList"));
 		checkAccountChangeListOfAccount((List<BaseEntity>)accountAsBaseEntity.propertyOf("accountChangeList"));
 		return this;
 
@@ -60,12 +73,11 @@ public class BankObjectChecker extends BankChecker{
 
 		checkIdOfAccountChange((String)accountChangeAsBaseEntity.propertyOf("id"));
 		checkNameOfAccountChange((String)accountChangeAsBaseEntity.propertyOf("name"));
-		checkAccountOfAccountChange((BaseEntity)accountChangeAsBaseEntity.propertyOf("account"));
 		checkPreviousBalanceOfAccountChange((BigDecimal)accountChangeAsBaseEntity.propertyOf("previousBalance"));
 		checkTypeOfAccountChange((String)accountChangeAsBaseEntity.propertyOf("type"));
 		checkAmountOfAccountChange((BigDecimal)accountChangeAsBaseEntity.propertyOf("amount"));
 		checkCurrentBalanceOfAccountChange((BigDecimal)accountChangeAsBaseEntity.propertyOf("currentBalance"));
-		checkChangeRequestOfAccountChange((BaseEntity)accountChangeAsBaseEntity.propertyOf("changeRequest"));
+		checkAccountOfAccountChange((BaseEntity)accountChangeAsBaseEntity.propertyOf("account"));
 		checkVersionOfAccountChange((int)accountChangeAsBaseEntity.propertyOf("version"));
 		return this;
 
@@ -281,6 +293,11 @@ public class BankObjectChecker extends BankChecker{
 		return this;
 	}
 
+	public BankChecker checkNameChangeEventListOfChangeRequest(List<BaseEntity> nameChangeEventList){
+		nameChangeEventList.stream().map(nameChangeEvent->this.checkNameChangeEventAsObject(nameChangeEvent));
+		return this;
+	}
+
 	public BankChecker checkAccountChangeListOfChangeRequest(List<BaseEntity> accountChangeList){
 		accountChangeList.stream().map(accountChange->this.checkAccountChangeAsObject(accountChange));
 		return this;
@@ -342,6 +359,34 @@ public class BankObjectChecker extends BankChecker{
 	}
 
 
+	public static final String ACCOUNT_OF_NAME_CHANGE_EVENT = "name_change_event.account";
+
+
+	public BankChecker checkAccountOfNameChangeEvent(BaseEntity accountAsBaseEntity){
+
+		if(accountAsBaseEntity == null){
+			checkBaseEntityReference(accountAsBaseEntity,true,ACCOUNT_OF_NAME_CHANGE_EVENT);
+			return this;
+		}
+		checkAccountAsObject(accountAsBaseEntity);
+		return this;
+	}
+
+
+	public static final String CHANGE_REQUEST_OF_NAME_CHANGE_EVENT = "name_change_event.change_request";
+
+
+	public BankChecker checkChangeRequestOfNameChangeEvent(BaseEntity changeRequestAsBaseEntity){
+
+		if(changeRequestAsBaseEntity == null){
+			checkBaseEntityReference(changeRequestAsBaseEntity,true,CHANGE_REQUEST_OF_NAME_CHANGE_EVENT);
+			return this;
+		}
+		checkChangeRequestAsObject(changeRequestAsBaseEntity);
+		return this;
+	}
+
+
 	public BankChecker checkTransactionListAsFromAccountOfAccount(List<BaseEntity> transactionListAsFromAccount){
 		transactionListAsFromAccount.stream().map(transaction->this.checkTransactionAsObject(transaction));
 		return this;
@@ -349,6 +394,11 @@ public class BankObjectChecker extends BankChecker{
 
 	public BankChecker checkTransactionListAsToAccountOfAccount(List<BaseEntity> transactionListAsToAccount){
 		transactionListAsToAccount.stream().map(transaction->this.checkTransactionAsObject(transaction));
+		return this;
+	}
+
+	public BankChecker checkNameChangeEventListOfAccount(List<BaseEntity> nameChangeEventList){
+		nameChangeEventList.stream().map(nameChangeEvent->this.checkNameChangeEventAsObject(nameChangeEvent));
 		return this;
 	}
 

@@ -1,7 +1,7 @@
 
 
 
-=================Execute Report (Model Time 190810T0132) @Sat Aug 10 01:35:55 CST 2019, 18 objects and 142 fields===========================
+=================Execute Report (Model Time 190812T1049) @Wed Aug 14 09:42:52 CST 2019, 19 objects and 147 fields===========================
 
 
 
@@ -36,6 +36,21 @@ Info: Add virtual field [transactions(es)] to <account>
 
 Info: Add virtual field [transactions(es)] to <change_request>
 	transaction.change_request
+
+
+ processing: name_change_event
+
+
+ processing: name_change_event.account.account
+
+Info: Add virtual field [name_change_events(es)] to <account>
+	name_change_event.account
+
+
+ processing: name_change_event.change_request.change_request
+
+Info: Add virtual field [name_change_events(es)] to <change_request>
+	name_change_event.change_request
 
 
  processing: account
@@ -85,8 +100,9 @@ change_request{
 		platform	platform('$(object)'), verb: false, required: true, referenceBy: changeRequestList;
 		int	version('2147483647'), verb: false, required: true;
 	}
-	references field(2){
+	references field(3){
 		transactionList	change_request(__no_group)--change_request;
+		nameChangeEventList	change_request(__no_group)--change_request;
 		accountChangeList	change_request(__no_group)--change_request;
 	}
 } depth=1; isRoot = false
@@ -106,6 +122,18 @@ transaction{
 	}
 } depth=2; isRoot = false
 
+name_change_event{
+	fields(5){
+		string	id('ABCD'), verb: false, required: true;
+		string	name('new name'), verb: false, required: true;
+		account	account('$(object)'), verb: false, required: true, referenceBy: nameChangeEventList;
+		change_request	change_request('$(object)'), verb: false, required: true, referenceBy: nameChangeEventList;
+		int	version('2147483647'), verb: false, required: true;
+	}
+	references field(0){
+	}
+} depth=2; isRoot = false
+
 account{
 	fields(7){
 		string	id('ABCD'), verb: false, required: true;
@@ -116,9 +144,10 @@ account{
 		platform	platform('$(object)'), verb: false, required: true, referenceBy: accountList;
 		int	version('2147483647'), verb: false, required: true;
 	}
-	references field(3){
+	references field(4){
 		transactionListAsFromAccount	from_account(__no_group)--from_account;
 		transactionListAsToAccount	to_account(__no_group)--from_account;
+		nameChangeEventList	account(__no_group)--account;
 		accountChangeList	account(__no_group)--account;
 	}
 } depth=1; isRoot = false
@@ -160,8 +189,9 @@ change_request{
 		platform	platform('$(object)'), verb: false, required: true, referenceBy: changeRequestList;
 		int	version('2147483647'), verb: false, required: true;
 	}
-	references field(2){
+	references field(3){
 		transactionList	change_request(__no_group)--change_request;
+		nameChangeEventList	change_request(__no_group)--change_request;
 		accountChangeList	change_request(__no_group)--change_request;
 	}
 } depth=1; isRoot = false
@@ -181,6 +211,18 @@ transaction{
 	}
 } depth=2; isRoot = false
 
+name_change_event{
+	fields(5){
+		string	id('ABCD'), verb: false, required: true;
+		string	name('new name'), verb: false, required: true;
+		account	account('$(object)'), verb: false, required: true, referenceBy: nameChangeEventList;
+		change_request	change_request('$(object)'), verb: false, required: true, referenceBy: nameChangeEventList;
+		int	version('2147483647'), verb: false, required: true;
+	}
+	references field(0){
+	}
+} depth=2; isRoot = false
+
 account{
 	fields(7){
 		string	id('ABCD'), verb: false, required: true;
@@ -191,9 +233,10 @@ account{
 		platform	platform('$(object)'), verb: false, required: true, referenceBy: accountList;
 		int	version('2147483647'), verb: false, required: true;
 	}
-	references field(3){
+	references field(4){
 		transactionListAsFromAccount	from_account(__no_group)--from_account;
 		transactionListAsToAccount	to_account(__no_group)--from_account;
+		nameChangeEventList	account(__no_group)--account;
 		accountChangeList	account(__no_group)--account;
 	}
 } depth=1; isRoot = false

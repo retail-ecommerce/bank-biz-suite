@@ -40,7 +40,7 @@ const fieldLabels = {
   id: 'ID',
   name: '名称',
   account: '账户',
-  previousBalance: '以前的平衡',
+  previousBalance: '初期余额',
   type: '类型',
   amount: '金额',
   currentBalance: '当前余额',
@@ -71,7 +71,7 @@ const renderItemOfList=(accountChange,targetComponent)=>{
         <Description term="名称">{accountChange.name}</Description> 
         <Description term="账户">{accountChange.account==null?appLocaleName(userContext,"NotAssigned"):`${accountChange.account.displayName}(${accountChange.account.id})`}
         </Description>
-        <Description term="以前的平衡">{accountChange.previousBalance}</Description> 
+        <Description term="初期余额">{accountChange.previousBalance}</Description> 
         <Description term="类型">{accountChange.type}</Description> 
         <Description term="金额">{accountChange.amount}</Description> 
         <Description term="当前余额">{accountChange.currentBalance}</Description> 

@@ -19,14 +19,16 @@ public class PlatformTable{
 	public static final String TABLE_NAME="platform_data";
 	static final String COLUMN_ID = "id";
 	static final String COLUMN_NAME = "name";
+	static final String COLUMN_FOUNDER = "founder";
 	static final String COLUMN_FOUNDED = "founded";
+	static final String COLUMN_DESCRIPTION = "description";
 	static final String COLUMN_VERSION = "version";
  
 	public static final String []ALL_CLOUMNS = {COLUMN_ID, 
-		COLUMN_NAME, COLUMN_FOUNDED, 
+		COLUMN_NAME, COLUMN_FOUNDER, COLUMN_FOUNDED, COLUMN_DESCRIPTION, 
 		COLUMN_VERSION};
 	public static final String []NORMAL_CLOUMNS = {
-		COLUMN_NAME, COLUMN_FOUNDED
+		COLUMN_NAME, COLUMN_FOUNDER, COLUMN_FOUNDED, COLUMN_DESCRIPTION
 		};
 	
 	

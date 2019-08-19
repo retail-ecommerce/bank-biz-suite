@@ -25,6 +25,7 @@
 <li><span>${userContext.localeMap['account_change.type']}</span> ${accountChange.type}</li>
 <li><span>${userContext.localeMap['account_change.amount']}</span> <fmt:formatNumber type="currency"  value="${accountChange.amount}" /></li>
 <li><span>${userContext.localeMap['account_change.current_balance']}</span> <fmt:formatNumber type="currency"  value="${accountChange.currentBalance}" /></li>
+<li><span>${userContext.localeMap['account_change.current_status']}</span> ${accountChange.currentStatus}</li>
 
 	
 	</ul>

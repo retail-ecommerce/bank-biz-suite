@@ -9,6 +9,7 @@ import com.doublechain.bank.account.Account;
 import com.doublechain.bank.accountchange.AccountChange;
 import com.doublechain.bank.changerequest.ChangeRequest;
 import com.doublechain.bank.changerequest.ChangeRequestTokens;
+import com.doublechain.bank.namechangeevent.NameChangeEvent;
 import com.doublechain.bank.platform.Platform;
 import com.doublechain.bank.transaction.Transaction;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -49,6 +50,14 @@ public class ChangeRequestService extends BaseManagerImpl{
 		ChangeRequest newReq = userContext.getManagerGroup()
 			.getChangeRequestManager()
 			.internalSaveChangeRequest(userContext, request);
+		
+		for(NameChangeEvent nv:request.getNameChangeEventList() ) {
+			Account a1 = userContext.getManagerGroup().getAccountManager()
+					.loadAccount(userContext, nv.getAccount().getId(), new String[] {});
+			a1.updateName(nv.getName());
+			userContext.getManagerGroup().getAccountManager().internalSaveAccount(userContext, a1);
+			
+		}
 		
 		for(Transaction tx:request.getTransactionList() ) {
 			Account a1 = userContext.getManagerGroup().getAccountManager().loadAccount(userContext, 
@@ -217,14 +226,32 @@ public class ChangeRequestService extends BaseManagerImpl{
 				.updateFromAccount(new Account().updateId("A000001"))
 				.updateToAccount(new Account().updateId("A000002"))
 				.updateType("转账")
-				.updateAmount(new BigDecimal("10.87"));
+				
+				.updateAmount(new BigDecimal("21.00"));
+		
+		
+		
 		
 		req.addTransaction(tx);
+		
+		tx = new Transaction().updateName("test tx")
+					.updateFromAccount(new Account().updateId("A000002"))
+					.updateToAccount(new Account().updateId("A000001"))
+					.updateType("转账")
+					
+					.updateAmount(new BigDecimal("11.00"));
+			
+		req.addTransaction(tx);
+		
+		NameChangeEvent ne=new NameChangeEvent()
+				.updateAccount(new Account().updateId("A000002"))
+				.updateName("OLD NAME");
+		req.addNameChangeEvent(ne);
+		
 		
 		try {
 			emitRequest(req);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

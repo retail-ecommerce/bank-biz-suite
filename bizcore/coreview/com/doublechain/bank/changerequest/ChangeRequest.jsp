@@ -102,6 +102,7 @@
 	 
 	<% ChangeRequest result = (ChangeRequest)request.getAttribute("result");  %>
 			<li><a data-toggle="tab" href="#transactionList" class="disabled"> ${userContext.localeMap['transaction']}</a></li>
+			<li><a data-toggle="tab" href="#nameChangeEventList" class="disabled"> ${userContext.localeMap['name_change_event']}</a></li>
 			<li><a data-toggle="tab" href="#accountChangeList" class="disabled"> ${userContext.localeMap['account_change']}</a></li>
  
 	</ul>
@@ -157,6 +158,14 @@
 		<c:set var="transactionListName" value="transactionList" scope="request"/>
 		<div id="transactionList" class="tab-pane fade sublist" refer-name="change_request">
 			<sky:include page="com/doublechain/bank/transaction/Transaction$List.jsp"
+					referName="changeRequest"/>
+		</div>
+	</c:if>
+	<c:if test='${not empty userContext.accessTokens["nameChangeEventList"] or ignoreListAccessControl}'>
+		<c:set var="nameChangeEventList" value="${result.nameChangeEventList}" scope="request"/>
+		<c:set var="nameChangeEventListName" value="nameChangeEventList" scope="request"/>
+		<div id="nameChangeEventList" class="tab-pane fade sublist" refer-name="change_request">
+			<sky:include page="com/doublechain/bank/namechangeevent/NameChangeEvent$List.jsp"
 					referName="changeRequest"/>
 		</div>
 	</c:if>

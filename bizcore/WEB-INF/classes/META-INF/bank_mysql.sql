@@ -1,4 +1,4 @@
--- BUILD WITH MODEL TIME 190810T0132
+-- BUILD WITH MODEL TIME 190810T1111
 drop database  if exists bank;
 create database bank;
 -- alter  database bank  character set = utf8mb4  collate = utf8mb4_unicode_ci; -- 支持表情符号
@@ -7,8 +7,10 @@ use bank;
 drop table  if exists platform_data;
 create table platform_data (
 	id                            	varchar(48)          not null            comment 'ID',
-	name                          	varchar(24)                              comment '名称',
+	name                          	varchar(60)                              comment '名称',
+	founder                       	varchar(12)                              comment '创始人',
 	founded                       	datetime                                 comment '成立',
+	description                   	varchar(60)                              comment '描述',
 	version                       	int                                      comment '版本',
 	primary key(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = "平台";
@@ -32,9 +34,21 @@ create table transaction_data (
 	amount                        	numeric(7,2)                             comment '金额',
 	type                          	varchar(8)                               comment '类型',
 	change_request                	varchar(48)                              comment '变更请求',
+	current_status                	varchar(64)                              comment '当前状态',
 	version                       	int                                      comment '版本',
 	primary key(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = "事务";
+
+drop table  if exists name_change_event_data;
+create table name_change_event_data (
+	id                            	varchar(48)          not null            comment 'ID',
+	name                          	varchar(32)                              comment '名称',
+	account                       	varchar(48)                              comment '账户',
+	change_request                	varchar(48)                              comment '变更请求',
+	current_status                	varchar(64)                              comment '当前状态',
+	version                       	int                                      comment '版本',
+	primary key(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = "名字更改事件";
 
 drop table  if exists account_data;
 create table account_data (
@@ -52,12 +66,13 @@ drop table  if exists account_change_data;
 create table account_change_data (
 	id                            	varchar(48)          not null            comment 'ID',
 	name                          	varchar(16)                              comment '名称',
-	account                       	varchar(48)                              comment '账户',
 	previous_balance              	numeric(8,2)                             comment '以前的平衡',
 	type                          	varchar(8)                               comment '类型',
 	amount                        	numeric(7,2)                             comment '金额',
 	current_balance               	numeric(8,2)                             comment '当前余额',
+	account                       	varchar(48)                              comment '账户',
 	change_request                	varchar(48)                              comment '变更请求',
+	current_status                	varchar(64)                              comment '当前状态',
 	version                       	int                                      comment '版本',
 	primary key(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = "账户变更";
@@ -240,30 +255,37 @@ create table form_action_data (
 
 
 insert into platform_data values
-	('P000001','银行模拟平台','2019-08-05 23:32:49','1'),
-	('P000002','银行模拟平台','2019-08-02 07:59:22','1');
+	('P000001','凯思俱乐部医药行业数据管理平台','朱义平','2019-08-10 08:28:30','凯思俱乐部医药行业数据管理平台','1'),
+	('P000002','凯思俱乐部医药行业数据管理平台','朱义平','2019-08-01 22:45:57','凯思俱乐部医药行业数据管理平台','1'),
+	('P000003','凯思俱乐部医药行业数据管理平台','朱义平','2019-08-04 16:05:52','凯思俱乐部医药行业数据管理平台','1');
 
 insert into change_request_data values
-	('CR000001','存款','2019-07-23 05:25:15','P000001','1'),
-	('CR000002','转账','2019-07-28 16:51:10','P000001','1'),
-	('CR000003','取款','2019-08-03 07:28:02','P000002','1');
+	('CR000001','存款','2019-08-10 01:28:54','P000001','1'),
+	('CR000002','转账','2019-08-02 12:31:08','P000002','1'),
+	('CR000003','取款','2019-08-04 20:21:54','P000003','1');
 
 insert into transaction_data values
-	('T000001','存款交易','A000001','A000001','105.87','存款','CR000001','1'),
-	('T000002','存款交易','A000001','A000001','106.81','存款','CR000001','1'),
-	('T000003','取款交易','A000002','A000002','94.80','取款','CR000002','1'),
-	('T000004','存款交易','A000003','A000003','115.30','存款','CR000003','1');
+	('T000001','存款交易','A000001','A000001','101.37','存款',NULL,'CHANGE_REQUESTED','1'),
+	('T000002','存款交易','A000001','A000001','99.39','存款',NULL,'CHANGE_REQUESTED0002','1'),
+	('T000003','取款交易','A000002','A000002','120.47','取款',NULL,'CHANGE_REQUESTED0003','1'),
+	('T000004','存款交易','A000003','A000003','104.96','存款',NULL,'CHANGE_REQUESTED0004','1');
+
+insert into name_change_event_data values
+	('NCE000001','new name','A000001',NULL,'CHANGE_REQUESTED','1'),
+	('NCE000002','new name0002','A000001',NULL,'CHANGE_REQUESTED0002','1'),
+	('NCE000003','new name0003','A000002',NULL,'CHANGE_REQUESTED0003','1'),
+	('NCE000004','new name0004','A000003',NULL,'CHANGE_REQUESTED0004','1');
 
 insert into account_data values
-	('A000001','张三账户','92.02','2019-08-02 18:18:26','2019-07-23 14:02:43','P000001','1'),
-	('A000002','李四账户','112.05','2019-07-23 23:41:28','2019-08-03 18:32:26','P000001','1'),
-	('A000003','银行账户','87.37','2019-08-08 11:42:43','2019-08-09 17:15:37','P000002','1');
+	('A000001','张三账户','88.55','2019-07-24 12:59:12','2019-07-22 14:08:40','P000001','1'),
+	('A000002','李四账户','90.52','2019-07-29 15:23:39','2019-07-24 14:49:01','P000002','1'),
+	('A000003','银行账户','121.81','2019-07-20 07:59:44','2019-08-05 21:15:03','P000003','1');
 
 insert into account_change_data values
-	('AC000001','存款交易','A000001','1278.56','存款','110.03','1101.60','CR000001','1'),
-	('AC000002','存款交易','A000001','1282.90','存款','98.49','1207.07','CR000001','1'),
-	('AC000003','取款交易','A000002','1159.00','取款','108.91','1210.48','CR000002','1'),
-	('AC000004','存款交易','A000003','1087.14','存款','121.25','1103.87','CR000003','1');
+	('AC000001','存款交易','1101.70','存款','101.40','1174.27','A000001',NULL,'CHANGE_REQUESTED','1'),
+	('AC000002','存款交易','980.07','存款','103.91','1014.88','A000001',NULL,'CHANGE_REQUESTED0002','1'),
+	('AC000003','取款交易','1039.07','取款','87.74','1117.32','A000002',NULL,'CHANGE_REQUESTED0003','1'),
+	('AC000004','存款交易','1134.05','存款','106.82','923.36','A000003',NULL,'CHANGE_REQUESTED0004','1');
 
 insert into user_domain_data values
 	('UD000001','用户区域','1');
@@ -273,11 +295,11 @@ insert into user_white_list_data values
 	('UWL000002','13808188512','tester;ios-spokesperson0002','UD000001','1');
 
 insert into sec_user_data values
-	('SU000001','login','13900000001','','C183EC89F92A462CF45B95504792EC4625E847C90536EEFE512D1C9DB8602E95','wx123456789abcdefghijklmn','wxapp12098410239840','jwt_token_12345678','0','2019-08-07 00:40:48','2019-07-30 21:52:21','UD000001',NULL,'BLOCKED','1'),
-	('SU000002','login0002','13900000002','suddy_chang@163.com','AC2F95628244C6975EB2C36942EA879ED93D93F5895EF3157733E4629FA86B92','wx123456789abcdefghijklmn0002','wxapp120984102398400002','jwt_token_123456780002','9999999','2019-08-09 06:05:38','2019-07-20 03:17:30','UD000001',NULL,'BLOCKED0002','1');
+	('SU000001','login','13900000001','','C183EC89F92A462CF45B95504792EC4625E847C90536EEFE512D1C9DB8602E95','wx123456789abcdefghijklmn','wxapp12098410239840','jwt_token_12345678','0','2019-07-25 06:15:51','2019-07-28 09:27:28','UD000001',NULL,'BLOCKED','1'),
+	('SU000002','login0002','13900000002','suddy_chang@163.com','AC2F95628244C6975EB2C36942EA879ED93D93F5895EF3157733E4629FA86B92','wx123456789abcdefghijklmn0002','wxapp120984102398400002','jwt_token_123456780002','9999999','2019-07-20 15:07:20','2019-08-02 21:47:47','UD000001',NULL,'BLOCKED0002','1');
 
 insert into sec_user_blocking_data values
-	('SUB000001','currentUser()','2019-07-20 11:52:59','这个用户多次发送违反社区的帖子，现在把他给屏蔽了','1');
+	('SUB000001','currentUser()','2019-07-20 21:43:22','这个用户多次发送违反社区的帖子，现在把他给屏蔽了','1');
 
 insert into user_app_data values
 	('UA000001','审车平台','SU000001','users','1','MXWR','CarInspectionPlatform','CIP000001','/link/to/app','1'),
@@ -308,10 +330,10 @@ insert into object_access_data values
 	('OA000008','控制访问列表10008','AccountSet','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','UA000006','1');
 
 insert into login_history_data values
-	('LH000001','2019-08-05 12:33:29','192.168.1.1','登陆成功','SU000001','1'),
-	('LH000002','2019-08-04 13:15:46','192.168.1.2','登陆成功0002','SU000001','1'),
-	('LH000003','2019-08-09 18:54:46','192.168.1.1','登陆成功0003','SU000002','1'),
-	('LH000004','2019-07-29 17:16:24','192.168.1.2','登陆成功0004','SU000002','1');
+	('LH000001','2019-08-01 22:04:56','192.168.1.1','登陆成功','SU000001','1'),
+	('LH000002','2019-07-29 13:25:13','192.168.1.2','登陆成功0002','SU000001','1'),
+	('LH000003','2019-07-26 19:30:05','192.168.1.1','登陆成功0003','SU000002','1'),
+	('LH000004','2019-07-21 04:08:55','192.168.1.2','登陆成功0004','SU000002','1');
 
 insert into generic_form_data values
 	('GF000001','登记输入单','姓名就是你身份证上的名字','1');
@@ -354,6 +376,12 @@ alter table transaction_data add constraint transaction4from_account_fk
 alter table transaction_data add constraint transaction4to_account_fk
 	foreign key(to_account) references account_data(id) on delete cascade on update cascade;
 alter table transaction_data add constraint transaction4change_request_fk
+	foreign key(change_request) references change_request_data(id) on delete cascade on update cascade;
+create unique index idx_name_change_event_version on name_change_event_data(id, version);
+
+alter table name_change_event_data add constraint name_change_event4account_fk
+	foreign key(account) references account_data(id) on delete cascade on update cascade;
+alter table name_change_event_data add constraint name_change_event4change_request_fk
 	foreign key(change_request) references change_request_data(id) on delete cascade on update cascade;
 create unique index idx_account_version on account_data(id, version);
 
@@ -421,6 +449,7 @@ create index change_request4create_time_idx on change_request_data(create_time);
 create index change_request4version_idx on change_request_data(version);
 create index transaction4amount_idx on transaction_data(amount);
 create index transaction4version_idx on transaction_data(version);
+create index name_change_event4version_idx on name_change_event_data(version);
 create index account4balance_idx on account_data(balance);
 create index account4create_time_idx on account_data(create_time);
 create index account4update_time_idx on account_data(update_time);
@@ -473,35 +502,31 @@ insert into sec_user_data values('SU000001','User000001','13900000001','1000001@
 insert into user_app_data values('UA000001','平台','SU000001','at',1,'MXWR','Platform','P000001','/link/to/app','1');
 insert into user_app_data values('UA000002','我的账户','SU000001','lock',1,'MXWR','SecUser','SU000001','/link/to/app','1');
 insert into sec_user_data values('SU000002','User000002','13900000002','1000002@qq.com','BB5210DAE99659C7164D7DBCFC51FB2D167D0DA372D58EF26A9F8533EEA2967C', 'weixin_openid_000002', 'weixin_appid_000002', 'jwt_token_000002' ,'9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',NULL,'INIT',1);
-insert into user_app_data values('UA000003','变更请求','SU000002','exchange-alt',1,'MXWR','ChangeRequest','CR000001','/link/to/app','1');
+insert into user_app_data values('UA000003','账户','SU000002','address-book',1,'MXWR','Account','A000001','/link/to/app','1');
 insert into user_app_data values('UA000004','我的账户','SU000002','lock',1,'MXWR','SecUser','SU000002','/link/to/app','1');
 insert into sec_user_data values('SU000003','User000003','13900000003','1000003@qq.com','9D4104DF2774FDEAAE074CA35B052D8F664F4F99064C7BEAB0B589C2605C4EDA', 'weixin_openid_000003', 'weixin_appid_000003', 'jwt_token_000003' ,'9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',NULL,'INIT',1);
-insert into user_app_data values('UA000005','账户','SU000003','ad',1,'MXWR','Account','A000001','/link/to/app','1');
+insert into user_app_data values('UA000005','用户域','SU000003','user',1,'MXWR','UserDomain','UD000001','/link/to/app','1');
 insert into user_app_data values('UA000006','我的账户','SU000003','lock',1,'MXWR','SecUser','SU000003','/link/to/app','1');
 insert into sec_user_data values('SU000004','User000004','13900000004','1000004@qq.com','9B223EBD008D7B544A3A640739EBE47459D3A4C5296DDA00F594FAF60FE88B28', 'weixin_openid_000004', 'weixin_appid_000004', 'jwt_token_000004' ,'9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',NULL,'INIT',1);
-insert into user_app_data values('UA000007','用户域','SU000004','user',1,'MXWR','UserDomain','UD000001','/link/to/app','1');
+insert into user_app_data values('UA000007','安全用户','SU000004','user',1,'MXWR','SecUser','SU000001','/link/to/app','1');
 insert into user_app_data values('UA000008','我的账户','SU000004','lock',1,'MXWR','SecUser','SU000004','/link/to/app','1');
 insert into sec_user_data values('SU000005','User000005','13900000005','1000005@qq.com','AE5F93F319636A96963C06D035B97F004D18E61D80129EFEA331784A6E21DC5C', 'weixin_openid_000005', 'weixin_appid_000005', 'jwt_token_000005' ,'9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',NULL,'INIT',1);
-insert into user_app_data values('UA000009','安全用户','SU000005','user',1,'MXWR','SecUser','SU000001','/link/to/app','1');
+insert into user_app_data values('UA000009','用户应用程序','SU000005','user',1,'MXWR','UserApp','UA000001','/link/to/app','1');
 insert into user_app_data values('UA000010','我的账户','SU000005','lock',1,'MXWR','SecUser','SU000005','/link/to/app','1');
-insert into sec_user_data values('SU000006','User000006','13900000006','1000006@qq.com','5FBBDBEAD9F84D599E8819CEEA167854CDA0FFD8D297D17D12E4619CE76F3B55', 'weixin_openid_000006', 'weixin_appid_000006', 'jwt_token_000006' ,'9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',NULL,'INIT',1);
-insert into user_app_data values('UA000011','用户应用程序','SU000006','user',1,'MXWR','UserApp','UA000001','/link/to/app','1');
-insert into user_app_data values('UA000012','我的账户','SU000006','lock',1,'MXWR','SecUser','SU000006','/link/to/app','1');
 
 /* ------------------------------------------------------------------------ */
 
 
-
+select id,pwd from sec_user_data;
 
 /*
 | 角色        | 用户名           | 密码         |
 | ------------- |:-------------:|:-------------------:|
 |平台|13900000001|DoubleChain!y1|
-|变更请求|13900000002|DoubleChain!y1|
-|账户|13900000003|DoubleChain!y1|
-|用户域|13900000004|DoubleChain!y1|
-|安全用户|13900000005|DoubleChain!y1|
-|用户应用程序|13900000006|DoubleChain!y1|
+|账户|13900000002|DoubleChain!y1|
+|用户域|13900000003|DoubleChain!y1|
+|安全用户|13900000004|DoubleChain!y1|
+|用户应用程序|13900000005|DoubleChain!y1|
 
 
 */

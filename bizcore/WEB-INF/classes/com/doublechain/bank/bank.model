@@ -1,13 +1,15 @@
 <root org="doublechain"
-    chinese_name="银行模拟平台"
-    english_name="银行模拟平台"
+    chinese_name="恺思医药数据管理平台"
+    english_name="Kaisi Clube Drug Data Management System"
 >
 
 
     <platform
-        name="银行模拟平台|银行模拟平台"
-       
+        name="凯思俱乐部医药行业数据管理平台|凯思俱乐部医药行业数据管理平台|凯思俱乐部医药行业数据管理平台"
+        founder="朱义平|朱义平"
+        
         founded="now()"
+        description="凯思俱乐部医药行业数据管理平台|凯思俱乐部医药行业数据管理平台|凯思俱乐部医药行业数据管理平台"
         
     />
 	<change_request
@@ -25,7 +27,12 @@
 		change_request="$(change_request)"
 		
 	/>
-	
+	<name_change_event
+		name="new name"
+		account="$(account)"
+		change_request="$(change_request)"
+		
+	/>
 	
 	<account
 		name="张三账户|李四账户|银行账户"
@@ -39,14 +46,11 @@
 	
 	<account_change
 		name="存款交易|存款交易|取款交易"
-		account="$(account)"
-		
 		previous_balance="$1312.00"
 		type="存款|存款|取款"
 		amount="$123.00"
 		current_balance="$1312.00"
-		
-		
+		account="$(account)"
 		change_request="$(change_request)"
 		
 	/>

@@ -96,7 +96,23 @@ public class BankCheckerManager extends BaseManagerImpl {
 	protected void checkNameOfPlatform(BankUserContext userContext, String name, List<Message> messageList)
 	{
 		
-	 	checkStringLengthRange(name,3, 24,NAME_OF_PLATFORM, messageList); 		
+	 	checkStringLengthRange(name,7, 60,NAME_OF_PLATFORM, messageList); 		
+		
+	}	 			
+	
+	public static final String  FOUNDER_OF_PLATFORM ="platform.founder";
+	protected void checkFounderOfPlatform(BankUserContext userContext, String founder, List<Message> messageList)
+	{
+		
+	 	checkStringLengthRange(founder,1, 12,FOUNDER_OF_PLATFORM, messageList); 		
+		
+	}	 			
+	
+	public static final String  DESCRIPTION_OF_PLATFORM ="platform.description";
+	protected void checkDescriptionOfPlatform(BankUserContext userContext, String description, List<Message> messageList)
+	{
+		
+	 	checkStringLengthRange(description,7, 60,DESCRIPTION_OF_PLATFORM, messageList); 		
 		
 	}	 			
 	
@@ -188,19 +204,43 @@ public class BankCheckerManager extends BaseManagerImpl {
 		
 	}	 			
 	
-	public static final String  CHANGE_REQUEST_OF_TRANSACTION ="transaction.change_request";
-	protected void checkChangeRequestIdOfTransaction(BankUserContext userContext, String changeRequestId, List<Message> messageList)
-	{
-		
-	 	checkIdOfTransaction(userContext,changeRequestId, messageList); 		
-		
-	}	 			
-	
 	public static final String  VERSION_OF_TRANSACTION ="transaction.version";
 	protected void checkVersionOfTransaction(BankUserContext userContext, int version, List<Message> messageList)
 	{
 		
 	 	checkIntegerRange(version,0, Integer.MAX_VALUE,VERSION_OF_TRANSACTION, messageList); 		
+		
+	}	 			
+	
+	public static final String  ID_OF_NAME_CHANGE_EVENT ="name_change_event.id";
+	protected void checkIdOfNameChangeEvent(BankUserContext userContext, String id, List<Message> messageList)
+	{
+		
+	 	checkStringLengthRange(id,2, 64,ID_OF_NAME_CHANGE_EVENT, messageList); 		
+		
+	}	 			
+	
+	public static final String  NAME_OF_NAME_CHANGE_EVENT ="name_change_event.name";
+	protected void checkNameOfNameChangeEvent(BankUserContext userContext, String name, List<Message> messageList)
+	{
+		
+	 	checkStringLengthRange(name,3, 32,NAME_OF_NAME_CHANGE_EVENT, messageList); 		
+		
+	}	 			
+	
+	public static final String  ACCOUNT_OF_NAME_CHANGE_EVENT ="name_change_event.account";
+	protected void checkAccountIdOfNameChangeEvent(BankUserContext userContext, String accountId, List<Message> messageList)
+	{
+		
+	 	checkIdOfNameChangeEvent(userContext,accountId, messageList); 		
+		
+	}	 			
+	
+	public static final String  VERSION_OF_NAME_CHANGE_EVENT ="name_change_event.version";
+	protected void checkVersionOfNameChangeEvent(BankUserContext userContext, int version, List<Message> messageList)
+	{
+		
+	 	checkIntegerRange(version,0, Integer.MAX_VALUE,VERSION_OF_NAME_CHANGE_EVENT, messageList); 		
 		
 	}	 			
 	
@@ -260,14 +300,6 @@ public class BankCheckerManager extends BaseManagerImpl {
 		
 	}	 			
 	
-	public static final String  ACCOUNT_OF_ACCOUNT_CHANGE ="account_change.account";
-	protected void checkAccountIdOfAccountChange(BankUserContext userContext, String accountId, List<Message> messageList)
-	{
-		
-	 	checkIdOfAccountChange(userContext,accountId, messageList); 		
-		
-	}	 			
-	
 	public static final String  PREVIOUS_BALANCE_OF_ACCOUNT_CHANGE ="account_change.previous_balance";
 	protected void checkPreviousBalanceOfAccountChange(BankUserContext userContext, BigDecimal previousBalance, List<Message> messageList)
 	{
@@ -300,11 +332,11 @@ public class BankCheckerManager extends BaseManagerImpl {
 		
 	}	 			
 	
-	public static final String  CHANGE_REQUEST_OF_ACCOUNT_CHANGE ="account_change.change_request";
-	protected void checkChangeRequestIdOfAccountChange(BankUserContext userContext, String changeRequestId, List<Message> messageList)
+	public static final String  ACCOUNT_OF_ACCOUNT_CHANGE ="account_change.account";
+	protected void checkAccountIdOfAccountChange(BankUserContext userContext, String accountId, List<Message> messageList)
 	{
 		
-	 	checkIdOfAccountChange(userContext,changeRequestId, messageList); 		
+	 	checkIdOfAccountChange(userContext,accountId, messageList); 		
 		
 	}	 			
 	
