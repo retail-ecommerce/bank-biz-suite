@@ -65,6 +65,16 @@ public class ChangeRequest extends BaseEntity implements  java.io.Serializable{
 	public 	ChangeRequest(){
 		// lazy load for all the properties
 	}
+	public 	static ChangeRequest withId(String id){
+		ChangeRequest changeRequest = new ChangeRequest();
+		changeRequest.setId(id);
+		// changeRequest.setVersion(Integer.MAX_VALUE);
+		return changeRequest;
+	}
+	public 	static ChangeRequest refById(String id){
+		return withId(id);
+	}
+	
 	// disconnect from all, 中文就是一了百了，跟所有一切尘世断绝往来藏身于茫茫数据海洋
 	public 	void clearFromAll(){
 		setPlatform( null );

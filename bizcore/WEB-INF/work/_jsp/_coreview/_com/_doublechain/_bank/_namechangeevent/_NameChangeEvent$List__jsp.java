@@ -176,18 +176,12 @@ public class _NameChangeEvent$List__jsp extends com.caucho.jsp.JavaPage
           _caucho_expr_29.print(out, _jsp_env, false);
           out.write(_jsp_string30, 0, _jsp_string30.length);
         }
-        out.write('\n');
-        if (_caucho_expr_30.evalBoolean(_jsp_env)) {
-          out.write(_jsp_string29, 0, _jsp_string29.length);
-          _caucho_expr_31.print(out, _jsp_env, false);
-          out.write(_jsp_string30, 0, _jsp_string30.length);
-        }
         out.write(_jsp_string31, 0, _jsp_string31.length);
-        _caucho_expr_32.print(out, _jsp_env, false);
+        _caucho_expr_30.print(out, _jsp_env, false);
         out.write(_jsp_string32, 0, _jsp_string32.length);
         if (_jsp_loop_0 == null)
           _jsp_loop_0 = new com.caucho.jsp.IteratorLoopSupportTag();
-        java.lang.Object _jsp_items_7 = _caucho_expr_33.evalObject(_jsp_env);
+        java.lang.Object _jsp_items_7 = _caucho_expr_31.evalObject(_jsp_env);
         java.util.Iterator _jsp_iter_7 = com.caucho.jstl.rt.CoreForEachTag.getIterator(_jsp_items_7);
         _jsp_loop_0.init(0, Integer.MAX_VALUE, 1);
         Object _jsp_oldVar_7 = pageContext.getAttribute("item");
@@ -196,46 +190,46 @@ public class _NameChangeEvent$List__jsp extends com.caucho.jsp.JavaPage
           pageContext.setAttribute("item", _jsp_i_7);
           _jsp_loop_0.setCurrent(_jsp_i_7, _jsp_iter_7.hasNext());
           out.write(_jsp_string33, 0, _jsp_string33.length);
-          _caucho_expr_34.print(out, _jsp_env, false);
+          _caucho_expr_32.print(out, _jsp_env, false);
           out.write(_jsp_string34, 0, _jsp_string34.length);
-          _caucho_expr_35.print(out, _jsp_env, false);
+          _caucho_expr_33.print(out, _jsp_env, false);
           out.write(_jsp_string35, 0, _jsp_string35.length);
-          _caucho_expr_35.print(out, _jsp_env, false);
+          _caucho_expr_33.print(out, _jsp_env, false);
           out.write(_jsp_string36, 0, _jsp_string36.length);
-          _caucho_expr_35.print(out, _jsp_env, false);
+          _caucho_expr_33.print(out, _jsp_env, false);
           out.write(_jsp_string37, 0, _jsp_string37.length);
           if (_caucho_expr_24.evalBoolean(_jsp_env)) {
             out.write(_jsp_string38, 0, _jsp_string38.length);
-            _caucho_expr_36.print(out, _jsp_env, false);
+            _caucho_expr_34.print(out, _jsp_env, false);
             out.write(_jsp_string39, 0, _jsp_string39.length);
             _caucho_expr_3.print(out, _jsp_env, false);
             out.write(_jsp_string40, 0, _jsp_string40.length);
             _caucho_expr_4.print(out, _jsp_env, false);
             out.write('/');
-            _caucho_expr_35.print(out, _jsp_env, false);
+            _caucho_expr_33.print(out, _jsp_env, false);
             out.write(_jsp_string41, 0, _jsp_string41.length);
-            _caucho_expr_36.print(out, _jsp_env, false);
+            _caucho_expr_34.print(out, _jsp_env, false);
             out.write(_jsp_string42, 0, _jsp_string42.length);
           }
           if (_caucho_expr_26.evalBoolean(_jsp_env)) {
             out.write(_jsp_string43, 0, _jsp_string43.length);
             _caucho_expr_3.print(out, _jsp_env, false);
             out.write('/');
-            _caucho_expr_35.print(out, _jsp_env, false);
+            _caucho_expr_33.print(out, _jsp_env, false);
             out.write(_jsp_string44, 0, _jsp_string44.length);
-            _caucho_expr_35.print(out, _jsp_env, false);
+            _caucho_expr_33.print(out, _jsp_env, false);
             out.write(_jsp_string45, 0, _jsp_string45.length);
-            _caucho_expr_37.print(out, _jsp_env, false);
+            _caucho_expr_35.print(out, _jsp_env, false);
             out.write(_jsp_string46, 0, _jsp_string46.length);
-            if (_caucho_expr_38.evalBoolean(_jsp_env)) {
+            if (_caucho_expr_36.evalBoolean(_jsp_env)) {
               out.write(_jsp_string47, 0, _jsp_string47.length);
-              _caucho_expr_39.print(out, _jsp_env, false);
+              _caucho_expr_37.print(out, _jsp_env, false);
               out.write(_jsp_string41, 0, _jsp_string41.length);
-              _caucho_expr_40.print(out, _jsp_env, false);
+              _caucho_expr_38.print(out, _jsp_env, false);
               out.write(_jsp_string48, 0, _jsp_string48.length);
             }
             out.write(_jsp_string49, 0, _jsp_string49.length);
-            if (_caucho_expr_41.evalBoolean(_jsp_env)) {
+            if (_caucho_expr_39.evalBoolean(_jsp_env)) {
               out.write(_jsp_string50, 0, _jsp_string50.length);
             }
             out.write(_jsp_string51, 0, _jsp_string51.length);
@@ -245,59 +239,45 @@ public class _NameChangeEvent$List__jsp extends com.caucho.jsp.JavaPage
             out.write(_jsp_string52, 0, _jsp_string52.length);
             _caucho_expr_3.print(out, _jsp_env, false);
             out.write('/');
-            _caucho_expr_35.print(out, _jsp_env, false);
+            _caucho_expr_33.print(out, _jsp_env, false);
             out.write(_jsp_string53, 0, _jsp_string53.length);
-            _caucho_expr_35.print(out, _jsp_env, false);
+            _caucho_expr_33.print(out, _jsp_env, false);
             out.write(_jsp_string54, 0, _jsp_string54.length);
-            _caucho_expr_37.print(out, _jsp_env, false);
+            _caucho_expr_35.print(out, _jsp_env, false);
             out.write(_jsp_string46, 0, _jsp_string46.length);
-            if (_caucho_expr_42.evalBoolean(_jsp_env)) {
+            if (_caucho_expr_40.evalBoolean(_jsp_env)) {
               out.write(_jsp_string55, 0, _jsp_string55.length);
-              _caucho_expr_43.print(out, _jsp_env, false);
+              _caucho_expr_41.print(out, _jsp_env, false);
               out.write(_jsp_string41, 0, _jsp_string41.length);
-              _caucho_expr_44.print(out, _jsp_env, false);
+              _caucho_expr_42.print(out, _jsp_env, false);
               out.write(_jsp_string48, 0, _jsp_string48.length);
             }
             out.write(_jsp_string49, 0, _jsp_string49.length);
-            if (_caucho_expr_45.evalBoolean(_jsp_env)) {
+            if (_caucho_expr_43.evalBoolean(_jsp_env)) {
               out.write(_jsp_string50, 0, _jsp_string50.length);
             }
             out.write(_jsp_string51, 0, _jsp_string51.length);
           }
-          out.write('\n');
-          if (_caucho_expr_30.evalBoolean(_jsp_env)) {
-            out.write(_jsp_string56, 0, _jsp_string56.length);
-            _caucho_expr_46.print(out, _jsp_env, false);
-            out.write(_jsp_string39, 0, _jsp_string39.length);
-            _caucho_expr_3.print(out, _jsp_env, false);
-            out.write(_jsp_string40, 0, _jsp_string40.length);
-            _caucho_expr_4.print(out, _jsp_env, false);
-            out.write('/');
-            _caucho_expr_35.print(out, _jsp_env, false);
-            out.write(_jsp_string41, 0, _jsp_string41.length);
-            _caucho_expr_46.print(out, _jsp_env, false);
-            out.write(_jsp_string42, 0, _jsp_string42.length);
-          }
+          out.write(_jsp_string56, 0, _jsp_string56.length);
+          _caucho_expr_3.print(out, _jsp_env, false);
           out.write(_jsp_string57, 0, _jsp_string57.length);
-          _caucho_expr_3.print(out, _jsp_env, false);
+          _caucho_expr_4.print(out, _jsp_env, false);
+          out.write('/');
+          _caucho_expr_33.print(out, _jsp_env, false);
           out.write(_jsp_string58, 0, _jsp_string58.length);
-          _caucho_expr_4.print(out, _jsp_env, false);
-          out.write('/');
-          _caucho_expr_35.print(out, _jsp_env, false);
+          _caucho_expr_44.print(out, _jsp_env, false);
           out.write(_jsp_string59, 0, _jsp_string59.length);
-          _caucho_expr_47.print(out, _jsp_env, false);
-          out.write(_jsp_string60, 0, _jsp_string60.length);
           _caucho_expr_3.print(out, _jsp_env, false);
-          out.write(_jsp_string61, 0, _jsp_string61.length);
+          out.write(_jsp_string60, 0, _jsp_string60.length);
           _caucho_expr_4.print(out, _jsp_env, false);
           out.write('/');
-          _caucho_expr_35.print(out, _jsp_env, false);
+          _caucho_expr_33.print(out, _jsp_env, false);
+          out.write(_jsp_string61, 0, _jsp_string61.length);
+          _caucho_expr_45.print(out, _jsp_env, false);
           out.write(_jsp_string62, 0, _jsp_string62.length);
-          _caucho_expr_48.print(out, _jsp_env, false);
-          out.write(_jsp_string63, 0, _jsp_string63.length);
         }
         pageContext.pageSetOrRemove("item", _jsp_oldVar_7);
-        out.write(_jsp_string64, 0, _jsp_string64.length);
+        out.write(_jsp_string63, 0, _jsp_string63.length);
       }
       out.write(_jsp_string1, 0, _jsp_string1.length);
     } catch (java.lang.Throwable _jsp_e) {
@@ -388,25 +368,22 @@ public class _NameChangeEvent$List__jsp extends com.caucho.jsp.JavaPage
     _caucho_expr_27 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['name_change_event.account']}");
     _caucho_expr_28 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${param.referName ne 'changeRequest'}");
     _caucho_expr_29 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['name_change_event.change_request']}");
-    _caucho_expr_30 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${param.referName ne 'currentStatus'}");
-    _caucho_expr_31 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['name_change_event.current_status']}");
-    _caucho_expr_32 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['@action']}");
-    _caucho_expr_33 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${nameChangeEventList}");
-    _caucho_expr_34 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.version}");
-    _caucho_expr_35 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.id}");
-    _caucho_expr_36 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.name}");
-    _caucho_expr_37 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${'$'}");
-    _caucho_expr_38 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${not empty  item.account}");
-    _caucho_expr_39 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.account.id}");
-    _caucho_expr_40 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.account.displayName}");
-    _caucho_expr_41 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${empty  item.account}");
-    _caucho_expr_42 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${not empty  item.changeRequest}");
-    _caucho_expr_43 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.changeRequest.id}");
-    _caucho_expr_44 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.changeRequest.displayName}");
-    _caucho_expr_45 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${empty  item.changeRequest}");
-    _caucho_expr_46 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.currentStatus}");
-    _caucho_expr_47 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['@delete']}");
-    _caucho_expr_48 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['@copy']}");
+    _caucho_expr_30 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['@action']}");
+    _caucho_expr_31 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${nameChangeEventList}");
+    _caucho_expr_32 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.version}");
+    _caucho_expr_33 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.id}");
+    _caucho_expr_34 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.name}");
+    _caucho_expr_35 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${'$'}");
+    _caucho_expr_36 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${not empty  item.account}");
+    _caucho_expr_37 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.account.id}");
+    _caucho_expr_38 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.account.displayName}");
+    _caucho_expr_39 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${empty  item.account}");
+    _caucho_expr_40 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${not empty  item.changeRequest}");
+    _caucho_expr_41 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.changeRequest.id}");
+    _caucho_expr_42 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${item.changeRequest.displayName}");
+    _caucho_expr_43 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${empty  item.changeRequest}");
+    _caucho_expr_44 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['@delete']}");
+    _caucho_expr_45 = com.caucho.jsp.JspUtil.createExpr(pageContext.getELContext(), "${userContext.localeMap['@copy']}");
   }
 
   public void destroy()
@@ -427,7 +404,7 @@ public class _NameChangeEvent$List__jsp extends com.caucho.jsp.JavaPage
     String resourcePath = loader.getResourcePathSpecificFirst();
     mergePath.addClassPath(resourcePath);
     com.caucho.vfs.Depend depend;
-    depend = new com.caucho.vfs.Depend(appDir.lookup("coreview/com/doublechain/bank/namechangeevent/NameChangeEvent$List.jsp"), 824487660585893190L, false);
+    depend = new com.caucho.vfs.Depend(appDir.lookup("coreview/com/doublechain/bank/namechangeevent/NameChangeEvent$List.jsp"), 8386118584134177626L, false);
     com.caucho.jsp.JavaPage.addDepend(_caucho_depends, depend);
     depend = new com.caucho.vfs.Depend(mergePath.lookup("jar:file:/opt/resin-3.1.12/lib/resin.jar!/com/caucho/jstl/fmt.tld"), 8594578285720415164L, false);
     com.caucho.jsp.JavaPage.addDepend(_caucho_depends, depend);
@@ -487,15 +464,12 @@ public class _NameChangeEvent$List__jsp extends com.caucho.jsp.JavaPage
   private static com.caucho.el.Expr _caucho_expr_43;
   private static com.caucho.el.Expr _caucho_expr_44;
   private static com.caucho.el.Expr _caucho_expr_45;
-  private static com.caucho.el.Expr _caucho_expr_46;
-  private static com.caucho.el.Expr _caucho_expr_47;
-  private static com.caucho.el.Expr _caucho_expr_48;
 
   private final static char []_jsp_string4;
   private final static char []_jsp_string46;
   private final static char []_jsp_string22;
-  private final static char []_jsp_string64;
-  private final static char []_jsp_string58;
+  private final static char []_jsp_string63;
+  private final static char []_jsp_string57;
   private final static char []_jsp_string13;
   private final static char []_jsp_string12;
   private final static char []_jsp_string25;
@@ -503,14 +477,14 @@ public class _NameChangeEvent$List__jsp extends com.caucho.jsp.JavaPage
   private final static char []_jsp_string29;
   private final static char []_jsp_string14;
   private final static char []_jsp_string35;
+  private final static char []_jsp_string56;
   private final static char []_jsp_string26;
   private final static char []_jsp_string44;
-  private final static char []_jsp_string62;
+  private final static char []_jsp_string61;
   private final static char []_jsp_string40;
   private final static char []_jsp_string49;
   private final static char []_jsp_string37;
   private final static char []_jsp_string21;
-  private final static char []_jsp_string56;
   private final static char []_jsp_string20;
   private final static char []_jsp_string18;
   private final static char []_jsp_string11;
@@ -528,10 +502,9 @@ public class _NameChangeEvent$List__jsp extends com.caucho.jsp.JavaPage
   private final static char []_jsp_string2;
   private final static char []_jsp_string17;
   private final static char []_jsp_string28;
-  private final static char []_jsp_string61;
-  private final static char []_jsp_string63;
+  private final static char []_jsp_string60;
+  private final static char []_jsp_string62;
   private final static char []_jsp_string52;
-  private final static char []_jsp_string57;
   private final static char []_jsp_string43;
   private final static char []_jsp_string16;
   private final static char []_jsp_string38;
@@ -540,12 +513,12 @@ public class _NameChangeEvent$List__jsp extends com.caucho.jsp.JavaPage
   private final static char []_jsp_string3;
   private final static char []_jsp_string5;
   private final static char []_jsp_string41;
-  private final static char []_jsp_string60;
+  private final static char []_jsp_string59;
   private final static char []_jsp_string10;
   private final static char []_jsp_string39;
   private final static char []_jsp_string24;
   private final static char []_jsp_string32;
-  private final static char []_jsp_string59;
+  private final static char []_jsp_string58;
   private final static char []_jsp_string31;
   private final static char []_jsp_string45;
   private final static char []_jsp_string47;
@@ -560,8 +533,8 @@ public class _NameChangeEvent$List__jsp extends com.caucho.jsp.JavaPage
     _jsp_string4 = "Manager/addNameChangeEvent/".toCharArray();
     _jsp_string46 = "{ID}/\">\n		<span class=\"display_span\">\n			".toCharArray();
     _jsp_string22 = "Manager/load".toCharArray();
-    _jsp_string64 = "\n		\n		</tbody>\n	</table>	\n	\n\n</div>".toCharArray();
-    _jsp_string58 = "Manager/removeNameChangeEvent/".toCharArray();
+    _jsp_string63 = "\n		\n		</tbody>\n	</table>	\n	\n\n</div>".toCharArray();
+    _jsp_string57 = "Manager/removeNameChangeEvent/".toCharArray();
     _jsp_string13 = " btn-sm\" href=\"".toCharArray();
     _jsp_string12 = "\n		<a class=\"btn btn-".toCharArray();
     _jsp_string25 = "/' \n			class='page-link page-action '>".toCharArray();
@@ -569,14 +542,14 @@ public class _NameChangeEvent$List__jsp extends com.caucho.jsp.JavaPage
     _jsp_string29 = "\n	<th>".toCharArray();
     _jsp_string14 = "\">".toCharArray();
     _jsp_string35 = "\" ><td><a class=\"link-action-removed\" href=\"./nameChangeEventManager/view/".toCharArray();
+    _jsp_string56 = "\n\n				<td>\n\n				<a href='#".toCharArray();
     _jsp_string26 = "</a>\n	</li>\n".toCharArray();
     _jsp_string44 = "/\"\n			data-switch-method=\"./nameChangeEventManager/transferToAnotherAccount/".toCharArray();
-    _jsp_string62 = "/' class='copy-action btn btn-success btn-xs'><i class=\"fa fa-files-o fa-lg\"></i> ".toCharArray();
+    _jsp_string61 = "/' class='copy-action btn btn-success btn-xs'><i class=\"fa fa-files-o fa-lg\"></i> ".toCharArray();
     _jsp_string40 = "Manager/updateNameChangeEvent/".toCharArray();
     _jsp_string49 = "\n			".toCharArray();
     _jsp_string37 = "</a></td>\n".toCharArray();
     _jsp_string21 = "\">\n		<a href='#".toCharArray();
-    _jsp_string56 = "	<td contenteditable='true' class='edit-value'  propertyToChange='currentStatus' storedCellValue='".toCharArray();
     _jsp_string20 = "\n\n\n	<li class=\"page-item ".toCharArray();
     _jsp_string18 = "	\n\n\n\n<nav aria-label=\"Page navigation example\">\n  <ul class=\"pagination\">\n".toCharArray();
     _jsp_string11 = "\n		".toCharArray();
@@ -594,10 +567,9 @@ public class _NameChangeEvent$List__jsp extends com.caucho.jsp.JavaPage
     _jsp_string2 = "\n	<div class=\"row\" style=\"font-size: 30px;\">\n		<div class=\"col-xs-12 col-md-12\" style=\"padding-left:20px\">\n		 ".toCharArray();
     _jsp_string17 = "\n	</div><!--end of div class=\"btn-group\" -->\n	\n		 \n		 \n		 \n		 </div>\n </div>\n    \n    \n<div class=\"table-responsive\">\n\n\n".toCharArray();
     _jsp_string28 = "'>\n		<thead><tr>\n		".toCharArray();
-    _jsp_string61 = "Manager/copyNameChangeEventFrom/".toCharArray();
-    _jsp_string63 = " </a>\n\n				</td>\n				</tr>\n			".toCharArray();
+    _jsp_string60 = "Manager/copyNameChangeEventFrom/".toCharArray();
+    _jsp_string62 = " </a>\n\n				</td>\n				</tr>\n			".toCharArray();
     _jsp_string52 = "\n	<td class=\"select_candidate_td\"\n			data-candidate-method=\"./nameChangeEventManager/requestCandidateChangeRequest/".toCharArray();
-    _jsp_string57 = "\n				<td>\n\n				<a href='#".toCharArray();
     _jsp_string43 = "\n	<td class=\"select_candidate_td\"\n			data-candidate-method=\"./nameChangeEventManager/requestCandidateAccount/".toCharArray();
     _jsp_string16 = "\n	".toCharArray();
     _jsp_string38 = "	<td contenteditable='true' class='edit-value'  propertyToChange='name' storedCellValue='".toCharArray();
@@ -606,12 +578,12 @@ public class _NameChangeEvent$List__jsp extends com.caucho.jsp.JavaPage
     _jsp_string3 = "! \n		 <a href=\"./".toCharArray();
     _jsp_string5 = "/\"><i class=\"fa fa-plus-square\" aria-hidden=\"true\"></i></a>\n		 \n		 \n		 \n		 </div>\n	</div>\n\n".toCharArray();
     _jsp_string41 = "/'>".toCharArray();
-    _jsp_string60 = "</a>\n				<a href='#".toCharArray();
+    _jsp_string59 = "</a>\n				<a href='#".toCharArray();
     _jsp_string10 = "/\"><i class=\"fa fa-plus-square\" aria-hidden=\"true\"></i></a>\n		 \n		 		 	<div class=\"btn-group\" role=\"group\" aria-label=\"Button group with nested dropdown\">		\n	".toCharArray();
     _jsp_string39 = "' prefix='".toCharArray();
     _jsp_string24 = "RowsPerPage=".toCharArray();
     _jsp_string32 = "</th>\n		</tr></thead>\n		<tbody>\n			\n			".toCharArray();
-    _jsp_string59 = "/' class='delete-action btn btn-danger btn-xs'><i class=\"fa fa-trash-o fa-lg\"></i> ".toCharArray();
+    _jsp_string58 = "/' class='delete-action btn btn-danger btn-xs'><i class=\"fa fa-trash-o fa-lg\"></i> ".toCharArray();
     _jsp_string31 = "\n<th>".toCharArray();
     _jsp_string45 = "/\"\n			data-link-template=\"./accountManager/view/".toCharArray();
     _jsp_string47 = "\n			<a href='./accountManager/view/".toCharArray();

@@ -1272,4 +1272,3 @@ public class BankChecker extends BaseChecker{
 
 
 
-

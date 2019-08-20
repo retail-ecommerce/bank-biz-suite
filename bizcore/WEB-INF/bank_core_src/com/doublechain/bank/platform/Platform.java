@@ -59,6 +59,16 @@ public class Platform extends BaseEntity implements  java.io.Serializable{
 	public 	Platform(){
 		// lazy load for all the properties
 	}
+	public 	static Platform withId(String id){
+		Platform platform = new Platform();
+		platform.setId(id);
+		// platform.setVersion(Integer.MAX_VALUE);
+		return platform;
+	}
+	public 	static Platform refById(String id){
+		return withId(id);
+	}
+	
 	// disconnect from all, 中文就是一了百了，跟所有一切尘世断绝往来藏身于茫茫数据海洋
 	public 	void clearFromAll(){
 

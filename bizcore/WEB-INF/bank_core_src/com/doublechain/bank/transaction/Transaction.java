@@ -63,6 +63,16 @@ public class Transaction extends BaseEntity implements  java.io.Serializable{
 	public 	Transaction(){
 		// lazy load for all the properties
 	}
+	public 	static Transaction withId(String id){
+		Transaction transaction = new Transaction();
+		transaction.setId(id);
+		// transaction.setVersion(Integer.MAX_VALUE);
+		return transaction;
+	}
+	public 	static Transaction refById(String id){
+		return withId(id);
+	}
+	
 	// disconnect from all, 中文就是一了百了，跟所有一切尘世断绝往来藏身于茫茫数据海洋
 	public 	void clearFromAll(){
 		setFromAccount( null );

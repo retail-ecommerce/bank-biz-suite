@@ -72,6 +72,16 @@ public class UserApp extends BaseEntity implements  java.io.Serializable{
 	public 	UserApp(){
 		// lazy load for all the properties
 	}
+	public 	static UserApp withId(String id){
+		UserApp userApp = new UserApp();
+		userApp.setId(id);
+		// userApp.setVersion(Integer.MAX_VALUE);
+		return userApp;
+	}
+	public 	static UserApp refById(String id){
+		return withId(id);
+	}
+	
 	// disconnect from all, 中文就是一了百了，跟所有一切尘世断绝往来藏身于茫茫数据海洋
 	public 	void clearFromAll(){
 		setSecUser( null );
