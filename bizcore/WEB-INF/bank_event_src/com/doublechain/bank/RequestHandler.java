@@ -2,7 +2,7 @@ package com.doublechain.bank;
 
 import com.doublechain.bank.BankUserContext;
 
-public class RequestHandler {
+public class RequestHandler extends CustomBankCheckerManager{
 	
 	public void apply(BankUserContext context, CommonChangeRequest request, ChangeRequestItem item) {
 		

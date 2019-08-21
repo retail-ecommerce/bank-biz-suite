@@ -62,7 +62,7 @@ public class Platform extends BaseEntity implements  java.io.Serializable{
 	public 	static Platform withId(String id){
 		Platform platform = new Platform();
 		platform.setId(id);
-		// platform.setVersion(Integer.MAX_VALUE);
+		platform.setVersion(Integer.MAX_VALUE);
 		return platform;
 	}
 	public 	static Platform refById(String id){

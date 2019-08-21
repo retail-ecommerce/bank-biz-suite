@@ -50,185 +50,31 @@ public class ChangeRequestService extends CustomBankCheckerManager{
 	public ChangeRequest process(BankUserContext userContext, ChangeRequest request) throws Exception {
 		
 		
-		userContext.getChecker().checkChangeRequestAsObject(request);
+		checkerOf(userContext).checkChangeRequestAsObject(request);
 		
 		
 		ChangeRequest newReq = changeRequestManagerOf(userContext)
 			.internalSaveChangeRequest(userContext, request);
 		
 		for(NameChangeEvent nv:request.getNameChangeEventList() ) {
-			Account a1 = accountManagerOf(userContext)
-					.loadAccount(userContext, nv.getAccount().getId(), new String[] {});
-			a1.updateName(nv.getName());
-			accountManagerOf(userContext).internalSaveAccount(userContext, a1);
 			
+			NameChangeEventHandler handler = new NameChangeEventHandler();
+			handler.apply(userContext, newReq, nv);
 		}
 		
 		for(Transaction tx:request.getTransactionList() ) {
-			Account a1 = accountManagerOf(userContext).loadAccount(userContext, 
-					tx.getFromAccount().getId(), new String[] {});
-			Account a2 = accountManagerOf(userContext).loadAccount(userContext, 
-					tx.getToAccount().getId(), new String[] {});
-			
-			
-			AccountChange ac1 = new AccountChange().updateAmount(tx.getAmount())
-					.updateName(tx.getName()).updatePreviousBalance(a1.getBalance())
-					.updateType("转出").updateCurrentBalance(a1.getBalance().subtract(tx.getAmount()))
-					.updateChangeRequest(newReq);
-			
-			AccountChange ac2=	new AccountChange().updateAmount(tx.getAmount())
-					.updateName(tx.getName()).updatePreviousBalance(a2.getBalance())
-					.updateType("转入").updateCurrentBalance(a2.getBalance().add(tx.getAmount()))
-					.updateChangeRequest(newReq);
-			a1.addAccountChange(ac1);
-			a2.addAccountChange(ac2);
-			a1.updateBalance(a1.getBalance().subtract(tx.getAmount()));
-			a2.updateBalance(a2.getBalance().add(tx.getAmount()));
-			
-			
-			accountManagerOf(userContext).internalSaveAccount(userContext, a1);
-			accountManagerOf(userContext).internalSaveAccount(userContext, a2);
-			
-			//userContext.getDAOGroup().getAccountDAO()
-			
-			
+			TxRequestHandler handler = new TxRequestHandler();
+			handler.apply(userContext, newReq, tx);
 		}
 		
 		
 		return request;
 		
-		/*
-		
-		for(ChangeRequestItem item: request.getItemList()) {
-			
-			RequestHandler handler=lookupHandler( userContext,item);
-			
-			if(handler==null) {
-				continue;
-			}
-			
-			handler.apply(userContext, request, item);
-			
-		}*/
-		
-		
-		
 	}
-	protected static void log(String message) {
-		String content = String.format("%s %s: %s", "TERMSVR","-",message);
-		System.out.println(content);
-		
-	}
-	protected static ObjectMapper getObjectMapper() {
-		ObjectMapper objectMapper  = new ObjectMapper();
-		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		objectMapper.setSerializationInclusion(Include.NON_NULL);
-
-		return objectMapper;
-
-	}
-	protected static ChangeRequest emitRequest(ChangeRequest req) throws IOException {
-		String requestURL = "http://localhost:8080/bank/commonChangeService/process/";
-		
-		
-		String val = getObjectMapper().writeValueAsString(req);
-		
-		
-		
-		MediaType mediaType = MediaType.parse("application/json");
-		RequestBody requestBody = RequestBody.create(mediaType,val);
-		//HttpUrl translateURL="http://localhost:8080/bank/commonChangeService/";
-		Request request = new Request
-				.Builder()
-				.put(requestBody)
-				.url(requestURL)
-				.build();
-		OkHttpClient okHttpClient = new OkHttpClient();
-		okHttpClient.setConnectTimeout(110, TimeUnit.SECONDS); // connect timeout
-		okHttpClient.setReadTimeout(110, TimeUnit.SECONDS);    // socket timeout
-		Response response = okHttpClient.newCall(request).execute();
-		String result = response.body().string();
-		log("server returns:" + result);
-		
-		
-		
-		return req;
-		
-		
-		
-		
-			
-		
-	}
-	public static void main(String args[]) {
-		
-		
-		
-		
-		//ChangeRequestService service = new ChangeRequestService();
-		//CommonChangeRequest request = new CommonChangeRequest();
-		//request.getItemList().add(new ChangeRequestItem());
-		//service.process(null, request);
-		Platform  platform = Platform.refById("P000001");
-		ChangeRequest req = new ChangeRequest()
-				.updateName("test cr")
-				.updatePlatform(platform);
-				
-		Transaction tx = new Transaction().updateName("test tx")
-				.updateFromAccount(Account.refById("A000001"))
-				.updateToAccount(Account.refById("A000002"))
-				.updateType("转账")
-				
-				.updateAmount(new BigDecimal("21.00"));
-		
-		
-		
-		
-		req.addTransaction(tx);
-		
-		tx = new Transaction().updateName("test tx3")
-					.updateFromAccount(Account.refById("A000002"))
-					.updateToAccount(Account.refById("A000001"))
-					.updateType("转账")
-					.updateAmount(new BigDecimal("11.00"));
-			
-		req.addTransaction(tx);
-		
-		NameChangeEvent ne=new NameChangeEvent()
-				.updateAccount(Account.refById("A000001"))
-				.updateName("OLD NAME");
-		req.addNameChangeEvent(ne);
-		
-		
-		
-		
-		
-		
-		
-		
-		BankObjectChecker checker=new BankObjectChecker();
-		
-		
-		//checker.checkChangeRequestAsObject(req);
-		
-		
-		
-		
-		
-		try {
-			
-			String val = getObjectMapper().writeValueAsString(req);
-			log(val);
-			
-			checker.throwExceptionIfHasErrors(ChangeRequestManagerException.class);
-			emitRequest(req);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		
-		
-	}
+	
+	
+	
+	
 	
 }
 

@@ -13,6 +13,12 @@ import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.cglib.proxy.MethodProxy;
 
 public class BankCheckerManager extends BaseManagerImpl {
+	
+	protected BankObjectChecker checkerOf(BankUserContext ctx) {
+		return ctx.getChecker();
+	}
+
+	
 	private static class AsyncManagerJob extends Thread {
 		protected Object me;
 		protected Object proxy;
