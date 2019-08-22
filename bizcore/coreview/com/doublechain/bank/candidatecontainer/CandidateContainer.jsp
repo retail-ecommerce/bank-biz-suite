@@ -1,4 +1,4 @@
-<%@ page import='java.util.*,com.doublechain.bank.*,com.doublechain.bank.formaction.FormAction'%>
+<%@ page import='java.util.*,com.doublechain.bank.*,com.doublechain.bank.candidatecontainer.CandidateContainer'%>
 
 <%@ page language="java" contentType="text/plain; charset=utf-8"%>
 <%@ page isELIgnored="false"%>
@@ -62,8 +62,8 @@
           <div class="table-responsive" id="content">
           <!-- real content -->
 
-<c:set var="ownerBeanName" value="formAction" scope="request"/>
-<c:set var="ownerClassName" value="FormAction" scope="request"/>
+<c:set var="ownerBeanName" value="candidateContainer" scope="request"/>
+<c:set var="ownerClassName" value="CandidateContainer" scope="request"/>
 
 
 
@@ -100,7 +100,8 @@
 	<ul class="nav nav-tabs" id="navi-tabs">
 	  <li class="active"><a data-toggle="tab" href="#summary" class="disabled"><i class="fa  fa-home"></i> ${userContext.localeMap['@summary']}</a></li>
 	 
-	<% FormAction result = (FormAction)request.getAttribute("result");  %>
+	<% CandidateContainer result = (CandidateContainer)request.getAttribute("result");  %>
+			<li><a data-toggle="tab" href="#candidateElementList" class="disabled"> ${userContext.localeMap['candidate_element']}</a></li>
  
 	</ul>
 	</div>
@@ -117,8 +118,8 @@
 <div class="row" desc="show parent objects">
 	
 	   
-	<c:set var="formAction" value="${ result}" scope="request" />
-<sky:include page="com/doublechain/bank/formaction/FormAction$Summary.jsp" />
+	<c:set var="candidateContainer" value="${ result}" scope="request" />
+<sky:include page="com/doublechain/bank/candidatecontainer/CandidateContainer$Summary.jsp" />
 
 	
 </div>
@@ -126,13 +127,7 @@
 	
 	
 
-	<div class="row">
-<c:set var="genericForm" value="${ result.form}" scope="request" />
-<c:set var="referName" value="(form)" scope="request" />
-<sky:include page="com/doublechain/bank/genericform/GenericForm$Info.jsp" />
-
-</div>
-
+	
 
 
 
@@ -150,7 +145,15 @@
 
 	
 
-	
+		<c:if test='${not empty userContext.accessTokens["candidateElementList"] or ignoreListAccessControl}'>
+		<c:set var="candidateElementList" value="${result.candidateElementList}" scope="request"/>
+		<c:set var="candidateElementListName" value="candidateElementList" scope="request"/>
+		<div id="candidateElementList" class="tab-pane fade sublist" refer-name="container">
+			<sky:include page="com/doublechain/bank/candidateelement/CandidateElement$List.jsp"
+					referName="container"/>
+		</div>
+	</c:if>
+
 	
 
 </div><!--<div class="tab-content" style="padding-top: 10px">-->

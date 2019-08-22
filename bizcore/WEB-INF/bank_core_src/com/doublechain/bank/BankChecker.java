@@ -1264,9 +1264,88 @@ public class BankChecker extends BaseChecker{
 		
 		return this;
 	}	
+
+	public static final String  ID_OF_CANDIDATE_CONTAINER ="candidate_container.id";
+	public BankChecker checkIdOfCandidateContainer(String id)
+	{
+		
+	 	checkStringLengthRange(id,2, 64,ID_OF_CANDIDATE_CONTAINER ); 		
+		
+		return this;
+	}	
+
+	public static final String  NAME_OF_CANDIDATE_CONTAINER ="candidate_container.name";
+	public BankChecker checkNameOfCandidateContainer(String name)
+	{
+		
+	 	checkStringLengthRange(name,2, 28,NAME_OF_CANDIDATE_CONTAINER ); 		
+		
+		return this;
+	}	
+
+	public static final String  VERSION_OF_CANDIDATE_CONTAINER ="candidate_container.version";
+	public BankChecker checkVersionOfCandidateContainer(int version)
+	{
+		
+	 	checkIntegerRange(version,0, Integer.MAX_VALUE,VERSION_OF_CANDIDATE_CONTAINER ); 		
+		
+		return this;
+	}	
+
+	public static final String  ID_OF_CANDIDATE_ELEMENT ="candidate_element.id";
+	public BankChecker checkIdOfCandidateElement(String id)
+	{
+		
+	 	checkStringLengthRange(id,2, 64,ID_OF_CANDIDATE_ELEMENT ); 		
+		
+		return this;
+	}	
+
+	public static final String  NAME_OF_CANDIDATE_ELEMENT ="candidate_element.name";
+	public BankChecker checkNameOfCandidateElement(String name)
+	{
+		
+	 	checkStringLengthRange(name,1, 200,NAME_OF_CANDIDATE_ELEMENT ); 		
+		
+		return this;
+	}	
+
+	public static final String  TYPE_OF_CANDIDATE_ELEMENT ="candidate_element.type";
+	public BankChecker checkTypeOfCandidateElement(String type)
+	{
+		
+	 	checkStringLengthRange(type,1, 200,TYPE_OF_CANDIDATE_ELEMENT ); 		
+		
+		return this;
+	}	
+
+	public static final String  IMAGE_OF_CANDIDATE_ELEMENT ="candidate_element.image";
+	public BankChecker checkImageOfCandidateElement(String image)
+	{
+		
+	 	checkImage(image,0, 512,IMAGE_OF_CANDIDATE_ELEMENT ); 		
+		
+		return this;
+	}	
+
+	public static final String  CONTAINER_OF_CANDIDATE_ELEMENT ="candidate_element.container";
+	public BankChecker checkContainerIdOfCandidateElement(String containerId)
+	{
+		
+	 	checkIdOfCandidateElement(containerId ); 		
+		
+		return this;
+	}	
+
+	public static final String  VERSION_OF_CANDIDATE_ELEMENT ="candidate_element.version";
+	public BankChecker checkVersionOfCandidateElement(int version)
+	{
+		
+	 	checkIntegerRange(version,0, Integer.MAX_VALUE,VERSION_OF_CANDIDATE_ELEMENT ); 		
+		
+		return this;
+	}	
 }
-
-
 
 
 

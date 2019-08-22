@@ -9,10 +9,10 @@
 <c:set var="ignoreListAccessControl" value="${true}"/>
 
 
-<c:if test="${not empty formAction}">
+<c:if test="${not empty candidateContainer}">
 <div class="col-xs-12 col-md-12 section">
-	<b title="A FormAction"> 
-		${userContext.localeMap['form_action']}${userContext.localeMap['@word_space']}${userContext.localeMap['@summary']}
+	<b title="A CandidateContainer"> 
+		${userContext.localeMap['candidate_container']}${userContext.localeMap['@word_space']}${userContext.localeMap['@summary']}
 		</b>
 		
 		
@@ -33,28 +33,12 @@
 	
 	
 	<div class="col-xs-12 col-md-3 summary-section">
-<span class="summary-label">${userContext.localeMap['form_action.id']}</span>
+<span class="summary-label">${userContext.localeMap['candidate_container.id']}</span>
 <span >${result.id}</span>
 </div>
 <div class="col-xs-12 col-md-3 summary-section">
-<span class="summary-label">${userContext.localeMap['form_action.label']}</span>
-<span >${result.label}</span>
-</div>
-<div class="col-xs-12 col-md-3 summary-section">
-<span class="summary-label">${userContext.localeMap['form_action.locale_key']}</span>
-<span >${result.localeKey}</span>
-</div>
-<div class="col-xs-12 col-md-3 summary-section">
-<span class="summary-label">${userContext.localeMap['form_action.action_key']}</span>
-<span >${result.actionKey}</span>
-</div>
-<div class="col-xs-12 col-md-3 summary-section">
-<span class="summary-label">${userContext.localeMap['form_action.level']}</span>
-<span >${result.level}</span>
-</div>
-<div class="col-xs-12 col-md-3 summary-section">
-<span class="summary-label">${userContext.localeMap['form_action.url']}</span>
-<span >${result.url}</span>
+<span class="summary-label">${userContext.localeMap['candidate_container.name']}</span>
+<span >${result.name}</span>
 </div>
 
 	</div>

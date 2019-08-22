@@ -1,4 +1,4 @@
-<%@ page import='java.util.*,com.doublechain.bank.*,com.doublechain.bank.formaction.FormAction'%>
+<%@ page import='java.util.*,com.doublechain.bank.*,com.doublechain.bank.candidateelement.CandidateElement'%>
 
 <%@ page language="java" contentType="text/plain; charset=utf-8"%>
 <%@ page isELIgnored="false"%>
@@ -62,8 +62,8 @@
           <div class="table-responsive" id="content">
           <!-- real content -->
 
-<c:set var="ownerBeanName" value="formAction" scope="request"/>
-<c:set var="ownerClassName" value="FormAction" scope="request"/>
+<c:set var="ownerBeanName" value="candidateElement" scope="request"/>
+<c:set var="ownerClassName" value="CandidateElement" scope="request"/>
 
 
 
@@ -100,7 +100,7 @@
 	<ul class="nav nav-tabs" id="navi-tabs">
 	  <li class="active"><a data-toggle="tab" href="#summary" class="disabled"><i class="fa  fa-home"></i> ${userContext.localeMap['@summary']}</a></li>
 	 
-	<% FormAction result = (FormAction)request.getAttribute("result");  %>
+	<% CandidateElement result = (CandidateElement)request.getAttribute("result");  %>
  
 	</ul>
 	</div>
@@ -117,8 +117,8 @@
 <div class="row" desc="show parent objects">
 	
 	   
-	<c:set var="formAction" value="${ result}" scope="request" />
-<sky:include page="com/doublechain/bank/formaction/FormAction$Summary.jsp" />
+	<c:set var="candidateElement" value="${ result}" scope="request" />
+<sky:include page="com/doublechain/bank/candidateelement/CandidateElement$Summary.jsp" />
 
 	
 </div>
@@ -127,9 +127,9 @@
 	
 
 	<div class="row">
-<c:set var="genericForm" value="${ result.form}" scope="request" />
-<c:set var="referName" value="(form)" scope="request" />
-<sky:include page="com/doublechain/bank/genericform/GenericForm$Info.jsp" />
+<c:set var="candidateContainer" value="${ result.container}" scope="request" />
+<c:set var="referName" value="(container)" scope="request" />
+<sky:include page="com/doublechain/bank/candidatecontainer/CandidateContainer$Info.jsp" />
 
 </div>
 
@@ -213,5 +213,22 @@
 
 
 </body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

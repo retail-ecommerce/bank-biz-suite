@@ -13,12 +13,9 @@ import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.cglib.proxy.MethodProxy;
 
 public class BankCheckerManager extends BaseManagerImpl {
-	
 	protected BankObjectChecker checkerOf(BankUserContext ctx) {
 		return ctx.getChecker();
 	}
-
-	
 	private static class AsyncManagerJob extends Thread {
 		protected Object me;
 		protected Object proxy;
@@ -201,6 +198,18 @@ public class BankCheckerManager extends BaseManagerImpl {
 	}
 	public com.doublechain.bank.formaction.FormActionDAO formActionDaoOf(BankUserContext userContext){
 		return userContext.getDAOGroup().getFormActionDAO();
+	}
+	public com.doublechain.bank.candidatecontainer.CandidateContainerManager candidateContainerManagerOf(BankUserContext userContext){
+		return userContext.getManagerGroup().getCandidateContainerManager();
+	}
+	public com.doublechain.bank.candidatecontainer.CandidateContainerDAO candidateContainerDaoOf(BankUserContext userContext){
+		return userContext.getDAOGroup().getCandidateContainerDAO();
+	}
+	public com.doublechain.bank.candidateelement.CandidateElementManager candidateElementManagerOf(BankUserContext userContext){
+		return userContext.getManagerGroup().getCandidateElementManager();
+	}
+	public com.doublechain.bank.candidateelement.CandidateElementDAO candidateElementDaoOf(BankUserContext userContext){
+		return userContext.getDAOGroup().getCandidateElementDAO();
 	}
 	
 	

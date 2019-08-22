@@ -198,6 +198,34 @@ import LoginHistoryPermission from './loginhistory/LoginHistory.permission';
 import LoginHistoryProfile from './loginhistory/LoginHistory.profile';
 import LoginHistoryService from './loginhistory/LoginHistory.service';
 import LoginHistoryUpdateForm from './loginhistory/LoginHistory.updateform';
+import CandidateContainerBase from './candidatecontainer/CandidateContainer.base';
+import CandidateContainerBizApp from './candidatecontainer/CandidateContainer.app';
+import CandidateContainerModel from './candidatecontainer/CandidateContainer.model';
+import CandidateContainerDashboard from './candidatecontainer/CandidateContainer.dashboard';
+import CandidateContainerModalTable from './candidatecontainer/CandidateContainer.modaltable';
+import CandidateContainerSearch from './candidatecontainer/CandidateContainer.search';
+import CandidateContainerSearchForm from './candidatecontainer/CandidateContainer.searchform';
+import CandidateContainerCreateForm from './candidatecontainer/CandidateContainer.createform';
+import CandidateContainerAssociateForm from './candidatecontainer/CandidateContainer.associateform';
+import CandidateContainerTable from './candidatecontainer/CandidateContainer.table';
+import CandidateContainerPermission from './candidatecontainer/CandidateContainer.permission';
+import CandidateContainerProfile from './candidatecontainer/CandidateContainer.profile';
+import CandidateContainerService from './candidatecontainer/CandidateContainer.service';
+import CandidateContainerUpdateForm from './candidatecontainer/CandidateContainer.updateform';
+import CandidateElementBase from './candidateelement/CandidateElement.base';
+import CandidateElementBizApp from './candidateelement/CandidateElement.app';
+import CandidateElementModel from './candidateelement/CandidateElement.model';
+import CandidateElementDashboard from './candidateelement/CandidateElement.dashboard';
+import CandidateElementModalTable from './candidateelement/CandidateElement.modaltable';
+import CandidateElementSearch from './candidateelement/CandidateElement.search';
+import CandidateElementSearchForm from './candidateelement/CandidateElement.searchform';
+import CandidateElementCreateForm from './candidateelement/CandidateElement.createform';
+import CandidateElementAssociateForm from './candidateelement/CandidateElement.associateform';
+import CandidateElementTable from './candidateelement/CandidateElement.table';
+import CandidateElementPermission from './candidateelement/CandidateElement.permission';
+import CandidateElementProfile from './candidateelement/CandidateElement.profile';
+import CandidateElementService from './candidateelement/CandidateElement.service';
+import CandidateElementUpdateForm from './candidateelement/CandidateElement.updateform';
 
 
 const BizModels = [
@@ -215,6 +243,8 @@ const BizModels = [
 	ListAccessModel,
 	ObjectAccessModel,
 	LoginHistoryModel,
+	CandidateContainerModel,
+	CandidateElementModel,
 
 ]
 
@@ -246,6 +276,8 @@ menuLibrary['userApp'] = UserAppBase.menuData
 menuLibrary['listAccess'] = ListAccessBase.menuData
 menuLibrary['objectAccess'] = ObjectAccessBase.menuData
 menuLibrary['loginHistory'] = LoginHistoryBase.menuData
+menuLibrary['candidateContainer'] = CandidateContainerBase.menuData
+menuLibrary['candidateElement'] = CandidateElementBase.menuData
 
 
 const menuDataOf=(type)=>{
@@ -280,6 +312,8 @@ const ViewMapping = {
   'com.doublechain.bank.listaccess.ListAccess': {name:'listAccess'},
   'com.doublechain.bank.objectaccess.ObjectAccess': {name:'objectAccess'},
   'com.doublechain.bank.loginhistory.LoginHistory': {name:'loginHistory'},
+  'com.doublechain.bank.candidatecontainer.CandidateContainer': {name:'candidateContainer'},
+  'com.doublechain.bank.candidateelement.CandidateElement': {name:'candidateElement'},
 
 }
 
@@ -521,6 +555,34 @@ const OOTBComponents={
     LoginHistoryProfile,
     LoginHistoryService,
     LoginHistoryUpdateForm,
+    CandidateContainerBase,
+    CandidateContainerBizApp,
+    CandidateContainerModel,
+    CandidateContainerDashboard,
+    CandidateContainerModalTable,
+    CandidateContainerSearch,
+    CandidateContainerSearchForm,
+    CandidateContainerCreateForm,
+    CandidateContainerAssociateForm,
+    CandidateContainerTable,
+    CandidateContainerPermission,
+    CandidateContainerProfile,
+    CandidateContainerService,
+    CandidateContainerUpdateForm,
+    CandidateElementBase,
+    CandidateElementBizApp,
+    CandidateElementModel,
+    CandidateElementDashboard,
+    CandidateElementModalTable,
+    CandidateElementSearch,
+    CandidateElementSearchForm,
+    CandidateElementCreateForm,
+    CandidateElementAssociateForm,
+    CandidateElementTable,
+    CandidateElementPermission,
+    CandidateElementProfile,
+    CandidateElementService,
+    CandidateElementUpdateForm,
     menuDataOf,bindBizModels,unbindBizModels,calcLocationPath,calcMenuData
 };
        

@@ -246,40 +246,56 @@ create table form_action_data (
 	primary key(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = "表单动作";
 
+drop table  if exists candidate_container_data;
+create table candidate_container_data (
+	id                            	varchar(48)          not null            comment 'ID',
+	name                          	varchar(28)                              comment '名称',
+	version                       	int                                      comment '版本',
+	primary key(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = "候选人容器";
+
+drop table  if exists candidate_element_data;
+create table candidate_element_data (
+	id                            	varchar(48)          not null            comment 'ID',
+	name                          	varchar(200)                             comment '名称',
+	type                          	varchar(200)                             comment '类型',
+	image                         	varchar(512) CHARACTER SET ascii COLLATE ascii_general_ci                     comment '图片',
+	container                     	varchar(48)                              comment '容器',
+	version                       	int                                      comment '版本',
+	primary key(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = "候选人元素";
+
 
 
 
 insert into platform_data values
-	('P000001','银行模拟平台','2019-08-09 17:00:50','1'),
-	('P000002','银行模拟平台','2019-08-09 09:41:10','1');
+	('P000001','银行模拟平台','2019-08-09 10:39:34','1');
 
 insert into change_request_data values
-	('CR000001','存款','2019-08-08 10:14:34','P000001','1'),
-	('CR000002','转账','2019-08-06 05:52:49','P000001','1'),
-	('CR000003','取款','2019-08-12 01:00:18','P000002','1');
+	('CR000001','存款','2019-08-19 03:55:38','P000001','1'),
+	('CR000002','转账','2019-08-12 08:37:14','P000001','1');
 
 insert into transaction_data values
-	('T000001','存款交易','A000001','A000001','94.12','存款','CR000001','1'),
-	('T000002','存款交易','A000001','A000001','109.43','存款','CR000001','1'),
-	('T000003','取款交易','A000002','A000002','87.06','取款','CR000002','1'),
-	('T000004','存款交易','A000003','A000003','104.74','存款','CR000003','1');
+	('T000001','存款交易','A000001','A000001','104.55','存款','CR000001','1'),
+	('T000002','存款交易','A000001','A000001','99.76','存款','CR000001','1'),
+	('T000003','取款交易','A000002','A000002','98.76','取款','CR000002','1'),
+	('T000004','存款交易','A000002','A000002','103.18','存款','CR000002','1');
 
 insert into name_change_event_data values
 	('NCE000001','new name','A000001','CR000001','1'),
 	('NCE000002','new name0002','A000001','CR000001','1'),
 	('NCE000003','new name0003','A000002','CR000002','1'),
-	('NCE000004','new name0004','A000003','CR000003','1');
+	('NCE000004','new name0004','A000002','CR000002','1');
 
 insert into account_data values
-	('A000001','张三账户','115.17','2019-08-09 22:43:40','2019-08-09 15:12:15','P000001','1'),
-	('A000002','李四账户','92.62','2019-08-16 18:24:03','2019-08-03 07:49:44','P000001','1'),
-	('A000003','银行账户','106.65','2019-08-01 12:21:54','2019-08-17 07:40:53','P000002','1');
+	('A000001','张三账户','108.59','2019-08-21 05:09:40','2019-08-09 05:51:03','P000001','1'),
+	('A000002','李四账户','94.26','2019-08-08 23:48:01','2019-08-21 21:19:51','P000001','1');
 
 insert into account_change_data values
-	('AC000001','存款交易','A000001','1091.32','存款','97.35','1275.55','CR000001','1'),
-	('AC000002','存款交易','A000001','1068.79','存款','92.96','1301.29','CR000001','1'),
-	('AC000003','取款交易','A000002','993.72','取款','90.05','1087.07','CR000002','1'),
-	('AC000004','存款交易','A000003','1142.74','存款','102.37','970.11','CR000003','1');
+	('AC000001','存款交易','A000001','996.94','存款','114.41','946.17','CR000001','1'),
+	('AC000002','存款交易','A000001','1159.69','存款','97.62','1202.41','CR000001','1'),
+	('AC000003','取款交易','A000002','1280.04','取款','109.75','1061.84','CR000002','1'),
+	('AC000004','存款交易','A000002','1137.37','存款','110.37','1150.46','CR000002','1');
 
 insert into user_domain_data values
 	('UD000001','用户区域','1');
@@ -289,45 +305,43 @@ insert into user_white_list_data values
 	('UWL000002','13808188512','tester;ios-spokesperson0002','UD000001','1');
 
 insert into sec_user_data values
-	('SU000001','login','13900000001','','C183EC89F92A462CF45B95504792EC4625E847C90536EEFE512D1C9DB8602E95','wx123456789abcdefghijklmn','wxapp12098410239840','jwt_token_12345678','0','2019-08-14 03:41:27','2019-08-08 03:06:38','UD000001',NULL,'BLOCKED','1'),
-	('SU000002','login0002','13900000002','suddy_chang@163.com','AC2F95628244C6975EB2C36942EA879ED93D93F5895EF3157733E4629FA86B92','wx123456789abcdefghijklmn0002','wxapp120984102398400002','jwt_token_123456780002','9999999','2019-08-13 06:17:20','2019-08-16 04:51:21','UD000001',NULL,'BLOCKED0002','1');
+	('SU000001','login','13900000001','','C183EC89F92A462CF45B95504792EC4625E847C90536EEFE512D1C9DB8602E95','wx123456789abcdefghijklmn','wxapp12098410239840','jwt_token_12345678','0','2019-08-20 21:58:45','2019-08-05 14:15:56','UD000001',NULL,'BLOCKED','1'),
+	('SU000002','login0002','13900000002','suddy_chang@163.com','AC2F95628244C6975EB2C36942EA879ED93D93F5895EF3157733E4629FA86B92','wx123456789abcdefghijklmn0002','wxapp120984102398400002','jwt_token_123456780002','9999999','2019-08-08 12:34:39','2019-08-10 09:26:10','UD000001',NULL,'BLOCKED0002','1');
 
 insert into sec_user_blocking_data values
-	('SUB000001','currentUser()','2019-08-13 15:03:39','这个用户多次发送违反社区的帖子，现在把他给屏蔽了','1');
+	('SUB000001','currentUser()','2019-08-07 01:02:17','这个用户多次发送违反社区的帖子，现在把他给屏蔽了','1');
 
 insert into user_app_data values
 	('UA000001','审车平台','SU000001','users','1','MXWR','CarInspectionPlatform','CIP000001','/link/to/app','1'),
 	('UA000002','账户管理','SU000001','bank','1','MXWR','UserDomain','UD000001','/link/to/app0002','1'),
-	('UA000003','接车公司','SU000001','wechat','1','MXWR','CarReceivingServiceCompany','CRSC000001','/link/to/app0003','1'),
-	('UA000004','审车公司','SU000002','bar-chart','1','MXWR','CarInspectionServiceCompany','CISC000001','/link/to/app0004','1'),
-	('UA000005','维修公司','SU000002','user','1','MXWR','CarRepairingServiceCompany','CRSC000001','/link/to/app0005','1'),
-	('UA000006','顾客','SU000002','users','1','MXWR','CustomerInfo','CI000001','/link/to/app0006','1');
+	('UA000003','接车公司','SU000002','wechat','1','MXWR','CarReceivingServiceCompany','CRSC000001','/link/to/app0003','1'),
+	('UA000004','审车公司','SU000002','bar-chart','1','MXWR','CarInspectionServiceCompany','CISC000001','/link/to/app0004','1');
 
 insert into list_access_data values
 	('LA000001','列表','levelOneCategoryList','1','1','1','1','1','UA000001','1'),
 	('LA000002','列表0002','levelOneCategoryList0002','1','1','1','1','1','UA000001','1'),
 	('LA000003','列表0003','levelOneCategoryList0003','1','1','1','1','1','UA000002','1'),
-	('LA000004','列表0004','levelOneCategoryList0004','1','1','1','1','1','UA000003','1'),
-	('LA000005','列表0005','levelOneCategoryList0005','1','1','1','1','1','UA000004','1'),
-	('LA000006','列表0006','levelOneCategoryList0006','1','1','1','1','1','UA000004','1'),
-	('LA000007','列表0007','levelOneCategoryList0007','1','1','1','1','1','UA000005','1'),
-	('LA000008','列表0008','levelOneCategoryList0008','1','1','1','1','1','UA000006','1');
+	('LA000004','列表0004','levelOneCategoryList0004','1','1','1','1','1','UA000002','1'),
+	('LA000005','列表0005','levelOneCategoryList0005','1','1','1','1','1','UA000003','1'),
+	('LA000006','列表0006','levelOneCategoryList0006','1','1','1','1','1','UA000003','1'),
+	('LA000007','列表0007','levelOneCategoryList0007','1','1','1','1','1','UA000004','1'),
+	('LA000008','列表0008','levelOneCategoryList0008','1','1','1','1','1','UA000004','1');
 
 insert into object_access_data values
 	('OA000001','控制访问列表1','FranchiseeStoreCountryCenter','catalogList','catalogList','catalogList','catalogList','catalogList','catalogList','catalogList','catalogList','catalogList','UA000001','1'),
 	('OA000002','控制访问列表10002','AccountSet','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','UA000001','1'),
 	('OA000003','控制访问列表10003','FranchiseeStoreCountryCenter','catalogList','catalogList','catalogList','catalogList','catalogList','catalogList','catalogList','catalogList','catalogList','UA000002','1'),
-	('OA000004','控制访问列表10004','AccountSet','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','UA000003','1'),
-	('OA000005','控制访问列表10005','FranchiseeStoreCountryCenter','catalogList','catalogList','catalogList','catalogList','catalogList','catalogList','catalogList','catalogList','catalogList','UA000004','1'),
-	('OA000006','控制访问列表10006','AccountSet','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','UA000004','1'),
-	('OA000007','控制访问列表10007','FranchiseeStoreCountryCenter','catalogList','catalogList','catalogList','catalogList','catalogList','catalogList','catalogList','catalogList','catalogList','UA000005','1'),
-	('OA000008','控制访问列表10008','AccountSet','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','UA000006','1');
+	('OA000004','控制访问列表10004','AccountSet','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','UA000002','1'),
+	('OA000005','控制访问列表10005','FranchiseeStoreCountryCenter','catalogList','catalogList','catalogList','catalogList','catalogList','catalogList','catalogList','catalogList','catalogList','UA000003','1'),
+	('OA000006','控制访问列表10006','AccountSet','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','UA000003','1'),
+	('OA000007','控制访问列表10007','FranchiseeStoreCountryCenter','catalogList','catalogList','catalogList','catalogList','catalogList','catalogList','catalogList','catalogList','catalogList','UA000004','1'),
+	('OA000008','控制访问列表10008','AccountSet','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','UA000004','1');
 
 insert into login_history_data values
-	('LH000001','2019-08-18 17:52:34','192.168.1.1','登陆成功','SU000001','1'),
-	('LH000002','2019-08-02 23:26:59','192.168.1.2','登陆成功0002','SU000001','1'),
-	('LH000003','2019-07-29 21:36:54','192.168.1.1','登陆成功0003','SU000002','1'),
-	('LH000004','2019-08-18 03:23:04','192.168.1.2','登陆成功0004','SU000002','1');
+	('LH000001','2019-08-07 11:26:39','192.168.1.1','登陆成功','SU000001','1'),
+	('LH000002','2019-07-31 14:46:10','192.168.1.2','登陆成功0002','SU000001','1'),
+	('LH000003','2019-08-17 22:38:11','192.168.1.1','登陆成功0003','SU000002','1'),
+	('LH000004','2019-08-21 01:11:01','192.168.1.2','登陆成功0004','SU000002','1');
 
 insert into generic_form_data values
 	('GF000001','登记输入单','姓名就是你身份证上的名字','1');
@@ -342,13 +356,18 @@ insert into form_field_message_data values
 
 insert into form_field_data values
 	('FF000001','姓名','name','name','text','GF000001','姓名就是你身份证上的名字','李一一','姓名就是你身份证上的名字','基础信息','maybe any value','a value expression','1','1','1','','','1'),
-	('FF000002','年龄','age','name0002','longtext','GF000001','姓名就是你身份证上的名字0002','李一一0002','姓名就是你身份证上的名字0002','扩展信息','maybe any value0002','a value expression0002','1','1','1','','','1'),
-	('FF000003','出生地','birth_place','name0003','date','GF000001','姓名就是你身份证上的名字0003','李一一0003','姓名就是你身份证上的名字0003','基础信息','maybe any value0003','a value expression0003','1','1','1','','','1'),
-	('FF000004','国籍','country','name0004','date_time','GF000001','姓名就是你身份证上的名字0004','李一一0004','姓名就是你身份证上的名字0004','扩展信息','maybe any value0004','a value expression0004','1','1','1','男,女','男,女','1');
+	('FF000002','年龄','age','name0002','longtext','GF000001','姓名就是你身份证上的名字0002','李一一0002','姓名就是你身份证上的名字0002','扩展信息','maybe any value0002','a value expression0002','1','1','1','','','1');
 
 insert into form_action_data values
 	('FA000001','功能','name','save','default','genericFormManager/name/name0002/name0003/','GF000001','1'),
 	('FA000002','功能0002','name0002','update','warning','genericFormManager/name/name0002/name0003/0002','GF000001','1');
+
+insert into candidate_container_data values
+	('CC000001','我只是一个容器','1');
+
+insert into candidate_element_data values
+	('CE000001','搜索到的匹配字段','类型描述','https://demo.doublechaintech.com/demodata/imageManager/genImage/100/400/200/grey/','CC000001','1'),
+	('CE000002','搜索到的匹配字段0002','类型描述0002','https://demo.doublechaintech.com/demodata/imageManager/genImage/100/400/200/grey/','CC000001','1');
 
 
 
@@ -435,6 +454,12 @@ create unique index idx_form_action_version on form_action_data(id, version);
 
 alter table form_action_data add constraint form_action4form_fk
 	foreign key(form) references generic_form_data(id) on delete cascade on update cascade;
+create unique index idx_candidate_container_version on candidate_container_data(id, version);
+
+create unique index idx_candidate_element_version on candidate_element_data(id, version);
+
+alter table candidate_element_data add constraint candidate_element4container_fk
+	foreign key(container) references candidate_container_data(id) on delete cascade on update cascade;
 -- create extra index for time, number and mobile phone
 
 create index platform4founded_idx on platform_data(founded);
@@ -472,6 +497,8 @@ create index form_message4version_idx on form_message_data(version);
 create index form_field_message4version_idx on form_field_message_data(version);
 create index form_field4version_idx on form_field_data(version);
 create index form_action4version_idx on form_action_data(version);
+create index candidate_container4version_idx on candidate_container_data(version);
+create index candidate_element4version_idx on candidate_element_data(version);
 
 
 
@@ -510,6 +537,9 @@ insert into user_app_data values('UA000010','我的账户','SU000005','lock',1,'
 insert into sec_user_data values('SU000006','User000006','13900000006','1000006@qq.com','5FBBDBEAD9F84D599E8819CEEA167854CDA0FFD8D297D17D12E4619CE76F3B55', 'weixin_openid_000006', 'weixin_appid_000006', 'jwt_token_000006' ,'9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',NULL,'INIT',1);
 insert into user_app_data values('UA000011','用户应用程序','SU000006','user',1,'MXWR','UserApp','UA000001','/link/to/app','1');
 insert into user_app_data values('UA000012','我的账户','SU000006','lock',1,'MXWR','SecUser','SU000006','/link/to/app','1');
+insert into sec_user_data values('SU000007','User000007','13900000007','1000007@qq.com','A9652F0D7C1ACCB421BAF55EB3E7286AFA8F591897F1AE4CEB6A76402CCBE803', 'weixin_openid_000007', 'weixin_appid_000007', 'jwt_token_000007' ,'9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',NULL,'INIT',1);
+insert into user_app_data values('UA000013','候选人容器','SU000007','at',1,'MXWR','CandidateContainer','CC000001','/link/to/app','1');
+insert into user_app_data values('UA000014','我的账户','SU000007','lock',1,'MXWR','SecUser','SU000007','/link/to/app','1');
 
 /* ------------------------------------------------------------------------ */
 
@@ -525,6 +555,7 @@ select id,pwd from sec_user_data;
 |用户域|13900000004|DoubleChain!y1|
 |安全用户|13900000005|DoubleChain!y1|
 |用户应用程序|13900000006|DoubleChain!y1|
+|候选人容器|13900000007|DoubleChain!y1|
 
 
 */

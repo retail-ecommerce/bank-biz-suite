@@ -603,7 +603,7 @@ public abstract class CommonJDBCTemplateDAO extends BaseEntity{
 	protected String getNextId() {
 		synchronized(currentMax){
 			if(currentMax.get() > 0){
-				System.out.println(this.getClass().getName()+this.hashCode()+":getNextId()="+currentMax);
+				//System.out.println(this.getClass().getName()+this.hashCode()+":getNextId()="+currentMax);
 				return String.format(getIdFormat(),currentMax.incrementAndGet());
 			}
 			//The following logic just run when the first time loaded the id from table

@@ -3,6 +3,7 @@ package com.doublechain.bank;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
 
 import com.doublechain.bank.account.Account;
 import com.doublechain.bank.changerequest.ChangeRequest;
@@ -33,7 +34,7 @@ public class ChangeRequestClient {
 		return objectMapper;
 
 	}
-	protected static ChangeRequest emitRequest(ChangeRequest req) throws IOException {
+	protected static BaseEntity emitRequest(BaseEntity req) throws IOException {
 		String requestURL = "http://localhost:8080/bank/commonChangeService/process/";
 		
 		
@@ -127,13 +128,27 @@ public class ChangeRequestClient {
 		
 		
 		
+		
+		
+		
+		
 		try {
 			
 			String val = getObjectMapper().writeValueAsString(req);
 			log(val);
 			
 			checker.throwExceptionIfHasErrors(ChangeRequestManagerException.class);
-			emitRequest(req);
+			IntStream.range(0, 10).forEach(
+					nbr -> {
+						try {
+							emitRequest(req);
+						} catch (IOException e) {
+							
+							e.printStackTrace();
+						}
+					}
+				);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

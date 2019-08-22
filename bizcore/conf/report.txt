@@ -1,7 +1,7 @@
 
 
 
-=================Execute Report (Model Time 190820T1606) @Tue Aug 20 18:20:50 CST 2019, 19 objects and 147 fields===========================
+=================Execute Report (Model Time 190820T1606) @Thu Aug 22 10:32:10 CST 2019, 21 objects and 156 fields===========================
 
 
 
@@ -462,6 +462,30 @@ form_action{
 		string	level('default|warning|danger|primary'), verb: false, required: true;
 		string	url('genericFormManager/name/name0002/name0003/'), verb: false, required: true;
 		generic_form	form('$(object)'), verb: false, required: true, referenceBy: formActionList;
+		int	version('2147483647'), verb: false, required: true;
+	}
+	references field(0){
+	}
+} depth=1; isRoot = false
+
+candidate_container{
+	fields(3){
+		string	id('ABCD'), verb: false, required: true;
+		string	name('我只是一个容器'), verb: false, required: true;
+		int	version('2147483647'), verb: false, required: true;
+	}
+	references field(1){
+		candidateElementList	container(__no_group)--container;
+	}
+} depth=0; isRoot = true
+
+candidate_element{
+	fields(6){
+		string	id('ABCD'), verb: false, required: true;
+		string	name('搜索到的匹配字段'), verb: false, required: true;
+		string	type('类型描述'), verb: false, required: true;
+		string_image	image('1.jpg'), verb: false, required: true;
+		candidate_container	container('$(object)'), verb: false, required: true, referenceBy: candidateElementList;
 		int	version('2147483647'), verb: false, required: true;
 	}
 	references field(0){

@@ -27,9 +27,14 @@ public class BankObjectChecker extends BankChecker{
 		return checkedObjectSet.contains(baseEntity);
 	}
 	@FunctionalInterface
-	public interface CheckerParameterFunction<P1,R> {
-		R apply(P1 valueToCheck);
+	public interface CheckerParameterFunction<P1> {
+		BankChecker apply(P1 valueToCheck);
 	}
+	@FunctionalInterface
+	public interface AssignParameterFunction {
+		BankObjectChecker apply(BaseEntity targetEntity);
+	}
+	
 	protected boolean isReferenceObject(BaseEntity target) {
 		
 		if(target.getId()==null) {
@@ -60,11 +65,23 @@ public class BankObjectChecker extends BankChecker{
 		return true;
 		
 	}
-	public <T> BankChecker commonObjectPropertyCheck(BaseEntity target, String propertyName, CheckerParameterFunction<T,BankChecker> checkerFunction) {
-		
-		if(!target.isChanged()) {
-			return this;
+	protected void setEntityProperty(BaseEntity targetEntity, String property, Object value) {
+		try {
+			targetEntity.setPropertyOf(property, value);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
+	}
+	
+	public <T> BankObjectChecker commonObjectPropertyAssign(BaseEntity target, String propertyName, AssignParameterFunction assigmentFunction) {
+		assigmentFunction.apply(target);
+		return this;
+	}
+	public <T> BankObjectChecker commonObjectPropertyCheck(BaseEntity target, String propertyName, CheckerParameterFunction<T> checkerFunction) {
+		
+		
 		if(!target.isChanged()) {
 			return this;
 		}
@@ -72,9 +89,7 @@ public class BankObjectChecker extends BankChecker{
 		if(isReferenceObject(target)&&!propertyName.equals("id")) {
 			//this is an object reference, so all other properties except id check will be ignored
 			//id will be checked in this case
-			//if(!propertyName.equals("id")) {
 			return this; //with an Id, but version is 0 regard as refencer
-			//}
 		}
 		if(isNewObject(target)&&propertyName.equals("id")) {
 			// ignore check id for new object to create
@@ -87,7 +102,7 @@ public class BankObjectChecker extends BankChecker{
 		
 		return this;
 	}
-	public  BankChecker commonObjectElementCheck(BaseEntity target, String propertyName, CheckerParameterFunction<BaseEntity,BankChecker> checkerFunction) {
+	public  BankChecker commonObjectElementCheck(BaseEntity target, String propertyName, CheckerParameterFunction<BaseEntity> checkerFunction) {
 		
 		pushPosition(propertyName);
 		checkerFunction.apply(target);
@@ -107,6 +122,7 @@ public class BankObjectChecker extends BankChecker{
 		markAsChecked(platformAsBaseEntity);
 		commonObjectPropertyCheck(platformAsBaseEntity,"id",this::checkIdOfPlatform);
 		commonObjectPropertyCheck(platformAsBaseEntity,"name",this::checkNameOfPlatform);
+		commonObjectPropertyAssign(platformAsBaseEntity,"founded",this::assignFoundedOfPlatform);
 		commonObjectPropertyCheck(platformAsBaseEntity,"version",this::checkVersionOfPlatform);
 		commonObjectPropertyCheck(platformAsBaseEntity,"changeRequestList",this::checkChangeRequestListOfPlatform);
 		commonObjectPropertyCheck(platformAsBaseEntity,"accountList",this::checkAccountListOfPlatform);
@@ -122,6 +138,7 @@ public class BankObjectChecker extends BankChecker{
 		markAsChecked(changeRequestAsBaseEntity);
 		commonObjectPropertyCheck(changeRequestAsBaseEntity,"id",this::checkIdOfChangeRequest);
 		commonObjectPropertyCheck(changeRequestAsBaseEntity,"name",this::checkNameOfChangeRequest);
+		commonObjectPropertyAssign(changeRequestAsBaseEntity,"createTime",this::assignCreateTimeOfChangeRequest);
 		commonObjectPropertyCheck(changeRequestAsBaseEntity,"platform",this::checkPlatformOfChangeRequest);
 		commonObjectPropertyCheck(changeRequestAsBaseEntity,"version",this::checkVersionOfChangeRequest);
 		commonObjectPropertyCheck(changeRequestAsBaseEntity,"transactionList",this::checkTransactionListOfChangeRequest);
@@ -173,6 +190,8 @@ public class BankObjectChecker extends BankChecker{
 		commonObjectPropertyCheck(accountAsBaseEntity,"id",this::checkIdOfAccount);
 		commonObjectPropertyCheck(accountAsBaseEntity,"name",this::checkNameOfAccount);
 		commonObjectPropertyCheck(accountAsBaseEntity,"balance",this::checkBalanceOfAccount);
+		commonObjectPropertyAssign(accountAsBaseEntity,"createTime",this::assignCreateTimeOfAccount);
+		commonObjectPropertyAssign(accountAsBaseEntity,"updateTime",this::assignUpdateTimeOfAccount);
 		commonObjectPropertyCheck(accountAsBaseEntity,"platform",this::checkPlatformOfAccount);
 		commonObjectPropertyCheck(accountAsBaseEntity,"version",this::checkVersionOfAccount);
 		commonObjectPropertyCheck(accountAsBaseEntity,"transactionListAsFromAccount",this::checkTransactionListAsFromAccountOfAccount);
@@ -250,6 +269,7 @@ public class BankObjectChecker extends BankChecker{
 		commonObjectPropertyCheck(secUserAsBaseEntity,"verificationCodeExpire",this::checkVerificationCodeExpireOfSecUser);
 		commonObjectPropertyCheck(secUserAsBaseEntity,"lastLoginTime",this::checkLastLoginTimeOfSecUser);
 		commonObjectPropertyCheck(secUserAsBaseEntity,"domain",this::checkDomainOfSecUser);
+		commonObjectPropertyAssign(secUserAsBaseEntity,"currentStatus",this::assignCurrentStatusOfSecUser);
 		commonObjectPropertyCheck(secUserAsBaseEntity,"version",this::checkVersionOfSecUser);
 		commonObjectPropertyCheck(secUserAsBaseEntity,"userAppList",this::checkUserAppListOfSecUser);
 		commonObjectPropertyCheck(secUserAsBaseEntity,"loginHistoryList",this::checkLoginHistoryListOfSecUser);
@@ -265,6 +285,7 @@ public class BankObjectChecker extends BankChecker{
 		markAsChecked(secUserBlockingAsBaseEntity);
 		commonObjectPropertyCheck(secUserBlockingAsBaseEntity,"id",this::checkIdOfSecUserBlocking);
 		commonObjectPropertyCheck(secUserBlockingAsBaseEntity,"who",this::checkWhoOfSecUserBlocking);
+		commonObjectPropertyAssign(secUserBlockingAsBaseEntity,"blockTime",this::assignBlockTimeOfSecUserBlocking);
 		commonObjectPropertyCheck(secUserBlockingAsBaseEntity,"comments",this::checkCommentsOfSecUserBlocking);
 		commonObjectPropertyCheck(secUserBlockingAsBaseEntity,"version",this::checkVersionOfSecUserBlocking);
 		commonObjectPropertyCheck(secUserBlockingAsBaseEntity,"secUserList",this::checkSecUserListOfSecUserBlocking);
@@ -345,6 +366,7 @@ public class BankObjectChecker extends BankChecker{
 		}
 		markAsChecked(loginHistoryAsBaseEntity);
 		commonObjectPropertyCheck(loginHistoryAsBaseEntity,"id",this::checkIdOfLoginHistory);
+		commonObjectPropertyAssign(loginHistoryAsBaseEntity,"loginTime",this::assignLoginTimeOfLoginHistory);
 		commonObjectPropertyCheck(loginHistoryAsBaseEntity,"fromIp",this::checkFromIpOfLoginHistory);
 		commonObjectPropertyCheck(loginHistoryAsBaseEntity,"description",this::checkDescriptionOfLoginHistory);
 		commonObjectPropertyCheck(loginHistoryAsBaseEntity,"secUser",this::checkSecUserOfLoginHistory);
@@ -444,6 +466,36 @@ public class BankObjectChecker extends BankChecker{
 		commonObjectPropertyCheck(formActionAsBaseEntity,"url",this::checkUrlOfFormAction);
 		commonObjectPropertyCheck(formActionAsBaseEntity,"form",this::checkFormOfFormAction);
 		commonObjectPropertyCheck(formActionAsBaseEntity,"version",this::checkVersionOfFormAction);
+		return this;
+
+	}
+
+	public BankObjectChecker checkCandidateContainerAsObject(BaseEntity candidateContainerAsBaseEntity){
+
+		if( isChecked(candidateContainerAsBaseEntity) ){
+			return this;
+		}
+		markAsChecked(candidateContainerAsBaseEntity);
+		commonObjectPropertyCheck(candidateContainerAsBaseEntity,"id",this::checkIdOfCandidateContainer);
+		commonObjectPropertyCheck(candidateContainerAsBaseEntity,"name",this::checkNameOfCandidateContainer);
+		commonObjectPropertyCheck(candidateContainerAsBaseEntity,"version",this::checkVersionOfCandidateContainer);
+		commonObjectPropertyCheck(candidateContainerAsBaseEntity,"candidateElementList",this::checkCandidateElementListOfCandidateContainer);
+		return this;
+
+	}
+
+	public BankObjectChecker checkCandidateElementAsObject(BaseEntity candidateElementAsBaseEntity){
+
+		if( isChecked(candidateElementAsBaseEntity) ){
+			return this;
+		}
+		markAsChecked(candidateElementAsBaseEntity);
+		commonObjectPropertyCheck(candidateElementAsBaseEntity,"id",this::checkIdOfCandidateElement);
+		commonObjectPropertyCheck(candidateElementAsBaseEntity,"name",this::checkNameOfCandidateElement);
+		commonObjectPropertyCheck(candidateElementAsBaseEntity,"type",this::checkTypeOfCandidateElement);
+		commonObjectPropertyCheck(candidateElementAsBaseEntity,"image",this::checkImageOfCandidateElement);
+		commonObjectPropertyCheck(candidateElementAsBaseEntity,"container",this::checkContainerOfCandidateElement);
+		commonObjectPropertyCheck(candidateElementAsBaseEntity,"version",this::checkVersionOfCandidateElement);
 		return this;
 
 	}
@@ -868,6 +920,58 @@ public class BankObjectChecker extends BankChecker{
 		return this;
 	}
 
+
+	public BankObjectChecker checkCandidateElementListOfCandidateContainer(List<BaseEntity> candidateElementList){
+		AtomicInteger index = new AtomicInteger();
+		candidateElementList.stream().forEach(candidateElement->
+			commonObjectElementCheck(candidateElement,wrapArrayIndex(index.getAndIncrement()),this::checkCandidateElementAsObject));
+		return this;
+	}
+
+	public static final String CONTAINER_OF_CANDIDATE_ELEMENT = "candidate_element.container";
+
+
+	public BankObjectChecker checkContainerOfCandidateElement(BaseEntity containerAsBaseEntity){
+
+		if(containerAsBaseEntity == null){
+			checkBaseEntityReference(containerAsBaseEntity,true,CONTAINER_OF_CANDIDATE_ELEMENT);
+			return this;
+		}
+		checkCandidateContainerAsObject(containerAsBaseEntity);
+		return this;
+	}
+
+	public BankObjectChecker assignFoundedOfPlatform(BaseEntity targetEntity){
+		setEntityProperty(targetEntity,"founded",userContext.now());
+		return this;
+	}
+	public BankObjectChecker assignCreateTimeOfChangeRequest(BaseEntity targetEntity){
+		setEntityProperty(targetEntity,"createTime",userContext.now());
+		return this;
+	}
+	public BankObjectChecker assignCreateTimeOfAccount(BaseEntity targetEntity){
+		setEntityProperty(targetEntity,"createTime",userContext.now());
+		return this;
+	}
+	public BankObjectChecker assignUpdateTimeOfAccount(BaseEntity targetEntity){
+		setEntityProperty(targetEntity,"updateTime",userContext.now());
+		return this;
+	}
+	public BankObjectChecker assignBlockingOfSecUser(BaseEntity targetEntity){
+		return this;
+	}
+	public BankObjectChecker assignCurrentStatusOfSecUser(BaseEntity targetEntity){
+		setEntityProperty(targetEntity,"currentStatus","INIT");
+		return this;
+	}
+	public BankObjectChecker assignBlockTimeOfSecUserBlocking(BaseEntity targetEntity){
+		setEntityProperty(targetEntity,"blockTime",userContext.now());
+		return this;
+	}
+	public BankObjectChecker assignLoginTimeOfLoginHistory(BaseEntity targetEntity){
+		setEntityProperty(targetEntity,"loginTime",userContext.now());
+		return this;
+	}
 
 }
 

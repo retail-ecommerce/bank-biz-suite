@@ -166,6 +166,17 @@ Level|水平
 Url|url
 Form|形式
 Version|版本
+Candidate Container|候选人容器
+Id|ID
+Name|名称
+Version|版本
+Candidate Element|候选人元素
+Id|ID
+Name|名称
+Type|类型
+Image|图片
+Container|容器
+Version|版本
 Transfer to Another Platform|转到平台
 Transfer to Another From Account|转帐
 Transfer to Another To Account|转入帐户
@@ -186,4 +197,5 @@ Transfer to Another Form|转移到形式
 Transfer to Another Form|转移到形式
 Transfer to Another Form|转移到形式
 Transfer to Another Form|转移到形式
+Transfer to Another Container|转移到容器
 
